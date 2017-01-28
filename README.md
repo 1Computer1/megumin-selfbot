@@ -30,7 +30,7 @@ Install erlpack and uws for extra performance.
 2. Open up a command prompt at the bot folder.
 3. Run `npm install`.
 4. Setup your settings inside src/data/config.json.
-5. Run `node megumin.js`
+5. Run `node megumin.js`.
 6. Enjoy!
 
 ## Commands
