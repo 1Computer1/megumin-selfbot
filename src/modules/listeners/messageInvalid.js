@@ -31,7 +31,11 @@ function exec(message){
 
         const embed = new RichEmbed().setImage(image);
         return message.edit(replaceTags(message.content.replace(name[0], '')), { embed }).catch(err => {
-            if (err.response && err.response.badRequest) return this.framework.logger.log(3, 'Your image was invalid. Double check your link!');
+            if (err.response && err.response.badRequest){
+                this.framework.logger.log(3, 'Your image was invalid. Double check your link!');
+                return message.delete();
+            }
+            
             throw err;
         });
     }

@@ -16,7 +16,11 @@ function exec(message, args){
 
         return message.edit(message.content.slice(message.content.search(args.id) + args.id.length + 1), { embed });
     }).catch(err => {
-        if (err.response && err.response.badRequest) return this.framework.logger.log(3, 'Your message ID was invalid.');
+        if (err.response && err.response.badRequest){
+            this.framework.logger.log(3, 'Your message ID was invalid.');
+            return message.delete();
+        }
+        
         throw err;
     });
 }
