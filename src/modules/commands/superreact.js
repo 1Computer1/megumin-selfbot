@@ -4,9 +4,14 @@ function exec(message, args){
     let emojiSet;
 
     if (!message.guild || !message.guild.emojis.size){
-        emojiSet = this.client.emojis;
+        emojiSet = this.client.user.premium ? this.client.emojis : this.client.emojis.filter(e => e.managed);
     } else {
         emojiSet = message.guild.emojis;
+    }
+
+    if (emojiSet.size === 0){
+        this.framework.logger.log(3, 'No custom emojis to react with.');
+        return message.delete();
     }
 
     let emojis = emojiSet.array();
