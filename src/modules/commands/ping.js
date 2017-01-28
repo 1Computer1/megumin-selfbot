@@ -2,7 +2,7 @@ const { Command } = require('discord-akairo');
 
 function exec(message){
     return message.edit('Pong!').then(m => {
-        const diff = m.createdAt - message.editedAt;
+        const diff = m.editedAt - m.createdAt;
         return m.edit(`Pong! (${diff} ms)`);
     });
 }
