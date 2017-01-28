@@ -38,6 +38,9 @@ By default, the prefix is /. You can change this in the config.json.
 Images can be sent by starting a message with {imagename}.  
 Tags can be used by adding [tagname] anywhere in the message.  
 
+#### ping
+Pong!  
+
 #### eval / e
 Evaluates Javascript code.  
 Not recommended for the average user.  
