@@ -11,7 +11,8 @@ function exec(message, args){
         const quotee = messages.get(args.id);
         const embed = new RichEmbed()
         .setDescription(quotee.content || '\u200B')
-        .setAuthor(`${quotee.author.username}#${quotee.author.discriminator}`, quotee.author.displayAvatarURL);
+        .setAuthor(`${quotee.author.username}#${quotee.author.discriminator}`, quotee.author.displayAvatarURL)
+        .setTimestamp(quotee.createdAt);
 
         return message.edit(message.content.slice(message.content.search(args.id) + args.id.length + 1), { embed });
     }).catch(err => {
