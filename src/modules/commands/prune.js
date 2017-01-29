@@ -12,7 +12,7 @@ function exec(message, args){
 }
 
 module.exports = new Command('prune', exec, {
-    aliases: ['prune', 'delete'],
+    aliases: ['prune', 'delete', 'del'],
     args: [
         {
             id: 'amount',

@@ -76,7 +76,7 @@ Each new line will be prefixed with a >.
 Makes some orangetext.  
 Each new line will be suffixed with a <.  
 
-#### prune
+#### prune / delete / del
 Prunes your messages.  
 Specify a number to prune that many messages.  
 By default it is 10.  
