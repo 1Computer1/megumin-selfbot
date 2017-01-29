@@ -1,5 +1,6 @@
 {
     "token": "abcDEFghiJKLmnoPQRstuVWXyz-",
     "ownerID": "1234567890",
-    "prefix": "/"
+    "prefix": "/",
+    "color": "auto"
 }
