@@ -17,16 +17,7 @@ This bot requires [Node.js 6.9.4](https://nodejs.org/en/) or higher.
 Dependencies that will be installed are chalk, discord.js, discord-akairo, and moment.  
 Install erlpack and uws for extra performance.  
 
-#### Method A:
-1. Download [git](https://git-scm.com/downloads).
-2. Open up a command prompt in a folder.
-3. Run `npm install 1computer1/megumin-selfbot`.
-4. Setup your settings inside src/data/config.json.
-5. Run `node megumin.js`.
-6. You're ready to go!
-
-#### Method B:
-1. Download this repository to a folder.
+1. Download this repository or download [git](https://git-scm.com/downloads) and clone this repository.
 2. Open up a command prompt at the bot folder.
 3. Run `npm install`.
 4. Setup your settings inside src/data/config.json.
