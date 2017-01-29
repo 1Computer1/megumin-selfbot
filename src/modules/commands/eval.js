@@ -2,7 +2,6 @@
 
 const { Command } = require('discord-akairo');
 const util = require('util');
-const config = require('../../data/config.json');
 const data = {};
 
 function exec(message, args){
@@ -16,8 +15,8 @@ function exec(message, args){
 
     return result.then(output => {
         if (typeof output !== 'string') output = util.inspect(output);
-        if (output.includes(config.token)) output = output.replace(config.token, '[TOKEN]');
-        if (output.length > 2000) output = 'Over 2000 characters.';
+        if (output.includes(this.framework.config.token)) output = output.replace(this.framework.config.token, '[TOKEN]');
+        if (output.length + args.code.length > 1900) output = 'Output too long.';
 
         return message.edit(`📥\u2000**Input**${cb}js\n${args.code}\n${cb}\n📤\u2000**Output** ${cb}js\n${output}\n${cb}`);
     }).catch(err => {
@@ -25,7 +24,7 @@ function exec(message, args){
         console.error(err);
 
         err = err.toString();
-        if (err.includes(config.token)) err = err.replace(config.token, '[TOKEN]');
+        if (err.includes(this.framework.config.token)) err = err.replace(this.framework.config.token, '[TOKEN]');
 
         return message.edit(`📥\u2000**Input**${cb}js\n${args.code}\n${cb}\n☠\u2000**Error** ${cb}js\n${err}\n${cb}`);
     });
