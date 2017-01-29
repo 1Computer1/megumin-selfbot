@@ -23,6 +23,7 @@ framework.logger = new Logger(framework);
 
 framework.tags = require('./src/data/tags.json');
 framework.images = require('./src/data/images.json');
+framework.config = config;
 
 framework.login(config.token).then(() => {
     framework.logger.log(1, 'Megumin ready! Explooooooosion!');

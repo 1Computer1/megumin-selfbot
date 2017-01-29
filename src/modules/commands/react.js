@@ -33,7 +33,7 @@ function exec(message, args){
 }
 
 module.exports = new Command('react', exec, {
-    aliases: ['react'],
+    aliases: ['react', 'r'],
     args: [
         {
             id: 'text',

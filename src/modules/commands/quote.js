@@ -12,7 +12,8 @@ function exec(message, args){
         const embed = new RichEmbed()
         .setDescription(quotee.content || '\u200B')
         .setAuthor(`${quotee.author.username}#${quotee.author.discriminator}`, quotee.author.displayAvatarURL)
-        .setTimestamp(quotee.createdAt);
+        .setTimestamp(quotee.createdAt)
+        .setColor(this.framework.color === 'auto' && message.guild ? this.client.util.displayColor(message.member) : this.framework.color || 0);
 
         if (quotee.attachments.size) embed.setThumbnail(quotee.attachments.first().url);
 
@@ -28,7 +29,7 @@ function exec(message, args){
 }
 
 module.exports = new Command('quote', exec, {
-    aliases: ['quote'],
+    aliases: ['quote', 'q'],
     args: [
         {
             id: 'id'

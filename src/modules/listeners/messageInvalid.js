@@ -27,7 +27,9 @@ function exec(message){
             return;
         }
 
-        const embed = new RichEmbed().setImage(image);
+        const embed = new RichEmbed().setImage(image)
+        .setColor(this.framework.color === 'auto' && message.guild ? this.client.util.displayColor(message.member) : this.framework.color || 0);
+
         return message.edit(replaceTags(message.content.replace(name[0], ''), this.framework.tags), { embed }).catch(err => {
             if (err.response && err.response.badRequest){
                 this.framework.logger.log(3, 'Your image was invalid. Double check your link!');

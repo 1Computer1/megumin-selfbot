@@ -20,9 +20,33 @@ Install erlpack and uws for extra performance.
 1. Download this repository or download [git](https://git-scm.com/downloads) and clone this repository.
 2. Open up a command prompt at the bot folder.
 3. Run `npm install`.
-4. Setup your settings inside src/data/config.json.
+4. Setup your settings inside src/data/config.json. See configuration below.
 5. Run `node megumin.js`.
 6. Enjoy!
+
+## Configuration
+Rename config.json.exmaple to config.json and fill in with appropriate information.  
+
+#### Token
+1. Press CTRL+SHIFT+I (or equivalent on other OS).
+2. Go to Applications (at top).
+3. Go to Local Storage (at side).
+4. Copy and paste your token.
+
+Do not share your token with anyone!  
+
+#### Owner ID
+This is just your own ID.  
+It does not have to be filled out, but is there just to be safe.  
+
+#### Prefix
+The prefix to use commands.  
+By default, it is /.  
+Change it to whatever you like!  
+
+#### Color
+The color of embeds used in images and quoting.  
+Set it to a hex code or "auto" to use your current role's color.  
 
 ## Commands
 By default, the prefix is /. You can change this in the config.json.  
@@ -57,7 +81,7 @@ Prunes your messages.
 Specify a number to prune that many messages.  
 By default it is 10.  
 
-#### quote
+#### quote / q
 Quotes a message.  
 Supply this command with a message ID.  
 All text after the ID will be your reply.  
@@ -65,7 +89,7 @@ All text after the ID will be your reply.
 #### shout / big
 Converts your text to emojis.  
 
-#### react
+#### react / r
 Reacts to the previous message with the specified text.  
 
 #### superreact
@@ -84,7 +108,7 @@ You can specify a multiple words long tag name by enclosing it in double quotes.
 
 Use `tag reload` to reload the tags.json if you have modified it outside of this command.
 
-#### image / images
+#### image / images / img
 Use `image list` to see a list of all your images.  
 
 Use `image add` to add a image.  
