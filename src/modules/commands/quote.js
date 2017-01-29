@@ -13,7 +13,7 @@ function exec(message, args){
         .setDescription(quotee.content || '\u200B')
         .setAuthor(`${quotee.author.username}#${quotee.author.discriminator}`, quotee.author.displayAvatarURL)
         .setTimestamp(quotee.createdAt)
-        .setColor(this.framework.color === 'auto' && message.guild ? this.client.util.displayColor(message.member) : this.framework.color || 0);
+        .setColor(this.framework.config.color === 'auto' && message.guild ? this.client.util.displayColor(message.member) : this.framework.config.color || 0);
 
         if (quotee.attachments.size) embed.setThumbnail(quotee.attachments.first().url);
 

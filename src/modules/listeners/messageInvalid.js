@@ -28,7 +28,7 @@ function exec(message){
         }
 
         const embed = new RichEmbed().setImage(image)
-        .setColor(this.framework.color === 'auto' && message.guild ? this.client.util.displayColor(message.member) : this.framework.color || 0);
+        .setColor(this.framework.config.color === 'auto' && message.guild ? this.client.util.displayColor(message.member) : this.framework.config.color || 0);
 
         return message.edit(replaceTags(message.content.replace(name[0], ''), this.framework.tags), { embed }).catch(err => {
             if (err.response && err.response.badRequest){

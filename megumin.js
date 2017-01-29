@@ -29,7 +29,6 @@ framework.login(config.token).then(() => {
     framework.logger.log(1, 'Megumin ready! Explooooooosion!');
 }).catch(console.error);
 
-
 process.on('unhandledRejection', err => {
     framework.logger.log(3, 'An error occured. Contact someone who might know what it means.');
     console.error(err);
