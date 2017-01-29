@@ -14,6 +14,8 @@ function exec(message, args){
         .setAuthor(`${quotee.author.username}#${quotee.author.discriminator}`, quotee.author.displayAvatarURL)
         .setTimestamp(quotee.createdAt);
 
+        if (quotee.attachments.size) embed.setThumbnail(quotee.attachments.first().url);
+
         return message.edit(message.content.slice(message.content.search(args.id) + args.id.length + 1), { embed });
     }).catch(err => {
         if (err.response && err.response.badRequest){
