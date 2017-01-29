@@ -3,8 +3,6 @@
 const { Command } = require('discord-akairo');
 const util = require('util');
 const config = require('../../data/config.json');
-const tags = require('../../data/tags.json');
-const images = require('../../data/images.json');
 const data = {};
 
 function exec(message, args){

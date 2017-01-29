@@ -21,6 +21,9 @@ const framework = new Framework(client, {
 const Logger = require('./src/struct/Logger');
 framework.logger = new Logger(framework);
 
+framework.tags = require('./src/data/tags.json');
+framework.images = require('./src/data/images.json');
+
 framework.login(config.token).then(() => {
     framework.logger.log(1, 'Megumin ready! Explooooooosion!');
 }).catch(console.error);

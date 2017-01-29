@@ -1,10 +1,9 @@
 const { Command } = require('discord-akairo');
 const fs = require('fs');
-let tags = require('../../data/tags.json');
 
 function exec(message, args){
     if (args.option === 'list'){
-        const keys = Object.keys(tags);
+        const keys = Object.keys(this.framework.tags);
         return message.editCode('json', keys.length ? keys.sort().map(tag => `[${tag}]`).join(', ') : 'No tags added.');
     }
 
@@ -14,16 +13,16 @@ function exec(message, args){
             return message.delete();
         }
 
-        if (tags.hasOwnProperty(args.name.toLowerCase())){
+        if (this.framework.tags.hasOwnProperty(args.name.toLowerCase())){
             this.framework.logger.log(3, `Tag [${args.name.toLowerCase()}] already exists. Remove it first.`);
             return message.delete();
         }
 
-        tags[args.name.toLowerCase()] = args.content;
+        this.framework.tags[args.name.toLowerCase()] = args.content;
 
-        fs.writeFileSync('./src/data/tags.json', JSON.stringify(tags, null, '\t'));
+        fs.writeFileSync('./src/data/tags.json', JSON.stringify(this.framework.tags, null, '\t'));
         delete require.cache[require.resolve('../../data/tags.json')];
-        tags = require('../../data/tags.json');
+        this.framework.tags = require('../../data/tags.json');
 
         this.framework.logger.log(2, `Tag [${args.name.toLowerCase()}] added: "${args.content}"`);
         return message.delete();
@@ -35,16 +34,16 @@ function exec(message, args){
             return message.delete();
         }
 
-        if (!tags.hasOwnProperty(args.name.toLowerCase())){
+        if (!this.framework.tags.hasOwnProperty(args.name.toLowerCase())){
             this.framework.logger.log(3, `Tag [${args.name.toLowerCase()}] does not exist.`);
             return message.delete();
         }
 
-        delete tags[args.name.toLowerCase()];
+        delete this.framework.tags[args.name.toLowerCase()];
 
-        fs.writeFileSync('./src/data/tags.json', JSON.stringify(tags, null, '\t'));
+        fs.writeFileSync('./src/data/tags.json', JSON.stringify(this.framework.tags, null, '\t'));
         delete require.cache[require.resolve('../../data/tags.json')];
-        tags = require('../../data/tags.json');
+        this.framework.tags = require('../../data/tags.json');
 
         this.framework.logger.log(2, `Tag [${args.name.toLowerCase()}] removed.`);
         return message.delete();
@@ -52,7 +51,7 @@ function exec(message, args){
 
     if (args.option === 'reload'){
         delete require.cache[require.resolve('../../data/tags.json')];
-        tags = require('../../data/tags.json');
+        this.framework.tags = require('../../data/tags.json');
 
         this.framework.logger.log(2, 'Reloaded tags.json.');
         return message.delete();

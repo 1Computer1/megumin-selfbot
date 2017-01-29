@@ -1,9 +1,7 @@
 const { Listener } = require('discord-akairo');
 const { RichEmbed } = require('discord.js');
-const tags = require('../../data/tags.json');
-const images = require('../../data/images.json');
 
-function replaceTags(text){
+function replaceTags(text, tags){
     const matched = text.match(/\[.+?\]/g);
 
     if (matched) matched.forEach(word => {
@@ -21,16 +19,16 @@ function replaceTags(text){
 function exec(message){
     if (/^\{.+?\}/.test(message.content)){
         const name = message.content.match(/^\{(.+?)\}/);
-        const image = images[name[1].toLowerCase()];
+        const image = this.framework.images[name[1].toLowerCase()];
 
         if (!image){
-            const rep = replaceTags(message.content);
+            const rep = replaceTags(message.content, this.framework.tags);
             if (message.content !== rep) message.edit(rep);
             return;
         }
 
         const embed = new RichEmbed().setImage(image);
-        return message.edit(replaceTags(message.content.replace(name[0], '')), { embed }).catch(err => {
+        return message.edit(replaceTags(message.content.replace(name[0], ''), this.framework.tags), { embed }).catch(err => {
             if (err.response && err.response.badRequest){
                 this.framework.logger.log(3, 'Your image was invalid. Double check your link!');
                 return message.delete();
@@ -40,7 +38,7 @@ function exec(message){
         });
     }
     
-    const rep = replaceTags(message.content);
+    const rep = replaceTags(message.content, this.framework.tags);
     if (message.content !== rep) message.edit(rep);
 }
 

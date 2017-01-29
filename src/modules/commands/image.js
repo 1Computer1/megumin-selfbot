@@ -1,10 +1,9 @@
 const { Command } = require('discord-akairo');
 const fs = require('fs');
-let images = require('../../data/images.json');
 
 function exec(message, args){
     if (args.option === 'list'){
-        const keys = Object.keys(images);
+        const keys = Object.keys(this.framework.images);
         return message.editCode('json', keys.length ? keys.sort().map(image => `{${image}}`).join(', ') : 'No images added.');
     }
 
@@ -14,16 +13,16 @@ function exec(message, args){
             return message.delete();
         }
 
-        if (images.hasOwnProperty(args.name.toLowerCase())){
+        if (this.framework.images.hasOwnProperty(args.name.toLowerCase())){
             this.framework.logger.log(3, `Image {${args.name.toLowerCase()}} already exists. Remove it first.`);
             return message.delete();
         }
 
-        images[args.name.toLowerCase()] = args.content;
+        this.framework.images[args.name.toLowerCase()] = args.content;
 
-        fs.writeFileSync('./src/data/images.json', JSON.stringify(images, null, '\t'));
+        fs.writeFileSync('./src/data/images.json', JSON.stringify(this.framework.images, null, '\t'));
         delete require.cache[require.resolve('../../data/images.json')];
-        images = require('../../data/images.json');
+        this.framework.images = require('../../data/images.json');
 
         this.framework.logger.log(2, `Image {${args.name.toLowerCase()}} added: "${args.content}"`);
         return message.delete();
@@ -35,16 +34,16 @@ function exec(message, args){
             return message.delete();
         }
 
-        if (!images.hasOwnProperty(args.name.toLowerCase())){
+        if (!this.framework.images.hasOwnProperty(args.name.toLowerCase())){
             this.framework.logger.log(3, `Image {${args.name.toLowerCase()}} does not exist.`);
             return message.delete();
         }
 
-        delete images[args.name.toLowerCase()];
+        delete this.framework.images[args.name.toLowerCase()];
 
-        fs.writeFileSync('./src/data/images.json', JSON.stringify(images, null, '\t'));
+        fs.writeFileSync('./src/data/images.json', JSON.stringify(this.framework.images, null, '\t'));
         delete require.cache[require.resolve('../../data/images.json')];
-        images = require('../../data/images.json');
+        this.framework.images = require('../../data/images.json');
 
         this.framework.logger.log(2, `Image {${args.name.toLowerCase()}} removed.`);
         return message.delete();
@@ -52,7 +51,7 @@ function exec(message, args){
 
     if (args.option === 'reload'){
         delete require.cache[require.resolve('../../data/images.json')];
-        images = require('../../data/images.json');
+        this.framework.images = require('../../data/images.json');
 
         this.framework.logger.log(2, 'Reloaded images.json.');
         return message.delete();
