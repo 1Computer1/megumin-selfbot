@@ -5,9 +5,14 @@ const { LogLevels, LogColors } = require('./Constants');
 class Logger {
     /**
      * Logging for bot.
+     * @param {boolean} [disabled=false] - Disables most logging.
      */
-    constructor(){
-
+    constructor(disabled = false){
+        /**
+         * Logging disabled.
+         * @type {boolean}
+         */
+        this.disabled = !!disabled;
     }
 
     /**
@@ -16,8 +21,9 @@ class Logger {
      * @param {*} args - Things to log.
      */
     log(level, ...args){
-        const joined = args.join(' ');
+        if (this.disabled) return;
 
+        const joined = args.join(' ');
         const time = chalk.cyan(`[${moment().format('YYYY-MM-DD HH:mm:ss')}]:`);
         const internal = chalk.bold(`[Internal/${LogLevels[level]}]:`);
         const colored = chalk[LogColors[level]](joined);
@@ -32,8 +38,9 @@ class Logger {
      * @param {*} args - Things to log.
      */
     logFrom(channel, level, ...args){
-        const joined = args.join(' ');
+        if (this.disabled) return;
 
+        const joined = args.join(' ');
         const time = chalk.cyan(`[${moment().format('YYYY-MM-DD HH:mm:ss')}]:`);
         const location = chalk.bold(`[${channel.guild ? channel.guild.name : 'PM'}/${channel.guild ? channel.name : channel.recipient.username}]:`);
         const colored = chalk[LogColors[level]](joined);
