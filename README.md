@@ -35,18 +35,22 @@ Rename config.json.exmaple to config.json and fill in with appropriate informati
 
 Do not share your token with anyone!  
 
-#### Owner ID
+#### Owner ID: "ownerID"
 This is just your own ID.  
 It does not have to be filled out, but is there just to be safe.  
 
-#### Prefix
+#### Prefix: "prefix"
 The prefix to use commands.  
 By default, it is /.  
 Change it to whatever you like!  
 
-#### Color
+#### Color: "color"
 The color of embeds used in images and quoting.  
 Set it to a hex code or "auto" to use your current role's color.  
+
+#### No Logging: "noLogs"
+Disables console logging.  
+Errors are still logged.  
 
 ## Commands
 By default, the prefix is /. You can change this in the config.json.  

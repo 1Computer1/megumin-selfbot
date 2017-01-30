@@ -19,7 +19,7 @@ const framework = new Framework(client, {
 });
 
 const Logger = require('./src/struct/Logger');
-framework.logger = new Logger(framework);
+framework.logger = new Logger(framework, config.noLogs);
 
 framework.tags = require('./src/data/tags.json');
 framework.images = require('./src/data/images.json');
