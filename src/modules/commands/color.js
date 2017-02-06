@@ -7,7 +7,7 @@ function exec(message, args){
 
     let hex = isNaN(embed.color) ? '0' : embed.color.toString(16);
     hex = '#' + '0'.repeat(6 - hex.length) + hex;
-    embed.setDescription(hex.toUpperCase());
+    embed.setTitle(hex.toUpperCase());
 
     return message.edit('', { embed });
 }
