@@ -2,6 +2,7 @@ const { Command } = require('discord-akairo');
 const { RichEmbed } = require('discord.js');
 
 function exec(message, args){
+    args.content = isNaN(args.content) ? args.content : parseInt(args.content);
     const embed = new RichEmbed().setColor(args.content);
 
     let hex = isNaN(embed.color) ? '0' : embed.color.toString(16);
