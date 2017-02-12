@@ -3,7 +3,7 @@ const { EmojiMap, EmojiRegex } = require('../../struct/Constants');
 
 function exec(message, args){
     if (!args.text){
-        this.framework.logger.log(3, 'No text provided to react.');
+        this.client.logger.log(3, 'No text provided to react.');
         return message.delete();
     }
 

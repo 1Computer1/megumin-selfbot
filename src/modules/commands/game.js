@@ -3,13 +3,13 @@ const { Command } = require('discord-akairo');
 function exec(message, args){
     if (!args.game){
         return this.client.user.setGame(null).then(() => {
-            this.framework.logger.log(1, 'Game set to not playing.');
+            this.client.logger.log(1, 'Game set to not playing.');
             return message.delete();
         });
     }
 
     return this.client.user.setGame(args.game).then(() => {
-        this.framework.logger.log(1, `Game set to "${this.client.user.presence.game.name}"`);
+        this.client.logger.log(1, `Game set to "${this.client.user.presence.game.name}"`);
         return message.delete();
     });
 }

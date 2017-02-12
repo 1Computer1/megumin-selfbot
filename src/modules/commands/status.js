@@ -2,7 +2,7 @@ const { Command } = require('discord-akairo');
 
 function exec(message, args){
     return this.client.user.setStatus(args.status).then(() => {
-        this.framework.logger.log(1, `Status set to "${this.client.user.presence.status}"`);
+        this.client.logger.log(1, `Status set to "${this.client.user.presence.status}"`);
         return message.delete();
     });
 }

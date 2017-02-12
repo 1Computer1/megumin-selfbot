@@ -3,7 +3,7 @@ const { EmojiMap, EmojiRegex } = require('../../struct/Constants');
 
 function exec(message, args){
     if (!args.text){
-        this.framework.logger.log(3, 'No text provided to shout.');
+        this.client.logger.log(3, 'No text provided to shout.');
         return message.delete();
     }
 
@@ -19,7 +19,7 @@ function exec(message, args){
     const output = chars.join('\u180E');
 
     if (output.length > 2000){
-        this.framework.logger.log(3, 'Text provided goes over character limit.');
+        this.client.logger.log(3, 'Text provided goes over character limit.');
         return message.delete();
     }
 

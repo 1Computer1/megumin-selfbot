@@ -19,20 +19,20 @@ function replaceTags(text, tags){
 function exec(message){
     if (/^\{.+?\}/.test(message.content)){
         const name = message.content.match(/^\{(.+?)\}/);
-        const image = this.framework.images[name[1].toLowerCase()];
+        const image = this.client.images[name[1].toLowerCase()];
 
         if (!image){
-            const rep = replaceTags(message.content, this.framework.tags);
+            const rep = replaceTags(message.content, this.client.tags);
             if (message.content !== rep) message.edit(rep);
             return;
         }
 
         const embed = new RichEmbed().setImage(image)
-        .setColor(this.framework.config.color === 'auto' && message.guild ? this.client.util.displayColor(message.member) : this.framework.config.color || 0);
+        .setColor(this.client.config.color === 'auto' && message.guild ? this.client.util.displayColor(message.member) : this.client.config.color || 0);
 
-        return message.edit(replaceTags(message.content.replace(name[0], ''), this.framework.tags), { embed }).catch(err => {
+        return message.edit(replaceTags(message.content.replace(name[0], ''), this.client.tags), { embed }).catch(err => {
             if (err.response && err.response.badRequest){
-                this.framework.logger.log(3, 'Your image was invalid. Double check your link!');
+                this.client.logger.log(3, 'Your image was invalid. Double check your link!');
                 return message.delete();
             }
             
@@ -40,7 +40,7 @@ function exec(message){
         });
     }
     
-    const rep = replaceTags(message.content, this.framework.tags);
+    const rep = replaceTags(message.content, this.client.tags);
     if (message.content !== rep) message.edit(rep);
 }
 

@@ -10,7 +10,7 @@ function exec(message, args){
     }
 
     if (emojiSet.size === 0){
-        this.framework.logger.log(3, 'No custom emojis to react with.');
+        this.client.logger.log(3, 'No custom emojis to react with.');
         return message.delete();
     }
 

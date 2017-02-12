@@ -100,19 +100,19 @@ Reacts to the previous message with the specified text.
 Don't use this one.  
 Especially not with the parameter set to 20.  
 
-#### tag / tags
+#### tag / tags / t
 Use `tag list` to see a list of all your tags.  
 
 Use `tag add` to add a tag.  
 The first parameter is the tag name, the second is its content.  
-You can specify a multiple words long tag name or content by enclosing them in double quotes.  
+You can specify a multiple words long tag name by enclosing them in double quotes.  
 
 Use `tag remove` to remove a tag.  
 You can specify a multiple words long tag name by enclosing it in double quotes.  
 
 Use `tag reload` to reload the tags.json if you have modified it outside of this command.
 
-#### image / images / img
+#### image / images / img / i
 Use `image list` to see a list of all your images.  
 
 Use `image add` to add a image.  
@@ -126,5 +126,5 @@ Use `image reload` to reload the images.json if you have modified it outside of 
 
 ## Customization
 You can customize the selfbot all you want!  
-To learn how, visit the [Discord.js documentation](https://discord.js.org/#/docs/main/stable/general/welcome) and the [Akairo documentation](https://1computer1.github.io/discord-akairo/).  
+To learn how, visit the [Discord.js documentation](https://discord.js.org/#/docs/main/stable/general/welcome) and the [Akairo documentation](https://1computer1.github.io/discord-akairo).  
 Of course, learn some Javascript as well.  
