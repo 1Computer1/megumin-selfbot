@@ -43,6 +43,7 @@ It does not have to be filled out, but is there just to be safe.
 The prefix to use commands.  
 By default, it is /.  
 Change it to whatever you like!  
+You can use an array for multiple prefixes.  
 
 #### Color: "color"
 The color of embeds used in images and quoting.  
