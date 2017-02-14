@@ -14,8 +14,7 @@
 
 ## Installation
 This bot requires [Node.js 6.9.4](https://nodejs.org/en/) or higher.  
-Dependencies that will be installed are chalk, discord.js, discord-akairo, and moment.  
-Install erlpack and uws for extra performance.  
+This bot uses [Discord.js](https://discord.js.org/) and [Akairo](https://1computer1.github.io/discord-akairo).  
 
 1. Download this repository or download [git](https://git-scm.com/downloads) and clone this repository.
 2. Open up a command prompt at the bot folder.
@@ -46,8 +45,8 @@ Change it to whatever you like!
 You can use an array for multiple prefixes.  
 
 #### Color: "color"
-The color of embeds used in images and quoting.  
-Set it to a hex code or "auto" to use your current role's color.  
+The color of embeds used in images and in quoting.  
+Set it to a hex code, an integer, "random", or "auto" to use your current role's color.  
 
 #### No Logging: "noLogs"
 Disables console logging.  
@@ -81,6 +80,9 @@ Each new line will be prefixed with a >.
 Makes some orangetext.  
 Each new line will be suffixed with a <.  
 
+#### color / colour
+Generates a random color or outputs with a specified color.
+
 #### prune / delete / del
 Prunes your messages.  
 Specify a number to prune that many messages.  
@@ -100,6 +102,13 @@ Reacts to the previous message with the specified text.
 #### superreact
 Don't use this one.  
 Especially not with the parameter set to 20.  
+
+#### xkcd
+Gets XKCD comics.  
+Leave parameters blank for a random XKCD.  
+Use any text to get a relevant XKCD.  
+Use a number for a specific XKCD.  
+Use 0 for the current XKCD.  
 
 #### tag / tags / t
 Use `tag list` to see a list of all your tags.  

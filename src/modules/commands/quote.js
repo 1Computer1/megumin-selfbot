@@ -7,13 +7,21 @@ function exec(message, args){
         return message.delete();
     }
 
+    const color = this.client.config.color === 'random'
+    ? (1 << 24) * Math.random() | 0
+    : this.client.config.color === 'auto'
+    ? message.guild
+    ? this.client.util.displayColor(message.member)
+    : 0
+    : this.client.config.color || 0;
+
     return message.channel.fetchMessages({ around: args.id, limit: 3 }).then(messages => {
         const quotee = messages.get(args.id);
         const embed = new RichEmbed()
         .setDescription(quotee.content || '\u200B')
         .setAuthor(`${quotee.author.username}#${quotee.author.discriminator}`, quotee.author.displayAvatarURL)
         .setTimestamp(quotee.createdAt)
-        .setColor(this.client.config.color === 'auto' && message.guild ? this.client.util.displayColor(message.member) : this.client.config.color || 0);
+        .setColor(color);
 
         if (quotee.attachments.size) embed.setThumbnail(quotee.attachments.first().url);
 

@@ -27,8 +27,16 @@ function exec(message){
             return;
         }
 
+        const color = this.client.config.color === 'random'
+        ? (1 << 24) * Math.random() | 0
+        : this.client.config.color === 'auto'
+        ? message.guild
+        ? this.client.util.displayColor(message.member)
+        : 0
+        : this.client.config.color || 0;
+
         const embed = new RichEmbed().setImage(image)
-        .setColor(this.client.config.color === 'auto' && message.guild ? this.client.util.displayColor(message.member) : this.client.config.color || 0);
+        .setColor(color);
 
         return message.edit(replaceTags(message.content.replace(name[0], ''), this.client.tags), { embed }).catch(err => {
             if (err.response && err.response.badRequest){
