@@ -10,23 +10,25 @@ function exec(message, args){
         return message.delete();
     }
 
-    const result = new Promise((resolve, reject) => resolve(eval(args.code)));
+    const result = new Promise(resolve => resolve(eval(args.code)));
     const cb = '```';
+
+    const tokenRegex = new RegExp(this.client.config.token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
 
     return result.then(output => {
         if (typeof output !== 'string') output = util.inspect(output);
-        if (output.includes(this.client.config.token)) output = output.replace(this.client.config.token, '[TOKEN]');
-        if (output.length + args.code.length > 1900) output = 'Output too long.';
+        output = output.replace(tokenRegex, '[TOKEN]');
 
-        return message.edit(`📥\u2000**Input**${cb}js\n${args.code}\n${cb}\n📤\u2000**Output** ${cb}js\n${output}\n${cb}`);
+        if (output.length + args.code.length > 1900) output = 'Output too long.';
+        return message.edit(`📥\u2000**Input**${cb}js\n${args.code}\n${cb}\n📤\u2000**Output**${cb}js\n${output}\n${cb}`);
     }).catch(err => {
         this.client.logger.log(2, 'Evaluation errored.');
         console.error(err);
 
         err = err.toString();
-        if (err.includes(this.client.config.token)) err = err.replace(this.client.config.token, '[TOKEN]');
+        err = err.replace(tokenRegex, '[TOKEN]');
 
-        return message.edit(`📥\u2000**Input**${cb}js\n${args.code}\n${cb}\n☠\u2000**Error** ${cb}js\n${err}\n${cb}`);
+        return message.edit(`📥\u2000**Input**${cb}js\n${args.code}\n${cb}\n☠\u2000**Error**${cb}js\n${err}\n${cb}`);
     });
 }
 
