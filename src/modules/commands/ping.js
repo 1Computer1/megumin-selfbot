@@ -1,9 +1,9 @@
 const { Command } = require('discord-akairo');
 
 function exec(message){
-    return message.edit('Pong!').then(m => {
+    return message.edit('🏓\u2000Pong!').then(m => {
         const diff = m.editedAt - m.createdAt;
-        return m.edit(`Pong! (${diff} ms)`);
+        return m.edit(`🏓\u2000Pong! (${diff} ms)`);
     });
 }
 
