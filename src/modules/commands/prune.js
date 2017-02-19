@@ -1,7 +1,7 @@
 const { Command } = require('discord-akairo');
 
 function exec(message, args){
-    args.amount = Math.min(args.amount, 100);
+    args.amount = Math.max(Math.min(args.amount, 100), 1);
 
     return message.channel.fetchMessages({ limit: 100 }).then((messages) => {
         const ownMessages = messages.filter(msg => msg.author.id === this.client.user.id).array();

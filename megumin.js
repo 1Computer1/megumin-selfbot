@@ -24,7 +24,10 @@ client.config = config;
 
 client.login(config.token).then(() => {
     client.logger.log(1, 'Megumin ready! Explooooooosion!');
-}).catch(console.error);
+}).catch(err => {
+    client.logger.log(3, 'Could not login. Is your token correct?');
+    console.error(err);
+});
 
 process.on('unhandledRejection', err => {
     client.logger.log(3, 'An error occured. Contact someone who might know what it means.');
