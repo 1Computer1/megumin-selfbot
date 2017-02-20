@@ -16,7 +16,7 @@ function exec(message, args){
         if (custom) return chars.push(custom);
 
         if (!EmojiMap.has(c.toLowerCase()) && !EmojiRegex.test(out)) return;
-        if (chars.includes(out)) out = AlternativeEmoji.get(out);
+        if (chars.includes(out)) out = AlternativeEmoji.get(out) || out;
         chars.push(out);
     });
 
