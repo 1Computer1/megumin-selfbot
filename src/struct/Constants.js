@@ -42,6 +42,12 @@ module.exports = {
         ['!', '❗'],
         ['?', '❓']
     ]),
+    AlternativeEmoji: new Map([
+        ['🇴', '🅾'],
+        ['🇽', '❌'],
+        ['🇮', 'ℹ'],
+        ['🇵', '🅿']
+    ]),
     LogLevels: [
         'Log',
         'Status',

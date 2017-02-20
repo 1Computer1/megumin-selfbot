@@ -1,5 +1,5 @@
 const { Command } = require('discord-akairo');
-const { EmojiMap, EmojiRegex } = require('../../struct/Constants');
+const { EmojiMap, EmojiRegex, AlternativeEmoji } = require('../../struct/Constants');
 
 function exec(message, args){
     if (!args.text){
@@ -10,12 +10,13 @@ function exec(message, args){
     let chars = [];
 
     args.text.match(/<.+?>|./g).forEach(c => {
-        const out = EmojiMap.get(c.toLowerCase()) || c;
+        let out = EmojiMap.get(c.toLowerCase()) || c;
 
         const custom = this.client.util.resolveEmoji(out, message.guild, false, true);
         if (custom) return chars.push(custom);
 
         if (!EmojiMap.has(c.toLowerCase()) && !EmojiRegex.test(out)) return;
+        if (chars.includes(out)) out = AlternativeEmoji.get(out);
         chars.push(out);
     });
 
