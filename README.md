@@ -24,7 +24,7 @@ This bot uses [Discord.js](https://discord.js.org/) and [Akairo](https://1comput
 6. Enjoy!
 
 ## Configuration
-Rename config.json.exmaple to config.json and fill in with appropriate information.  
+Rename config.json.example to config.json and fill in with appropriate information.  
 
 #### Token
 1. Press CTRL+SHIFT+I (or equivalent on other OS).
