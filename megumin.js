@@ -18,7 +18,7 @@ const client = new AkairoClient({
         'MESSAGE_DELETE',
         'GUILD_MEMBER_UPDATE',
         'PRESENCE_UPDATE',
-        !config.cache ? 'MESSAGE_UPDATE' : ''
+        config.cache === 0 ? 'MESSAGE_UPDATE' : ''
     ]
 });
 
