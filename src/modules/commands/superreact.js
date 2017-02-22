@@ -16,17 +16,17 @@ function exec(message, args){
 
     let emojis = emojiSet.array();
 
-    let currentIndex = emojis.length;
-    let temporaryValue;
-    let randomIndex;
+    let curr = emojis.length;
+    let temp;
+    let rand;
 
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
+    while (curr !== 0) {
+        rand = Math.floor(Math.random() * curr);
+        curr--;
 
-        temporaryValue = emojis[currentIndex];
-        emojis[currentIndex] = emojis[randomIndex];
-        emojis[randomIndex] = temporaryValue;
+        temp = emojis[curr];
+        emojis[curr] = emojis[rand];
+        emojis[rand] = temp;
     }
 
     emojis = emojis.slice(0, Math.min(args.amount, 20));

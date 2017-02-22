@@ -4,14 +4,14 @@ const { RichEmbed } = require('discord.js');
 function replaceTags(text, tags){
     const matched = text.match(/\[.+?\]/g);
 
-    if (matched) matched.forEach(word => {
-        if (!/\[.+?\]/.test(word)) return;
+    if (matched) for (const word of matched){
+        if (!/\[.+?\]/.test(word)) continue;
 
         const tag = tags[word.slice(1, -1).toLowerCase()];
-        if (!tag) return;
+        if (!tag) continue;
 
         text = text.replace(word, tag);
-    });
+    }
 
     return text;
 }
@@ -49,7 +49,7 @@ function exec(message){
     }
     
     const rep = replaceTags(message.content, this.client.tags);
-    if (message.content !== rep) message.edit(rep);
+    if (message.content !== rep) return message.edit(rep);
 }
 
 module.exports = new Listener('messageInvalid', exec, {

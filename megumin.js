@@ -12,15 +12,24 @@ const client = new AkairoClient({
 }, {
     maxMessageCache: 0,
     disableEveryone: true,
-    disabledEvents: ['TYPING_START', 'TYPING_END', 'MESSAGE_UPDATE', 'MESSAGE_DELETE', 'GUILD_MEMBER_UPDATE', 'PRESENCE_UPDATE']
+    disabledEvents: [
+        'TYPING_START',
+        'TYPING_END',
+        'MESSAGE_UPDATE',
+        'MESSAGE_DELETE',
+        'GUILD_MEMBER_UPDATE',
+        'PRESENCE_UPDATE'
+    ]
 });
 
-const Logger = require('./src/struct/Logger');
-client.logger = new Logger(config.noLogs);
+const Logger = require('./src/util/Logger');
 
-client.tags = require('./src/data/tags.json');
-client.images = require('./src/data/images.json');
-client.config = config;
+Object.assign(client, {
+    logger: new Logger(config.noLogs),
+    tags: require('./src/data/tags.json'),
+    images: require('./src/data/images.json'),
+    config
+});
 
 client.login(config.token).then(() => {
     client.logger.log(1, 'Megumin ready! Explooooooosion!');
