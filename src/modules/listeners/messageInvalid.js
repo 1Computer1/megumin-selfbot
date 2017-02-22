@@ -17,7 +17,8 @@ function editText(client, text){
     if (client.config.grammar){
         const corrected = text
         .replace(/(?:^|[.?!]\s)\w/g, m => m.toUpperCase())
-        .replace(/(\bi)('?m?\b)/gi, (m, i, a) => i.toUpperCase() + a)
+        .replace(/\b(i)(m)/gi, '$1\'$2')
+        .replace(/\b(i)('m)?\b/gi, (m, i, a) => i.toUpperCase() + (a || ''))
         .replace(/\b(can|don|won|isn|wasn|aren|ain|shouldn|couldn|wouldn|didn|hadn|haven)(t)\b/gi, '$1\'$2')
         .replace(/\b(should|could|would|must|you)(ve)\b/gi, '$1\'$2')
         .replace(/\b(y)(all)\b/gi, '$1\'$2')
