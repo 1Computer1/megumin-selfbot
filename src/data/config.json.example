@@ -4,5 +4,6 @@
     "prefix": "/",
     "color": "auto",
     "noLogs": false,
-    "grammar": false
+    "grammar": false,
+    "cache": 50
 }

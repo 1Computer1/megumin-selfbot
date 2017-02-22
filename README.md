@@ -49,13 +49,18 @@ You can use an array for multiple prefixes.
 The color of embeds used in images and in quoting.  
 Set it to a hex code, an integer, "random", or "auto" to use your current role's color.  
 
-#### No Logging: "noLogs"
-Disables console logging.  
-Errors are still logged.  
-
 #### Grammar: "grammar"
 Capitalizes your sentences and fixes contractions.
 Does not actually make your grammar that much better.
+
+#### Caching: "cache"
+Amount of messages to keep in cache (default 50).    
+Set to 0 to disable message caching, possibly saving memory.  
+Will make the edits command useless.  
+
+#### No Logging: "noLogs"
+Disables console logging.  
+Errors are still logged.  
 
 ## Commands
 By default, the prefix is /. You can change this in the config.json.  
@@ -95,6 +100,11 @@ By default it is 10.
 
 #### quote / q
 Quotes a message.  
+Supply this command with a message ID.  
+All text after the ID will be your reply.  
+
+#### edits
+Sees the edit history of a cached message.  
 Supply this command with a message ID.  
 All text after the ID will be your reply.  
 
