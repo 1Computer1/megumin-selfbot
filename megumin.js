@@ -10,14 +10,15 @@ const client = new AkairoClient({
     commandDirectory: './src/modules/commands',
     listenerDirectory: './src/modules/listeners',
 }, {
-    maxMessageCache: config.caching || 50,
+    maxMessageCache: config.cache == null ? 50 : config.cache,
     disableEveryone: true,
     disabledEvents: [
         'TYPING_START',
         'TYPING_END',
         'MESSAGE_DELETE',
         'GUILD_MEMBER_UPDATE',
-        'PRESENCE_UPDATE'
+        'PRESENCE_UPDATE',
+        !config.cache ? 'MESSAGE_UPDATE' : ''
     ]
 });
 
