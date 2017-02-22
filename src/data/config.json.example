@@ -3,5 +3,6 @@
     "ownerID": "1234567890",
     "prefix": "/",
     "color": "auto",
-    "noLogs": false
+    "noLogs": false,
+    "grammar": false
 }

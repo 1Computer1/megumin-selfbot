@@ -10,6 +10,7 @@
 - Image and text tags.
 - Message pruning.
 - Various fun emoji commands.
+- Grammar correction.
 - Some other things.
 
 ## Installation
@@ -51,6 +52,10 @@ Set it to a hex code, an integer, "random", or "auto" to use your current role's
 #### No Logging: "noLogs"
 Disables console logging.  
 Errors are still logged.  
+
+#### Grammar: "grammar"
+Capitalizes your sentences and fixes contractions.
+Does not actually make your grammar that much better.
 
 ## Commands
 By default, the prefix is /. You can change this in the config.json.  
