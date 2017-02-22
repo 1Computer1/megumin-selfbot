@@ -50,8 +50,8 @@ The color of embeds used in images and in quoting.
 Set it to a hex code, an integer, "random", or "auto" to use your current role's color.  
 
 #### Grammar: "grammar"
-Capitalizes your sentences and fixes contractions.
-Does not actually make your grammar that much better.
+Capitalizes your sentences and fixes contractions.  
+Does not actually make your grammar that much better.  
 
 #### Caching: "cache"
 Amount of messages to keep in cache (default 50).    
