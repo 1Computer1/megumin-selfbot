@@ -13,7 +13,7 @@ function exec(message, args){
     const result = new Promise(resolve => resolve(eval(args.code)));
     const cb = '```';
 
-    const tokenRegex = new RegExp(this.client.config.token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
+    const tokenRegex = new RegExp(this.client.config.token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').split('').join('.?'), 'g');
 
     return result.then(output => {
         if (typeof output !== 'string') output = util.inspect(output);
