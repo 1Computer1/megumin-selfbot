@@ -63,9 +63,10 @@ Disables console logging.
 Errors are still logged.  
 
 ## Commands
-By default, the prefix is /. You can change this in the config.json.  
-Images can be sent by starting a message with {imagename}.  
-Tags can be used by adding [tagname] anywhere in the message.  
+By default, the prefix is `/`. You can change this in the config.json.  
+Images can be sent by starting a message with `{imagename}`.  
+Tags can be used by adding `[tagname]` anywhere in the message.  
+You can escape a tag (thefore not using it) by doing `\[tagname]`.  
 
 #### ping
 Pong!  

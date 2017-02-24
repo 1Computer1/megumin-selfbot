@@ -2,15 +2,20 @@ const { Listener } = require('discord-akairo');
 const { RichEmbed } = require('discord.js');
 
 function editText(client, text){
-    const matched = text.match(/\[.+?\]/g);
+    const matches = [];
+    const regex = /(?:[^\\]|^)\[(.+?)\]/g;
+    let temp;
 
-    if (matched) for (const word of matched){
-        if (!/\[.+?\]/.test(word)) continue;
+    while ((temp = regex.exec(text)) !== null){
+        matches.push(temp);
+    }
 
-        const tag = client.tags[word.slice(1, -1).toLowerCase()];
+    if (matches.length) for (const [full, name] of matches){
+
+        const tag = client.tags[name.toLowerCase()];
         if (!tag) continue;
 
-        text = text.replace(word, tag);
+        text = text.replace(full, tag);
     }
 
     if (!client.config.grammar) return text;
