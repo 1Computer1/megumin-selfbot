@@ -27,7 +27,12 @@ const operators = {
         return temp;
     },
     'sqrt': a => Math.sqrt(a),
-    'log': a => Math.log(a),
+    'logn': a => Math.log(a),
+    'logb': a => Math.log2(a),
+    'logc': a => Math.log10(a),
+    'ln': a => Math.log(a),
+    'lb': a => Math.log2(a),
+    'lc': a => Math.log10(a),
     'sin': a => Math.sin(a),
     'cos': a => Math.cos(a),
     'tan': a => Math.tan(a),
@@ -46,7 +51,8 @@ const numbers = {
     'G': 6.67408 * Math.pow(10, -11),
     'c': 299792458,
     'weed': 420,
-    'gr': (1 + Math.sqrt(5)) / 2
+    'gr': (1 + Math.sqrt(5)) / 2,
+    'φ': (1 + Math.sqrt(5)) / 2
 };
 
 function exec(message, args){
