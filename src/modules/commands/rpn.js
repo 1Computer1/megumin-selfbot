@@ -61,7 +61,7 @@ function exec(message, args){
         return message.delete();
     }
 
-    const ops = args.content.match(/\d+|\S+/g);
+    const ops = args.content.match(/[\d.]+|\S+/g);
     if (!ops) return message.edit(`\`${args.content} = NaN\``);
 
     const stack = [];
