@@ -2,14 +2,14 @@ const { Command } = require('discord-akairo');
 const { EmojiMap, EmojiRegex } = require('../../util/Constants');
 
 function exec(message, args){
-    if (!args.text){
+    if (!args.content){
         this.client.logger.log(3, 'No text provided to shout.');
         return message.delete();
     }
 
     const chars = [];
 
-    for (const c of args.text.match(/<.+?>|./g)){
+    for (const c of args.content.match(/<.+?>|./g)){
         const out = c === ' ' ? '\u2000' : EmojiMap.get(c.toLowerCase()) || c;
 
         const custom = this.client.util.resolveEmoji(out, message.guild, false, true);
@@ -37,7 +37,7 @@ module.exports = new Command('shout', exec, {
     aliases: ['shout', 'big'],
     args: [
         {
-            id: 'text',
+            id: 'content',
             match: 'content'
         }
     ]

@@ -70,7 +70,8 @@ module.exports = new Command('tag', exec, {
             id: 'name'
         },
         {
-            id: 'content'
+            id: 'content',
+            match: 'rest'
         }
     ],
     split: 'quoted'
