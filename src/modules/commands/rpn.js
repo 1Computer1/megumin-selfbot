@@ -1,5 +1,54 @@
 const { Command } = require('discord-akairo');
 
+const operators = {
+    '+': (a, b) => a + b,
+    '-': (a, b) => a - b,
+    'x': (a, b) => a * b,
+    '*': (a, b) => a * b,
+    '/': (a, b) => a / b,
+    '%': (a, b) => a % b,
+    '&': (a, b) => a & b,
+    '|': (a, b) => a | b,
+    '^': (a, b) => a ^ b,
+    '>>': (a, b) => a >> b,
+    '<<': (a, b) => a << b,
+    '>>>': (a, b) => a >>> b,
+    '//': (a, b) => Math.floor(a / b),
+    '**': (a, b) => Math.pow(a, b),
+    'pow': (a, b) => Math.pow(a, b),
+    'rt': (a, b) => Math.pow(a, 1 / b),
+    'root': (a, b) => Math.pow(a, 1 / b),
+    '~': a => ~a,
+    '√': a => Math.sqrt(a),
+    '!': a => {
+        if (a < 0 || Math.floor(a) !== a) return NaN;
+        let temp = 1;
+        for (let i = 2; i <= a; i++) temp *= i;
+        return temp;
+    },
+    'sqrt': a => Math.sqrt(a),
+    'log': a => Math.log(a),
+    'sin': a => Math.sin(a),
+    'cos': a => Math.cos(a),
+    'tan': a => Math.tan(a),
+    'abs': a => Math.abs(a),
+    'floor': a => Math.floor(a),
+    'round': a => Math.round(a),
+    'ceil': a => Math.ceil(a)
+};
+
+const numbers = {
+    'pi': Math.PI,
+    'π': Math.PI,
+    'tau': Math.PI * 2,
+    'τ': Math.PI * 2,
+    'e': Math.E,
+    'G': 6.67408 * Math.pow(10, -11),
+    'c': 299792458,
+    'weed': 420,
+    'gr': (1 + Math.sqrt(5)) / 2
+};
+
 function exec(message, args){
     if (!args.content){
         this.client.logger.log(3, 'No text provided to evaluate.');
@@ -8,47 +57,6 @@ function exec(message, args){
 
     const ops = args.content.match(/\d+|\S+/g);
     if (!ops) return message.edit(`\`${args.content} = NaN\``);
-
-    const operators = {
-        '+': (a, b) => a + b,
-        '-': (a, b) => a - b,
-        'x': (a, b) => a * b,
-        '*': (a, b) => a * b,
-        '/': (a, b) => a / b,
-        '%': (a, b) => a % b,
-        '&': (a, b) => a & b,
-        '|': (a, b) => a | b,
-        '^': (a, b) => a ^ b,
-        '>>': (a, b) => a >> b,
-        '<<': (a, b) => a << b,
-        '>>>': (a, b) => a >>> b,
-        '//': (a, b) => Math.floor(a / b),
-        '**': (a, b) => Math.pow(a, b),
-        '~': a => ~a,
-        'sqrt': a => Math.sqrt(a),
-        'log': a => Math.log(a),
-        'sin': a => Math.sin(a),
-        'cos': a => Math.cos(a),
-        'tan': a => Math.tan(a),
-        '!': a => {
-            if (a < 0 || Math.floor(a) !== a) return NaN;
-            let temp = 1;
-            for (let i = 2; i <= a; i++) temp *= i;
-            return temp;
-        }
-    };
-
-    const numbers = {
-        'pi': Math.PI,
-        'π': Math.PI,
-        'tau': Math.PI * 2,
-        'τ': Math.PI * 2,
-        'e': Math.E,
-        'G': 6.67408 * Math.pow(10, -11),
-        'c': 299792458,
-        'weed': 420,
-        'gr': (1 + Math.sqrt(5)) / 2
-    };
 
     const stack = [];
 
