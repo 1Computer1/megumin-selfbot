@@ -126,6 +126,10 @@ Use any text to get a relevant XKCD.
 Use a number for a specific XKCD.  
 Use 0 for the current XKCD.  
 
+#### rpn
+Does math in [Reverse Polish notation](https://en.wikipedia.org/wiki/Reverse_Polish_notation).  
+See the source code for available operators and constants.  
+
 #### tag / tags / t
 Use `tag list` to see a list of all your tags.  
 
