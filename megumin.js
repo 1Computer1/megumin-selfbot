@@ -28,7 +28,16 @@ Object.assign(client, {
     logger: new Logger(config.noLogs),
     tags: require('./src/data/tags.json'),
     images: require('./src/data/images.json'),
-    config
+    config,
+    color: message => {
+        return config.color === 'random'
+        ? (1 << 24) * Math.random() | 0
+        : client.config.color === 'auto'
+        ? message.guild
+        ? client.util.displayColor(message.member)
+        : 0
+        : client.config.color || 0;
+    }
 });
 
 client.login(config.token).then(() => {

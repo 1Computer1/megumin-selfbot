@@ -4,13 +4,7 @@ const xkcd = require('relevant-xkcd');
 
 function exec(message, args){
     const sendComic = comic => {
-        const color = this.client.config.color === 'random'
-        ? (1 << 24) * Math.random() | 0
-        : this.client.config.color === 'auto'
-        ? message.guild
-        ? this.client.util.displayColor(message.member)
-        : 0
-        : this.client.config.color || 0;
+        const color = this.client.color(message);
 
         const embed = new RichEmbed()
         .setColor(color)

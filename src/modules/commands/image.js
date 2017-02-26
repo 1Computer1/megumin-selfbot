@@ -7,7 +7,7 @@ function exec(message, args){
         return message.editCode('json', keys.length ? keys.sort().map(image => `{${image}}`).join(', ') : 'No images added.');
     }
 
-    if (args.option === 'add'){
+    if (['add', 'new', 'set'].includes(args.option)){
         if (!args.name || !args.content){
             this.client.logger.log(3, 'No image name or link provided.');
             return message.delete();
@@ -28,7 +28,7 @@ function exec(message, args){
         return message.delete();
     }
 
-    if (args.option === 'remove'){
+    if (['remove', 'delete', 'del'].includes(args.option)){
         if (!args.name){
             this.client.logger.log(3, 'No image name provided.');
             return message.delete();
@@ -59,11 +59,11 @@ function exec(message, args){
 }
 
 module.exports = new Command('image', exec, {
-    aliases: ['image', 'images', 'img', 'i'],
+    aliases: ['image', 'images', 'img'],
     args: [
         {
             id: 'option',
-            type: ['list', 'add', 'remove', 'reload'],
+            type: ['list', 'add', 'new', 'set', 'remove', 'delete', 'del', 'reload'],
             defaultValue: 'list'
         },
         {

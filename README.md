@@ -133,7 +133,7 @@ Use `tag add` to add a tag.
 The first parameter is the tag name, the second is its content.  
 You can specify a multiple words long tag name by enclosing them in double quotes.  
 
-Use `tag remove` to remove a tag.  
+Use `tag del` to remove a tag.  
 You can specify a multiple words long tag name by enclosing it in double quotes.  
 
 Use `tag reload` to reload the tags.json if you have modified it outside of this command.
@@ -141,11 +141,11 @@ Use `tag reload` to reload the tags.json if you have modified it outside of this
 #### image / images / img / i
 Use `image list` to see a list of all your images.  
 
-Use `image add` to add a image.  
+Use `image add` to add an image.  
 The first parameter is the image name, the second is the link to the image.  
 You can specify a multiple words long image name by enclosing it in double quotes.  
 
-Use `image remove` to remove a image.  
+Use `image del` to remove an image.  
 You can specify a multiple words long image name by enclosing it in double quotes.  
 
 Use `image reload` to reload the images.json if you have modified it outside of this command.

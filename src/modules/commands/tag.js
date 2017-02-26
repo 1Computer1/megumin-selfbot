@@ -7,7 +7,7 @@ function exec(message, args){
         return message.editCode('json', keys.length ? keys.sort().map(tag => `[${tag}]`).join(', ') : 'No tags added.');
     }
 
-    if (args.option === 'add'){
+    if (['add', 'new', 'set'].includes(args.option)){
         if (!args.name || !args.content){
             this.client.logger.log(3, 'No tag name or content provided.');
             return message.delete();
@@ -28,7 +28,7 @@ function exec(message, args){
         return message.delete();
     }
 
-    if (args.option === 'remove'){
+    if (['remove', 'delete', 'del'].includes(args.option)){
         if (!args.name){
             this.client.logger.log(3, 'No tag name provided.');
             return message.delete();
@@ -59,19 +59,18 @@ function exec(message, args){
 }
 
 module.exports = new Command('tag', exec, {
-    aliases: ['tag', 'tags', 't'],
+    aliases: ['tag', 'tags'],
     args: [
         {
             id: 'option',
-            type: ['list', 'add', 'remove', 'reload'],
+            type: ['list', 'add', 'new', 'set', 'remove', 'delete', 'del', 'reload'],
             defaultValue: 'list'
         },
         {
             id: 'name'
         },
         {
-            id: 'content',
-            match: 'rest'
+            id: 'content'
         }
     ],
     split: 'quoted'

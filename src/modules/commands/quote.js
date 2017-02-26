@@ -7,13 +7,7 @@ function exec(message, args){
         return message.delete();
     }
 
-    const color = this.client.config.color === 'random'
-    ? (1 << 24) * Math.random() | 0
-    : this.client.config.color === 'auto'
-    ? message.guild
-    ? this.client.util.displayColor(message.member)
-    : 0
-    : this.client.config.color || 0;
+    const color = this.client.color(message);
 
     return message.channel.fetchMessages({ around: args.id, limit: 3 }).then(messages => {
         const quotee = messages.get(args.id);

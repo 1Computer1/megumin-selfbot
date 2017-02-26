@@ -7,16 +7,9 @@ function exec(message, args){
         return message.delete();
     }
 
-    const color = this.client.config.color === 'random'
-    ? (1 << 24) * Math.random() | 0
-    : this.client.config.color === 'auto'
-    ? message.guild
-    ? this.client.util.displayColor(message.member)
-    : 0
-    : this.client.config.color || 0;
-
+    const color = this.client.color(message);
     const quotee = message.channel.messages.get(args.id);
-
+    
     if (!quotee){
         this.client.logger.log(3, 'Your message ID was invalid or the message is not cached.');
         return message.delete();
