@@ -3,10 +3,11 @@ const { RichEmbed } = require('discord.js');
 
 function editText(client, text){
     const matches = [];
-    const regex = /(?:[^\\]|^)\[(.+?)\]/g;
+    const regex = /\\?\[(.+?)\]/g;
     let temp;
 
     while ((temp = regex.exec(text)) !== null){
+        if (temp[0].startsWith('\\')) continue;
         matches.push(temp);
     }
 
