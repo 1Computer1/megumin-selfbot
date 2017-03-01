@@ -12,14 +12,16 @@ function exec(message, args){
     }
 
     const color = this.client.color(message);
-    const embed = this.client.util.embed().setColor(color);
+    const embed = this.client.util.embed()
+    .setColor(color)
+    .setTitle('Emotes');
 
     const emotes = args.guild.emojis;
     const sections = [];
     let temp = [];
 
     for (const emote of emotes.values()){
-        if (temp.join(' ').length + ' ' + emote.toString().length > 1020){
+        if (temp.join(' ').length + emote.toString().length + 1 > 1020){
             sections.push(temp);
             temp = [];
         }
