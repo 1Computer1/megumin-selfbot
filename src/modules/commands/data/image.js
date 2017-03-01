@@ -73,5 +73,6 @@ module.exports = new Command('image', exec, {
             id: 'content'
         }
     ],
-    split: 'quoted'
+    split: 'quoted',
+    category: 'data'
 });

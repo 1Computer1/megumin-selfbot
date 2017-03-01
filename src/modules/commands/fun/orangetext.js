@@ -12,5 +12,6 @@ module.exports = new Command('orangetext', exec, {
             match: 'content',
             defaultValue: '\u200B'
         }
-    ]
+    ],
+    category: 'fun'
 });

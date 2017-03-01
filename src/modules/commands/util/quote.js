@@ -1,5 +1,4 @@
 const { Command } = require('discord-akairo');
-const { RichEmbed } = require('discord.js');
 
 function exec(message, args){
     if (!args.id){
@@ -11,9 +10,11 @@ function exec(message, args){
 
     return message.channel.fetchMessages({ around: args.id, limit: 3 }).then(messages => {
         const quotee = messages.get(args.id);
-        const embed = new RichEmbed()
+
+        const embed = this.client.util.embed()
         .setDescription(quotee.content || '\u200B')
         .setAuthor(`${quotee.author.username}#${quotee.author.discriminator}`, quotee.author.displayAvatarURL)
+        .setFooter(quotee.id)
         .setTimestamp(quotee.createdAt)
         .setColor(color);
 
@@ -36,5 +37,6 @@ module.exports = new Command('quote', exec, {
         {
             id: 'id'
         }
-    ]
+    ],
+    category: 'util'
 });

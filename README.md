@@ -75,6 +75,27 @@ Pong!
 Evaluates Javascript code.  
 Not recommended for the average user.  
 
+#### avatar
+Gets avatar of a user.  
+
+#### icon
+Gets icon of a guild.  
+
+#### id
+Gets the ID of something (member/channel/role/emote).  
+Usable only in a guild.  
+
+#### emotes
+Gets the emotes of the guild.  
+Usable only in a guild.  
+
+#### guild / server
+Gets information about a guild.  
+
+#### user / member / whois
+Gets information about a user.  
+Usable only in a guild.  
+
 #### game
 Sets your current playing game.  
 Leave blank to stop playing game.  

@@ -99,5 +99,6 @@ module.exports = new Command('rpn', exec, {
             id: 'content',
             match: 'content'
         }
-    ]
+    ],
+    category: 'fun'
 });

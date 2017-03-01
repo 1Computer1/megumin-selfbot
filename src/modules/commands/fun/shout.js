@@ -1,5 +1,5 @@
 const { Command } = require('discord-akairo');
-const { EmojiMap, EmojiRegex } = require('../../util/Constants');
+const { EmojiMap, EmojiRegex } = require('../../../util/Constants');
 
 function exec(message, args){
     if (!args.content){
@@ -40,5 +40,6 @@ module.exports = new Command('shout', exec, {
             id: 'content',
             match: 'content'
         }
-    ]
+    ],
+    category: 'fun'
 });

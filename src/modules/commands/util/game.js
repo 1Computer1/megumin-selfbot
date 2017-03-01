@@ -21,5 +21,6 @@ module.exports = new Command('game', exec, {
             id: 'game',
             match: 'content'
         }
-    ]
+    ],
+    category: 'util'
 });

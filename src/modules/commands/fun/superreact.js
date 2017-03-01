@@ -16,17 +16,17 @@ function exec(message, args){
 
     let emojis = emojiSet.array();
 
-    let curr = emojis.length;
-    let temp;
-    let rand;
+    let currentIndex = emojis.length;
+    let temporaryValue;
+    let randomIndex;
 
-    while (curr !== 0) {
-        rand = Math.floor(Math.random() * curr);
-        curr--;
+    while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
 
-        temp = emojis[curr];
-        emojis[curr] = emojis[rand];
-        emojis[rand] = temp;
+        temporaryValue = emojis[currentIndex];
+        emojis[currentIndex] = emojis[randomIndex];
+        emojis[randomIndex] = temporaryValue;
     }
 
     emojis = emojis.slice(0, Math.min(args.amount, 20));
@@ -52,5 +52,6 @@ module.exports = new Command('superreact', exec, {
             type: 'integer',
             defaultValue: 1
         }
-    ]
+    ],
+    category: 'fun'
 });

@@ -15,5 +15,6 @@ module.exports = new Command('status', exec, {
             type: ['online', 'idle', 'dnd', 'invisible'],
             defaultValue: 'online'
         }
-    ]
+    ],
+    category: 'util'
 });

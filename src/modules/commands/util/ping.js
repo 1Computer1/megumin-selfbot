@@ -9,5 +9,5 @@ function exec(message){
 
 module.exports = new Command('ping', exec, {
     aliases: ['ping'],
-    args: []
+    category: 'util'
 });

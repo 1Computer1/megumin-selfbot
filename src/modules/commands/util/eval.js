@@ -1,4 +1,4 @@
-/* eslint no-unused-vars: "off" */ // Would be nice to have some stuff for eval().
+/* eslint no-unused-vars: "off" */
 
 const { Command } = require('discord-akairo');
 const util = require('util');
@@ -13,7 +13,7 @@ function exec(message, args){
     const result = new Promise(resolve => resolve(eval(args.code)));
     const cb = '```';
 
-    const tokenRegex = new RegExp(this.client.config.token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').split('').join('.?'), 'g');
+    const tokenRegex = new RegExp(this.client.token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').split('').join('.?'), 'g');
 
     return result.then(output => {
         if (typeof output !== 'string') output = util.inspect(output);
@@ -39,5 +39,6 @@ module.exports = new Command('eval', exec, {
             id: 'code',
             match: 'content'
         }
-    ]
+    ],
+    category: 'util'
 });

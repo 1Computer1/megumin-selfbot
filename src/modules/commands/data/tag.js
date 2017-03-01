@@ -74,5 +74,6 @@ module.exports = new Command('tag', exec, {
             match: 'rest'
         }
     ],
-    split: 'quoted'
+    split: 'quoted',
+    category: 'data'
 });

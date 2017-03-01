@@ -1,7 +1,7 @@
 const { Command } = require('discord-akairo');
 
 function exec(message, args){
-    args.amount = Math.max(Math.min(args.amount, 100), 1);
+    args.amount = Math.min(args.amount, 100);
 
     return message.channel.fetchMessages({ limit: 100 }).then(messages => {
         const ownMessages = [];
@@ -17,12 +17,13 @@ function exec(message, args){
 }
 
 module.exports = new Command('prune', exec, {
-    aliases: ['prune', 'delete', 'del'],
+    aliases: ['prune', 'delete', 'del',],
     args: [
         {
             id: 'amount',
             type: 'integer',
             defaultValue: 10
         }
-    ]
+    ],
+    category: 'util'
 });

@@ -1,5 +1,4 @@
 const { Command } = require('discord-akairo');
-const { RichEmbed } = require('discord.js');
 
 function exec(message, args){
     if (!args.id){
@@ -9,13 +8,13 @@ function exec(message, args){
 
     const color = this.client.color(message);
     const quotee = message.channel.messages.get(args.id);
-    
+
     if (!quotee){
         this.client.logger.log(3, 'Your message ID was invalid or the message is not cached.');
         return message.delete();
     }
 
-    const embed = new RichEmbed()
+    const embed = this.client.util.embed()
     .setAuthor(`${quotee.author.username}#${quotee.author.discriminator}`, quotee.author.displayAvatarURL)
     .setFooter(`${quotee.id} | Edit History`)
     .setColor(color);
@@ -33,5 +32,6 @@ module.exports = new Command('edits', exec, {
         {
             id: 'id'
         }
-    ]
+    ],
+    category: 'info'
 });

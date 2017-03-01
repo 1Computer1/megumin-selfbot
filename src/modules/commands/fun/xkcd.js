@@ -1,12 +1,11 @@
 const { Command } = require('discord-akairo');
-const { RichEmbed } = require('discord.js');
 const xkcd = require('relevant-xkcd');
 
 function exec(message, args){
     const sendComic = comic => {
         const color = this.client.color(message);
-
-        const embed = new RichEmbed()
+        
+        const embed = this.client.util.embed()
         .setColor(color)
         .setTitle(comic.title)
         .setURL(comic.explainURL)
@@ -39,5 +38,6 @@ module.exports = new Command('xkcd', exec, {
             id: 'content',
             match: 'content'
         }
-    ]
+    ],
+    category: 'fun'
 });
