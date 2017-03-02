@@ -68,7 +68,6 @@ By default, the prefix is `/`. You can change this in the config.json.
 Images can be sent by starting a message with `{imagename}`.  
 Tags can be used by adding `[tagname]` anywhere in the message.  
 You can escape a tag (therefore not using it) by doing `\[tagname]`.  
-
 #### ping
 Pong!  
 
@@ -76,25 +75,28 @@ Pong!
 Evaluates Javascript code.  
 Not recommended for the average user.  
 
-#### avatar
-Gets avatar of a user.  
+#### stats / info / about
+Displays the memory usage, uptime, and a link to here.  
+
+#### guild / server
+Gets information about a guild.  
 
 #### icon
 Gets icon of a guild.  
-
-#### id
-Gets the ID of something (member/channel/role/emote).  
-Usable only in a guild.  
 
 #### emotes
 Gets the emotes of the guild.  
 Usable only in a guild.  
 
-#### guild / server
-Gets information about a guild.  
-
 #### user / member / whois
 Gets information about a user.  
+Usable only in a guild.  
+
+#### avatar
+Gets avatar of a user.  
+
+#### id
+Gets the ID of something (member/channel/role/emote).  
 Usable only in a guild.  
 
 #### game
