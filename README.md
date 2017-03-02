@@ -36,10 +36,6 @@ Rename config.json.example to config.json and fill in with appropriate informati
 
 Do not share your token with anyone!  
 
-#### Owner ID: "ownerID"
-This is just your own ID.  
-It does not have to be filled out, but is there just to be safe.  
-
 #### Prefix: "prefix"
 The prefix to use commands.  
 By default, it is /.  
