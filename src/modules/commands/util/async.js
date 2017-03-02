@@ -13,7 +13,7 @@ function exec(message, args){
     const evaled = {};
     const logs = [];
 
-    const tokenRegex = new RegExp(this.client.token.replace(/\./g, '\\$&').split('').join('.?'), 'g');
+    const tokenRegex = new RegExp(this.client.token.replace(/\./g, '\\.').split('').join('.?'), 'g');
 
     const print = (...a) => {
         const cleaned = a.map(o => {
