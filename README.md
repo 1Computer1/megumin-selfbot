@@ -75,6 +75,11 @@ Pong!
 Evaluates Javascript code.  
 Not recommended for the average user.  
 
+#### async / a
+A better version of eval.  
+Requires harmony or Node 7.6.0 or higher.  
+Has `await` and `print()`.  
+
 #### stats / info / about
 Displays the memory usage, uptime, and a link to here.  
 
