@@ -9,9 +9,10 @@
 - Changing game and status.
 - Image and text tags.
 - Message pruning.
+- User/server info.
 - Various fun emoji commands.
-- Grammar correction.
-- Some other things.
+- "Grammar correction".
+- A bunch of other things!
 
 ## Installation
 This bot requires [Node.js 6.9.4](https://nodejs.org/en/) or higher.  
@@ -174,6 +175,10 @@ Use `image del` to remove an image.
 You can specify a multiple words long image name by enclosing it in double quotes.  
 
 Use `image reload` to reload the images.json if you have modified it outside of this command.
+
+#### log / logs
+Fetches 100 messages and saves it to the logs folder.  
+Include an ID to fetch 100 messages before that message.  
 
 ## Customization
 You can customize the selfbot all you want!  
