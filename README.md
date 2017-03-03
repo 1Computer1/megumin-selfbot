@@ -62,6 +62,10 @@ Will make the edits command useless.
 Disables console logging.  
 Errors are still logged.  
 
+#### Exit on Disconnect: "exitOnDisconnect"
+Exits the process on disconnect.  
+Recommended to use with uws and a process manager (eg PM2).  
+
 ## Commands
 By default, the prefix is `/`.  
 You can change this in the config.json.  

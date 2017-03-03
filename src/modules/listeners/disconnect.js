@@ -1,7 +1,9 @@
 const { Listener } = require('discord-akairo');
 
 function exec(close){
-    return this.client.logger.log(1, `Client disconnected with code ${close.code}.`);
+    this.client.logger.log(1, `Client disconnected with code ${close.code}.`);
+    if (this.client.config.exitOnDisconnect) return process.exit();
+    return;
 }
 
 module.exports = new Listener('disconnect', exec, {
