@@ -21,8 +21,8 @@ function exec(message, args){
         this.client.images[args.name.toLowerCase()] = args.content;
 
         fs.writeFileSync('./src/data/images.json', JSON.stringify(this.client.images, null, '\t'));
-        delete require.cache[require.resolve('../../data/images.json')];
-        this.client.images = require('../../data/images.json');
+        delete require.cache[require.resolve('../../../data/images.json')];
+        this.client.images = require('../../../data/images.json');
 
         this.client.logger.log(2, `Image {${args.name.toLowerCase()}} added: "${args.content}"`);
         return message.delete();
@@ -42,16 +42,16 @@ function exec(message, args){
         delete this.client.images[args.name.toLowerCase()];
 
         fs.writeFileSync('./src/data/images.json', JSON.stringify(this.client.images, null, '\t'));
-        delete require.cache[require.resolve('../../data/images.json')];
-        this.client.images = require('../../data/images.json');
+        delete require.cache[require.resolve('../../../data/images.json')];
+        this.client.images = require('../../../data/images.json');
 
         this.client.logger.log(2, `Image {${args.name.toLowerCase()}} removed.`);
         return message.delete();
     }
 
     if (args.option === 'reload'){
-        delete require.cache[require.resolve('../../data/images.json')];
-        this.client.images = require('../../data/images.json');
+        delete require.cache[require.resolve('../../../data/images.json')];
+        this.client.images = require('../../../data/images.json');
 
         this.client.logger.log(2, 'Reloaded images.json.');
         return message.delete();

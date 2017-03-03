@@ -21,8 +21,8 @@ function exec(message, args){
         this.client.tags[args.name.toLowerCase()] = args.content;
 
         fs.writeFileSync('./src/data/tags.json', JSON.stringify(this.client.tags, null, '\t'));
-        delete require.cache[require.resolve('../../data/tags.json')];
-        this.client.tags = require('../../data/tags.json');
+        delete require.cache[require.resolve('../../../data/tags.json')];
+        this.client.tags = require('../../../data/tags.json');
 
         this.client.logger.log(2, `Tag [${args.name.toLowerCase()}] added: "${args.content}"`);
         return message.delete();
@@ -42,16 +42,16 @@ function exec(message, args){
         delete this.client.tags[args.name.toLowerCase()];
 
         fs.writeFileSync('./src/data/tags.json', JSON.stringify(this.client.tags, null, '\t'));
-        delete require.cache[require.resolve('../../data/tags.json')];
-        this.client.tags = require('../../data/tags.json');
+        delete require.cache[require.resolve('../../../data/tags.json')];
+        this.client.tags = require('../../../data/tags.json');
 
         this.client.logger.log(2, `Tag [${args.name.toLowerCase()}] removed.`);
         return message.delete();
     }
 
     if (args.option === 'reload'){
-        delete require.cache[require.resolve('../../data/tags.json')];
-        this.client.tags = require('../../data/tags.json');
+        delete require.cache[require.resolve('../../../data/tags.json')];
+        this.client.tags = require('../../../data/tags.json');
 
         this.client.logger.log(2, 'Reloaded tags.json.');
         return message.delete();
