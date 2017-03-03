@@ -17,7 +17,7 @@ function exec(message, args){
     const fields = [
         [
             'Username',
-            args.member.user.username,
+            `${args.member.user.username}${args.member.user.discriminator}`,
             true
         ],
         [
