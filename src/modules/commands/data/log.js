@@ -25,7 +25,24 @@ function exec(message, args){
                     time: m.createdTimestamp,
                     date: m.createdAt.toString(),
                     content: m.cleanContent,
-                    attachment: m.attachments.size ? m.attachments.first().url : undefined
+                    attachment: m.attachments.size ? m.attachments.first().url : undefined,
+                    embeds: m.embeds.length ? m.embeds.map(embed => {
+                        return {
+                            title: embed.title || undefined,
+                            url: embed.url || undefined,
+                            color: embed.color || undefined,
+                            description: embed.description || undefined,
+                            fields: embed.fields.length ? embed.fields.map(field => {
+                                return {
+                                    name: field.name,
+                                    value: field.value
+                                };
+                            }) : undefined,
+                            thumbnail: embed.thumbnail && embed.thumbnail.url || undefined,
+                            image: embed.image && embed.image.url || undefined,
+                            footer: embed.footer && embed.footer.text || undefined,
+                        };
+                    }) : undefined
                 };
             })
         };
