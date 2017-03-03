@@ -5,13 +5,14 @@
 </p>  
 
 ## Features
-- An eval command.
+- A powerful eval command.
 - Changing game and status.
-- Image and text tags.
+- Image tags and inline text tags.
 - Message pruning.
-- User/server info.
+- User/server info commands.
 - Various fun emoji commands.
-- "Grammar correction".
+- Grammar correction, kinda.
+- Customizable!
 - A bunch of other things!
 
 ## Installation
@@ -19,11 +20,12 @@ This bot requires [Node.js 6.9.4](https://nodejs.org/en/) or higher.
 This bot uses [Discord.js](https://discord.js.org/) and [Akairo](https://1computer1.github.io/discord-akairo).  
 
 1. Download this repository or download [git](https://git-scm.com/downloads) and clone this repository.
-2. Open up a command prompt at the bot folder.
-3. Run `npm install`.
-4. Setup your settings inside src/data/config.json. See configuration below.
-5. Run `node megumin.js`.
-6. Enjoy!
+2. Open up a command prompt (or your preferred terminal) at the bot folder.
+3. Run `npm install` or `npm install --no-optional` if you are having build problems.
+4. Setup your settings inside src/data/config.json (see configuration below).
+5. Remember to rename those files to not have .example!
+6. Run `node megumin.js`.
+7. Enjoy!
 
 ## Configuration
 Rename config.json.example to config.json and fill in with appropriate information.  
@@ -38,7 +40,7 @@ Do not share your token with anyone!
 
 #### Prefix: "prefix"
 The prefix to use commands.  
-By default, it is /.  
+By default, it is `/`.  
 Change it to whatever you like!  
 You can use an array for multiple prefixes.  
 
@@ -49,6 +51,7 @@ Set it to a hex code, an integer, "random", or "auto" to use your current role's
 #### Grammar: "grammar"
 Capitalizes your sentences and fixes contractions.  
 Does not actually make your grammar that much better.  
+By default, it is off.  
 
 #### Caching: "cache"
 Amount of messages to keep in cache (default 50).    
@@ -60,7 +63,8 @@ Disables console logging.
 Errors are still logged.  
 
 ## Commands
-By default, the prefix is `/`. You can change this in the config.json.  
+By default, the prefix is `/`.  
+You can change this in the config.json.  
 Images can be sent by starting a message with `{imagename}`.  
 Tags can be used by adding `[tagname]` anywhere in the message.  
 You can escape a tag (therefore not using it) by doing `\[tagname]`.  
@@ -165,7 +169,11 @@ You can specify a multiple words long tag name by enclosing them in double quote
 Use `tag del` to remove a tag.  
 You can specify a multiple words long tag name by enclosing it in double quotes.  
 
-Use `tag reload` to reload the tags.json if you have modified it outside of this command.
+Use `tag reload` to reload the tags.json if you have modified it outside of this command.  
+
+Tags can be used by doing `[tagname]` in your message.  
+For example, "hey check this out [animestuffs] it's so cool! [laugh]".  
+To force a tag to not be used, simply add a backslash, `\[tagname]`.  
 
 #### image / images / img / i
 Use `image list` to see a list of all your images.  
@@ -177,10 +185,14 @@ You can specify a multiple words long image name by enclosing it in double quote
 Use `image del` to remove an image.  
 You can specify a multiple words long image name by enclosing it in double quotes.  
 
-Use `image reload` to reload the images.json if you have modified it outside of this command.
+Use `image reload` to reload the images.json if you have modified it outside of this command.  
+
+Images can be used by starting a message with `{imagename}`.  
+It will not work anywhere else in the message.  
+Everything after the image tag will be the actual message.  
 
 #### log / logs
-Fetches 100 messages and saves it to the logs folder.  
+Fetches 100 messages and saves it to the src/data/logs/ folder.  
 Include an ID to fetch 100 messages before that message.  
 
 ## Customization
