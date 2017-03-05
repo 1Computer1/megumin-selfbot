@@ -78,11 +78,13 @@ Pong!
 #### eval / e
 Evaluates Javascript code.  
 Not recommended for the average user.  
+Has a `print()` method that prepends/appends to the output, including async things.  
+Also a `data` object that persists throughout evaluations.  
 
 #### async / a
 A better version of eval.  
 Requires harmony or Node 7.6.0 or higher.  
-Has `await` and `print()`.  
+Allows usage of `await` in addtion to things from eval.  
 
 #### stats / info / about
 Displays the memory usage, uptime, and a link to here.  

@@ -39,6 +39,7 @@ function exec(message, args){
         output = output.replace(tokenRegex, '[TOKEN]');
 
         if (output.length + args.code.length > 1900) output = 'Output too long.';
+        
         return message.edit(`📥\u2000**Input**${cb}js\n${args.code}\n${cb}\n📤\u2000**Output**${cb}js\n${output}\n${cb}`).then(() => {
             evaled.errored = false;
             evaled.output = output;
