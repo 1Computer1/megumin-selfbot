@@ -12,10 +12,6 @@
     "moment": "^2.17.1",
     "relevant-xkcd": "^1.1.1"
   },
-  "optionalDependencies": {
-    "erlpack": "github:hammerandchisel/erlpack#master",
-    "uws": "^0.12.0"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/1Computer1/megumin-selfbot.git"

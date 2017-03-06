@@ -21,7 +21,7 @@ This bot uses [Discord.js](https://discord.js.org/) and [Akairo](https://1comput
 
 1. Download this repository or download [git](https://git-scm.com/downloads) and clone this repository.
 2. Open up a command prompt (or your preferred terminal) at the bot folder.
-3. Run `npm install` or `npm install --no-optional` if you are having build problems.
+3. Run `npm install` to install dependencies.
 4. Setup your settings inside src/data/config.json (see configuration below).
 5. Remember to rename those files to not have .example!
 6. Run `node megumin.js`.
