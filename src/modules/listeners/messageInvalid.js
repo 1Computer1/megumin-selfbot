@@ -1,7 +1,41 @@
 const { Listener } = require('discord-akairo');
 const { RichEmbed } = require('discord.js');
 
-function editText(client, text){
+function exec(message){
+    if (/^\{.+?\}/.test(message.content)){
+        const name = message.content.match(/^\{(.+?)\}/);
+        const image = this.client.images[name[1].toLowerCase()];
+
+        if (!image){
+            const rep = this.editText(message.content);
+            if (message.content !== rep) message.edit(rep);
+            return;
+        }
+
+        const color = this.client.color(message);
+        const embed = new RichEmbed().setImage(image).setColor(color);
+        
+        return message.edit(this.editText(message.content.replace(name[0], '')), { embed }).catch(err => {
+            if (err.response && err.response.badRequest){
+                this.client.logger.log(3, 'Your image was invalid. Double check your link!');
+                return message.delete();
+            }
+            
+            throw err;
+        });
+    }
+    
+    const rep = this.editText(message.content);
+    if (message.content !== rep) return message.edit(rep);
+}
+
+module.exports = new Listener('messageInvalid', exec, {
+    emitter: 'commandHandler',
+    eventName: 'messageInvalid',
+    type: 'on'
+});
+
+module.exports.editText = function(text){
     const matches = [];
     const regex = /\\?\[(.+?)\]/g;
     let temp;
@@ -13,14 +47,14 @@ function editText(client, text){
 
     if (matches.length) for (const [full, name] of matches){
 
-        const tag = client.tags[name.toLowerCase()];
+        const tag = this.client.tags[name.toLowerCase()];
         if (!tag) continue;
 
         text = text.replace(full, tag);
     }
 
-    if (!client.config.grammar) return text;
-    if (client.config.grammar){
+    if (!this.client.config.grammar) return text;
+    if (this.client.config.grammar){
         const corrected = text
         .replace(/(?:^|[.?!]\s)\w/g, m => m.toUpperCase())
         .replace(/\b(i)(m)/gi, '$1\'$2')
@@ -32,38 +66,4 @@ function editText(client, text){
 
         return corrected;
     }
-}
-
-function exec(message){
-    if (/^\{.+?\}/.test(message.content)){
-        const name = message.content.match(/^\{(.+?)\}/);
-        const image = this.client.images[name[1].toLowerCase()];
-
-        if (!image){
-            const rep = editText(this.client, message.content);
-            if (message.content !== rep) message.edit(rep);
-            return;
-        }
-
-        const color = this.client.color(message);
-        const embed = new RichEmbed().setImage(image).setColor(color);
-        
-        return message.edit(editText(this.client, message.content.replace(name[0], '')), { embed }).catch(err => {
-            if (err.response && err.response.badRequest){
-                this.client.logger.log(3, 'Your image was invalid. Double check your link!');
-                return message.delete();
-            }
-            
-            throw err;
-        });
-    }
-    
-    const rep = editText(this.client, message.content);
-    if (message.content !== rep) return message.edit(rep);
-}
-
-module.exports = new Listener('messageInvalid', exec, {
-    emitter: 'commandHandler',
-    eventName: 'messageInvalid',
-    type: 'on'
-});
+};

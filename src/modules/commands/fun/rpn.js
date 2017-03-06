@@ -1,6 +1,54 @@
 const { Command } = require('discord-akairo');
 
-const operators = {
+function exec(message, args){
+    if (!args.content){
+        this.client.logger.log(3, 'No text provided to evaluate.');
+        return message.delete();
+    }
+
+    const ops = args.content.match(/[\d.]+|\S+/g);
+    if (!ops) return message.edit(`\`${args.content} = NaN\``);
+
+    const stack = [];
+
+    for (const char of ops){
+        if (isNaN(char)){
+            if (!this.operators[char] && !this.numbers[char]) continue;
+
+            if (this.numbers[char]){
+                stack.unshift(this.numbers[char]);
+                continue;
+            }
+
+            const operator = this.operators[char];
+            const values = stack.splice(0, operator.length);
+
+            if (values.some(v => v == null)) return message.edit(`\`${args.content} = NaN\``);
+
+            const res = operator(...values.reverse());
+            stack.unshift(res);
+            continue;
+        }
+
+        stack.unshift(parseFloat(char));
+    }
+
+    if (stack.length !== 1) return message.edit(`\`${args.content} = NaN\``);
+    return message.edit(`\`${args.content} = ${stack[0]}\``);
+}
+
+module.exports = new Command('rpn', exec, {
+    aliases: ['rpn'],
+    args: [
+        {
+            id: 'content',
+            match: 'content'
+        }
+    ],
+    category: 'fun'
+});
+
+module.exports.operators = {
     '+': (a, b) => a + b,
     '-': (a, b) => a - b,
     'x': (a, b) => a * b,
@@ -42,7 +90,7 @@ const operators = {
     'ceil': a => Math.ceil(a)
 };
 
-const numbers = {
+module.exports.numbers = {
     'pi': Math.PI,
     'π': Math.PI,
     'tau': Math.PI * 2,
@@ -54,51 +102,3 @@ const numbers = {
     'gr': (1 + Math.sqrt(5)) / 2,
     'φ': (1 + Math.sqrt(5)) / 2
 };
-
-function exec(message, args){
-    if (!args.content){
-        this.client.logger.log(3, 'No text provided to evaluate.');
-        return message.delete();
-    }
-
-    const ops = args.content.match(/[\d.]+|\S+/g);
-    if (!ops) return message.edit(`\`${args.content} = NaN\``);
-
-    const stack = [];
-
-    for (const char of ops){
-        if (isNaN(char)){
-            if (!operators[char] && !numbers[char]) continue;
-
-            if (numbers[char]){
-                stack.unshift(numbers[char]);
-                continue;
-            }
-
-            const operator = operators[char];
-            const values = stack.splice(0, operator.length);
-
-            if (values.some(v => v == null)) return message.edit(`\`${args.content} = NaN\``);
-
-            const res = operator(...values.reverse());
-            stack.unshift(res);
-            continue;
-        }
-
-        stack.unshift(parseFloat(char));
-    }
-
-    if (stack.length !== 1) return message.edit(`\`${args.content} = NaN\``);
-    return message.edit(`\`${args.content} = ${stack[0]}\``);
-}
-
-module.exports = new Command('rpn', exec, {
-    aliases: ['rpn'],
-    args: [
-        {
-            id: 'content',
-            match: 'content'
-        }
-    ],
-    category: 'fun'
-});
