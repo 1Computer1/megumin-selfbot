@@ -21,13 +21,13 @@ function exec(message, args){
             return o.replace(tokenRegex, '[TOKEN]');
         });
 
-        if (!evaled.output) return logs.push(...cleaned);
+        if (!evaled.output) return void logs.push(...cleaned);
 
         evaled.output += evaled.output.endsWith('\n') ? cleaned.join(' ') : `\n${cleaned.join(' ')}`;
         const title = evaled.errored ? '☠\u2000**Error**' : '📤\u2000**Output**';
 
         if (evaled.output.length + args.code.length > 1900) evaled.output = 'Output too long.';
-        return message.edit(`📥\u2000**Input**${cb}js\n${args.code}\n${cb}\n${title}${cb}js\n${evaled.output}\n${cb}`);
+        return void message.edit(`📥\u2000**Input**${cb}js\n${args.code}\n${cb}\n${title}${cb}js\n${evaled.output}\n${cb}`);
     };
 
     const result = new Promise(resolve => resolve(eval(`(async () => { ${args.code} })()`)));
