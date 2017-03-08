@@ -68,9 +68,7 @@ module.exports = new Command('guild', exec, {
     args: [
         {
             id: 'guild',
-            type: function(word){
-                return this.client.util.resolveGuild(word, false, true);
-            },
+            type: 'guild',
             default: m => m.guild
         }
     ],
