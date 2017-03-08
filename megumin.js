@@ -25,10 +25,10 @@ const client = new AkairoClient({
 const Logger = require('./src/util/Logger');
 
 Object.assign(client, {
+    config,
     logger: new Logger(config.noLogs),
     tags: require('./src/data/tags.json'),
     images: require('./src/data/images.json'),
-    config,
     color: message => {
         return config.color === 'random'
         ? (1 << 24) * Math.random() | 0

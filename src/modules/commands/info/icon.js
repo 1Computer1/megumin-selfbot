@@ -30,7 +30,7 @@ module.exports = new Command('icon', exec, {
             type: function(word){
                 return this.client.util.resolveGuild(word, false, true);
             },
-            defaultValue: m => m.guild
+            default: m => m.guild
         }
     ],
     category: 'info'

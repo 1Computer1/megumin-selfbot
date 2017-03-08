@@ -70,7 +70,7 @@ module.exports = new Command('user', exec, {
             id: 'member',
             match: 'content',
             type: 'member',
-            defaultValue: message => message.author.id
+            default: message => message.author.id
         }
     ],
     category: 'info'

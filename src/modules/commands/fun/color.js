@@ -17,7 +17,7 @@ module.exports = new Command('color', exec, {
         {
             id: 'content',
             match: 'content',
-            defaultValue: () => (1 << 24) * Math.random() | 0
+            default: () => (1 << 24) * Math.random() | 0
         }
     ],
     category: 'fun'

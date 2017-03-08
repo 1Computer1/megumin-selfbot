@@ -64,7 +64,7 @@ module.exports = new Command('image', exec, {
         {
             id: 'option',
             type: ['list', 'add', 'new', 'set', 'remove', 'delete', 'del', 'reload'],
-            defaultValue: 'list'
+            default: 'list'
         },
         {
             id: 'name'

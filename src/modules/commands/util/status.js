@@ -13,7 +13,7 @@ module.exports = new Command('status', exec, {
         {
             id: 'status',
             type: ['online', 'idle', 'dnd', 'invisible'],
-            defaultValue: 'online'
+            default: 'online'
         }
     ],
     category: 'util'

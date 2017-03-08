@@ -18,7 +18,7 @@ module.exports = new Command('avatar', exec, {
         {
             id: 'user',
             type: 'user',
-            defaultValue: m => m.author.id
+            default: m => m.author.id
         }
     ],
     category: 'info'

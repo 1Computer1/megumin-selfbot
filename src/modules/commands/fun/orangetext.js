@@ -10,7 +10,7 @@ module.exports = new Command('orangetext', exec, {
         {
             id: 'content',
             match: 'content',
-            defaultValue: '\u200B'
+            default: '\u200B'
         }
     ],
     category: 'fun'

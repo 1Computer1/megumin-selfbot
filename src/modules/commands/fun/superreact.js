@@ -50,7 +50,7 @@ module.exports = new Command('superreact', exec, {
         {
             id: 'amount',
             type: 'integer',
-            defaultValue: 1
+            default: 1
         }
     ],
     category: 'fun'
