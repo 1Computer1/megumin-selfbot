@@ -37,10 +37,10 @@ function exec(message, args){
 
         const react = i => {
             if (!emojis[i]) return;
-            setTimeout(() => reactee.react(emojis[i]).then(() => react(i + 1)));
+            return reactee.react(emojis[i]).then(() => react(i + 1));
         };
 
-        react(0);
+        return react(0);
     }));
 }
 

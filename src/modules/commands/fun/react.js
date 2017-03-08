@@ -33,10 +33,10 @@ function exec(message, args){
 
         const react = i => {
             if (!chars[i]) return;
-            setTimeout(() => reactee.react(chars[i]).then(() => react(i + 1)));
+            return reactee.react(chars[i]).then(() => react(i + 1));
         };
 
-        react(0);
+        return react(0);
     }));
 }
 
