@@ -1,4 +1,6 @@
 const { Command } = require('discord-akairo');
+const { URL } = require('url');
+const path = require('path');
 
 function exec(message, args){
     if (!args.id){
@@ -18,7 +20,15 @@ function exec(message, args){
         .setTimestamp(quotee.createdAt)
         .setColor(color);
 
-        if (quotee.attachments.size) embed.setThumbnail(quotee.attachments.first().url);
+        if (quotee.attachments.size){
+            try {
+                const url = new URL(quotee.attachments.first().url);
+                const ext = path.extname(url.pathname);
+                if (['.png', '.jpg', '.jpeg', '.gif', '.webp'].includes(ext)) embed.setThumbnail(quotee.attachments.first().url);
+            } catch (err) {
+                if (err.message !== 'Invalid URL') throw err;
+            }
+        }
 
         return message.edit(message.content.slice(message.content.search(args.id) + args.id.length + 1), { embed });
     }).catch(err => {
