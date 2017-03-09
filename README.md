@@ -57,6 +57,7 @@ By default, it is off.
 Amount of messages to keep in cache (default 50).    
 Set to 0 to disable message caching, possibly saving memory.  
 Will make the edits command useless.  
+Will also probably disable the ability to run commands on an edit.  
 
 #### No Logging: "noLogs"
 Disables console logging.  

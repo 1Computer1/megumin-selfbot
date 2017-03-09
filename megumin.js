@@ -9,6 +9,7 @@ const client = new AkairoClient({
     ownerID: config.ownerID,
     commandDirectory: './src/modules/commands',
     listenerDirectory: './src/modules/listeners',
+    handleEdits: true
 }, {
     maxMessageCache: config.cache == null ? 50 : config.cache,
     disableEveryone: true,
