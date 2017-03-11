@@ -41,9 +41,11 @@ module.exports.formatMs = ms => {
     x = Math.floor(x / 60);
     let hours = x % 24;
 
+    let days = Math.floor(x / 24);
+
     seconds = `${'0'.repeat(2 - seconds.toString().length)}${seconds}`;
     minutes = `${'0'.repeat(2 - minutes.toString().length)}${minutes}`;
     hours = `${'0'.repeat(Math.max(0, 2 - hours.toString().length))}${hours}`;
-
-    return `${hours}:${minutes}:${seconds}`;
+    days = `${'0'.repeat(2 - days.toString().length)}${days}`;
+    return `${days !== '00' ? `${days}:` : ''}${hours}:${minutes}:${seconds}`;
 };
