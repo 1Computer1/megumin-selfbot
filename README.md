@@ -162,6 +162,13 @@ Use any text to get a relevant XKCD.
 Use a number for a specific XKCD.  
 Use 0 for the current XKCD.  
 
+#### translate / tl
+Translates using [this lovely person's API](https://github.com/kurisubrooks/sherlock).  
+By default, this translates from English to Japanese.  
+Include `to:lang` to change output language.  
+Include `from:lang` to change input language.  
+To get a list of languages, use `translate --list`.  
+
 #### rpn
 Does math in [Reverse Polish notation](https://en.wikipedia.org/wiki/Reverse_Polish_notation).  
 See the source code for available operators and constants.  
