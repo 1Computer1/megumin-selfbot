@@ -32,7 +32,9 @@ function exec(message, args){
             return message.delete();
         }
 
+        const color = this.client.color(message);
         const embed = this.client.util.embed()
+        .setColor(color)
         .setTitle(`${body.from.name} → ${body.to.name}`)
         .setDescription(body.result);
 
