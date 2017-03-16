@@ -11,7 +11,7 @@ function exec(message, args){
     }
 
     return request.get(`${TIMEIS}${args.content}`).set({ 'Accept-Language': 'en-US' }).then(({ text }) => {
-        const time = text.match(/<div id="twd">([^]+?)<\/div>/)[1];
+        const time = text.match(/<div id="twd">([^]+?)<\/div>/)[1].replace(/<span id="ampm" style="font-size:21px;line-height:21px">(AM|PM)<\/span>/, ' $1');
         const clock = clocks[parseInt(time.split(':')[0], 10) % 12];
         const place = text.match(/<div id="msgdiv"><h1>Time in ([^]+?) now<\/h1>/)[1];
 
