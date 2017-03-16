@@ -12,11 +12,6 @@ function exec(message, args){
         });
     }
 
-    if (this.ratelimited){
-        this.client.logger.log(3, 'Translate API ratelimited, restart selfbot and try again later.');
-        return message.delete();
-    }
-
     return request.get(ENDPOINT).query({
         query: args.text,
         to: args.to,
@@ -26,8 +21,6 @@ function exec(message, args){
         'X-Discord-User': `${this.client.user.username}#${this.client.user.discriminator}`
     }).then(({ body }) => {
         if (!body.ok){
-            if (body.code === 429) this.ratelimited = true;
-            
             this.client.logger.log(3, `Translate API errored: ${body.error}`);
             return message.delete();
         }
