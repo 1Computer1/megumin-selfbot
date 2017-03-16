@@ -47,7 +47,11 @@ function exec(message, args){
         ],
         [
             'Roles',
-            args.member.roles.map(r => r.toString()).join(', ')
+            (() => {
+                const roles = args.member.roles.map(r => r.toString()).join(', ');
+                if (roles.length > 1024) return 'A lot of roles!';
+                return roles;
+            })()
         ],
         [
             'Joined At',
