@@ -46,7 +46,8 @@ module.exports = new Command('translate', exec, {
         {
             id: 'to',
             match: 'prefix',
-            prefix: 'to:'
+            prefix: 'to:',
+            default: 'ja'
         },
         {
             id: 'from',
