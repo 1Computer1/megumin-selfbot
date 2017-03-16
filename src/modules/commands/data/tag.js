@@ -59,7 +59,7 @@ function exec(message, args){
 }
 
 module.exports = new Command('tag', exec, {
-    aliases: ['tag', 'tags'],
+    aliases: ['tag', 'tags', 't'],
     args: [
         {
             id: 'option',

@@ -59,7 +59,7 @@ function exec(message, args){
 }
 
 module.exports = new Command('image', exec, {
-    aliases: ['image', 'images', 'img'],
+    aliases: ['image', 'images', 'img', 'i'],
     args: [
         {
             id: 'option',
