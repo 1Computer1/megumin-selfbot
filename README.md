@@ -169,6 +169,9 @@ Include `to:lang` to change output language.
 Include `from:lang` to change input language.  
 To get a list of languages, use `translate --list`.  
 
+#### time
+Gets the currrent time, somewhere.  
+
 #### rpn
 Does math in [Reverse Polish notation](https://en.wikipedia.org/wiki/Reverse_Polish_notation).  
 See the source code for available operators and constants.  
