@@ -8,7 +8,7 @@ function exec(message, args){
     if (args.list){
         return request.get(SUPPORTED).then(({ text }) => {
             const body = JSON.parse(text);
-            return message.edit(`\`${body.map(lang => lang.code).join('` `')}\``);
+            return message.editCode('json', body.map(lang => lang.code).join(', '));
         });
     }
 
@@ -32,7 +32,11 @@ function exec(message, args){
             return message.delete();
         }
 
-        return message.edit(body.result);
+        const embed = this.client.util.embed()
+        .setTitle(`${body.from.name} → ${body.to.name}`)
+        .setDescription(body.result);
+
+        return message.edit(body.query, { embed });
     });
 }
 
