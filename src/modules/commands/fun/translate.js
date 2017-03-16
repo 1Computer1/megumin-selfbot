@@ -12,6 +12,11 @@ function exec(message, args){
         });
     }
 
+    if (!args.text){
+        this.client.logger.log(3, 'No text provided.');
+        return message.delete();
+    }
+
     return request.get(ENDPOINT).query({
         query: args.text,
         to: args.to,
