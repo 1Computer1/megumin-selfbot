@@ -18,9 +18,9 @@ function exec(message, args){
     }
 
     return request.get(ENDPOINT).query({
+        query: args.text,
         to: args.to,
-        from: args.from,
-        query: args.text
+        from: args.from || undefined
     }).set({
         'X-Discord-ID': this.client.user.id,
         'X-Discord-User': `${this.client.user.username}#${this.client.user.discriminator}`
@@ -46,14 +46,12 @@ module.exports = new Command('translate', exec, {
         {
             id: 'to',
             match: 'prefix',
-            prefix: 'to:',
-            default: 'ja'
+            prefix: 'to:'
         },
         {
             id: 'from',
             match: 'prefix',
-            prefix: 'from:',
-            default: 'en'
+            prefix: 'from:'
         },
         {
             id: 'list',
