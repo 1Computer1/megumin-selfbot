@@ -1,4 +1,4 @@
-/* eslint no-unused-vars: "off" */
+/* eslint-disable no-unused-vars */
 
 const { Command } = require('discord-akairo');
 const util = require('util');
@@ -49,7 +49,7 @@ function exec(message, args) {
         });
     }).catch(err => {
         this.client.logger.log(2, 'Evaluation errored.');
-        console.error(err);
+        console.error(err); // eslint-disable-line no-console
 
         err = err.toString();
         err = `${logs.join('\n')}\n${logs.length && err === 'undefined' ? '' : err}`;

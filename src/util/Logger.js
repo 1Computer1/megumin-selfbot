@@ -28,7 +28,7 @@ class Logger {
         const internal = chalk.bold(`[Internal/${LogLevels[level]}]:`);
         const colored = chalk[LogColors[level]](joined);
 
-        console.log(`${time} ${internal} ${colored}`);
+        console.log(`${time} ${internal} ${colored}`); // eslint-disable-line no-console
     }
 
     /**
@@ -45,7 +45,7 @@ class Logger {
         const location = chalk.bold(`[${channel.guild ? channel.guild.name : 'PM'}/${channel.guild ? channel.name : channel.recipient.username}]:`);
         const colored = chalk[LogColors[level]](joined);
 
-        console.log(`${time} ${location} ${colored}`);
+        console.log(`${time} ${location} ${colored}`); // eslint-disable-line no-console
     }
 }
 
