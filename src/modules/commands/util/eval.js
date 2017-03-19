@@ -13,7 +13,9 @@ function exec(message, args) {
     const evaled = {};
     const logs = [];
 
-    const tokenRegex = new RegExp(this.client.token.replace(/\./g, '\\.').split('').join('.?'), 'g');
+    const token = this.client.token.split('').join('[\\s\\S]{0,2}');
+    const rev = this.client.token.split('').reverse().join('[\\s\\S]{0,2}');
+    const tokenRegex = new RegExp(`${token}|${rev}`, 'g');
 
     const print = (...a) => {
         const cleaned = a.map(o => {
@@ -30,7 +32,7 @@ function exec(message, args) {
         const title = evaled.errored ? '☠\u2000**Error**' : '📤\u2000**Output**';
 
         if (evaled.output.length + args.code.length > 1900) evaled.output = 'Output too long.';
-        message.edit(`📥\u2000**Input**${cb}js\n${args.code}\n${cb}\n${title}${cb}js\n${evaled.output}\n${cb}`);
+        message.edit(`📥\u2000**Input**${cb}js\n${args.actualInput || args.code}\n${cb}\n${title}${cb}js\n${evaled.output}\n${cb}`);
     };
 
     const result = new Promise(resolve => resolve(eval(args.code)));
@@ -43,7 +45,7 @@ function exec(message, args) {
 
         if (output.length + args.code.length > 1900) output = 'Output too long.';
 
-        return message.edit(`📥\u2000**Input**${cb}js\n${args.code}\n${cb}\n📤\u2000**Output**${cb}js\n${output}\n${cb}`).then(() => {
+        return message.edit(`📥\u2000**Input**${cb}js\n${args.actualInput || args.code}\n${cb}\n📤\u2000**Output**${cb}js\n${output}\n${cb}`).then(() => {
             evaled.errored = false;
             evaled.output = output;
         });
@@ -55,7 +57,7 @@ function exec(message, args) {
         err = `${logs.join('\n')}\n${logs.length && err === 'undefined' ? '' : err}`;
         err = err.replace(tokenRegex, '[TOKEN]');
 
-        return message.edit(`📥\u2000**Input**${cb}js\n${args.code}\n${cb}\n☠\u2000**Error**${cb}js\n${err}\n${cb}`).then(() => {
+        return message.edit(`📥\u2000**Input**${cb}js\n${args.actualInput || args.code}\n${cb}\n☠\u2000**Error**${cb}js\n${err}\n${cb}`).then(() => {
             evaled.errored = true;
             evaled.output = err;
         });
