@@ -13,8 +13,8 @@ function exec(message, args) {
     const evaled = {};
     const logs = [];
 
-    const token = this.client.token.split('').join('[\\s\\S]{0,2}');
-    const rev = this.client.token.split('').reverse().join('[\\s\\S]{0,2}');
+    const token = this.client.token.split('').join('[^]{0,2}');
+    const rev = this.client.token.split('').reverse().join('[^]{0,2}');
     const tokenRegex = new RegExp(`${token}|${rev}`, 'g');
 
     const print = (...a) => {
