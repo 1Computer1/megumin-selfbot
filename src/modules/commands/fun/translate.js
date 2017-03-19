@@ -4,15 +4,15 @@ const request = require('superagent');
 const ENDPOINT = 'https://api.kurisubrooks.com/api/translate';
 const SUPPORTED = 'https://raw.githubusercontent.com/kurisubrooks/sherlock/master/modules/api/translate/langs.json';
 
-function exec(message, args){
-    if (args.list){
+function exec(message, args) {
+    if (args.list) {
         return request.get(SUPPORTED).then(({ text }) => {
             const body = JSON.parse(text);
             return message.editCode('json', body.map(lang => lang.code).join(', '));
         });
     }
 
-    if (!args.text){
+    if (!args.text) {
         this.client.logger.log(3, 'No text provided.');
         return message.delete();
     }
@@ -25,7 +25,7 @@ function exec(message, args){
         'X-Discord-ID': this.client.user.id,
         'X-Discord-User': `${this.client.user.username}#${this.client.user.discriminator}`
     }).then(({ body }) => {
-        if (!body.ok){
+        if (!body.ok) {
             this.client.logger.log(3, `Translate API errored: ${body.error}`);
             return message.delete();
         }

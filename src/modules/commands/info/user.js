@@ -1,8 +1,8 @@
 const { Command } = require('discord-akairo');
 const moment = require('moment');
 
-function exec(message, args){
-    if (!message.guild){
+function exec(message, args) {
+    if (!message.guild) {
         this.client.logger.log(3, 'Must be in a guild to check a user\'s information.');
         return message.delete();
     }
@@ -37,7 +37,7 @@ function exec(message, args){
         ],
         [
             'Game',
-            args.member.presence.game && args.member.presence.game && args.member.presence.game.name || 'Not playing a game.',
+            (args.member.presence.game && args.member.presence.game && args.member.presence.game.name) || 'Not playing a game.',
             true
         ],
         [

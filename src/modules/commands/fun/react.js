@@ -1,20 +1,20 @@
 const { Command } = require('discord-akairo');
 const { EmojiMap, EmojiRegex, EmojiAlts } = require('../../../util/Constants');
 
-function exec(message, args){
-    if (!args.content){
+function exec(message, args) {
+    if (!args.content) {
         this.client.logger.log(3, 'No text provided to react.');
         return message.delete();
     }
 
     let chars = [];
 
-    for (const c of args.content.match(/<.+?>|./g)){
+    for (const c of args.content.match(/<.+?>|./g)) {
         let out = EmojiMap.get(c.toLowerCase()) || c;
 
         const custom = this.client.util.resolveEmoji(out, message.guild.emojis, false, true);
 
-        if (custom){
+        if (custom) {
             chars.push(custom);
             continue;
         }
@@ -29,10 +29,10 @@ function exec(message, args){
 
     return message.delete().then(() => message.channel.fetchMessages({ limit: 2 }).then(messages => {
         const reactee = messages.first();
-        if (!reactee) return;
+        if (!reactee) return undefined;
 
         const react = i => {
-            if (!chars[i]) return;
+            if (!chars[i]) return undefined;
             return reactee.react(chars[i]).then(() => react(i + 1));
         };
 

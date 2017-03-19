@@ -4,8 +4,8 @@ const request = require('superagent');
 const TIMEIS = 'https://time.is/';
 const clocks = ['🕛', '🕐', '🕑', '🕒', '🕓', '🕔', '🕕', '🕖', '🕗', '🕘', '🕙', '🕚'];
 
-function exec(message, args){
-    if (!args.content){
+function exec(message, args) {
+    if (!args.content) {
         this.client.logger.log(3, 'No location provided.');
         return message.delete();
     }
@@ -17,7 +17,7 @@ function exec(message, args){
 
         return message.edit(`${clock}\u2000The time in ${place} is ${time}.`);
     }).catch(err => {
-        if (err.status === 404){
+        if (err.status === 404) {
             this.client.logger.log(3, `Location ${args.content} not found.`);
         } else {
             this.client.logger.log(3, `Time.is errored: ${err}`);

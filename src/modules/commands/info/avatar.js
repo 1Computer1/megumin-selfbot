@@ -1,6 +1,6 @@
 const { Command } = require('discord-akairo');
 
-function exec(message, args){
+function exec(message, args) {
     const color = this.client.color(message);
 
     const embed = this.client.util.embed()

@@ -1,7 +1,7 @@
 const { Command } = require('discord-akairo');
 
-function exec(message, args){
-    if (!args.id){
+function exec(message, args) {
+    if (!args.id) {
         this.client.logger.log(3, 'No message ID provided to see edits.');
         return message.delete();
     }
@@ -9,7 +9,7 @@ function exec(message, args){
     const color = this.client.color(message);
     const quotee = message.channel.messages.get(args.id);
 
-    if (!quotee){
+    if (!quotee) {
         this.client.logger.log(3, 'Your message ID was invalid or the message is not cached.');
         return message.delete();
     }
@@ -19,7 +19,7 @@ function exec(message, args){
     .setFooter(`${quotee.id} | Edit History`)
     .setColor(color);
 
-    for (const [i, edit] of quotee.edits.entries()){
+    for (const [i, edit] of quotee.edits.entries()) {
         embed.addField(i === 0 ? 'Latest' : i === quotee.edits.length - 1 ? 'Original' : `Edit ${quotee.edits.length - i - 1}`, edit.content);
     }
 

@@ -1,8 +1,8 @@
 const { Listener } = require('discord-akairo');
 
-function exec(err){
+function exec(err) {
     this.client.logger.log(3, 'An error occured. Contact someone who might know what it means.');
-    return console.error(err);
+    console.error(err);
 }
 
 module.exports = new Listener('error', exec, {

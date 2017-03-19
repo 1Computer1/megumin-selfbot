@@ -1,7 +1,7 @@
 const { Command } = require('discord-akairo');
 
-function exec(message, args){
-    if (!args.content){
+function exec(message, args) {
+    if (!args.content) {
         this.client.logger.log(3, 'No text provided to evaluate.');
         return message.delete();
     }
@@ -11,11 +11,11 @@ function exec(message, args){
 
     const stack = [];
 
-    for (const char of ops){
-        if (isNaN(char)){
+    for (const char of ops) {
+        if (isNaN(char)) {
             if (!this.operators[char] && !this.numbers[char]) continue;
 
-            if (this.numbers[char]){
+            if (this.numbers[char]) {
                 stack.unshift(this.numbers[char]);
                 continue;
             }
@@ -51,7 +51,7 @@ module.exports = new Command('rpn', exec, {
 module.exports.operators = {
     '+': (a, b) => a + b,
     '-': (a, b) => a - b,
-    'x': (a, b) => a * b,
+    x: (a, b) => a * b,
     '*': (a, b) => a * b,
     '/': (a, b) => a / b,
     '%': (a, b) => a % b,
@@ -63,9 +63,9 @@ module.exports.operators = {
     '>>>': (a, b) => a >>> b,
     '//': (a, b) => Math.floor(a / b),
     '**': (a, b) => Math.pow(a, b),
-    'pow': (a, b) => Math.pow(a, b),
-    'rt': (a, b) => Math.pow(a, 1 / b),
-    'root': (a, b) => Math.pow(a, 1 / b),
+    pow: (a, b) => Math.pow(a, b),
+    rt: (a, b) => Math.pow(a, 1 / b),
+    root: (a, b) => Math.pow(a, 1 / b),
     '~': a => ~a,
     '√': a => Math.sqrt(a),
     '!': a => {
@@ -74,31 +74,31 @@ module.exports.operators = {
         for (let i = 2; i <= a; i++) temp *= i;
         return temp;
     },
-    'sqrt': a => Math.sqrt(a),
-    'logn': a => Math.log(a),
-    'logb': a => Math.log2(a),
-    'logc': a => Math.log10(a),
-    'ln': a => Math.log(a),
-    'lb': a => Math.log2(a),
-    'lc': a => Math.log10(a),
-    'sin': a => Math.sin(a),
-    'cos': a => Math.cos(a),
-    'tan': a => Math.tan(a),
-    'abs': a => Math.abs(a),
-    'floor': a => Math.floor(a),
-    'round': a => Math.round(a),
-    'ceil': a => Math.ceil(a)
+    sqrt: a => Math.sqrt(a),
+    logn: a => Math.log(a),
+    logb: a => Math.log2(a),
+    logc: a => Math.log10(a),
+    ln: a => Math.log(a),
+    lb: a => Math.log2(a),
+    lc: a => Math.log10(a),
+    sin: a => Math.sin(a),
+    cos: a => Math.cos(a),
+    tan: a => Math.tan(a),
+    abs: a => Math.abs(a),
+    floor: a => Math.floor(a),
+    round: a => Math.round(a),
+    ceil: a => Math.ceil(a)
 };
 
 module.exports.numbers = {
-    'pi': Math.PI,
-    'π': Math.PI,
-    'tau': Math.PI * 2,
-    'τ': Math.PI * 2,
-    'e': Math.E,
-    'G': 6.67408 * Math.pow(10, -11),
-    'c': 299792458,
-    'weed': 420,
-    'gr': (1 + Math.sqrt(5)) / 2,
-    'φ': (1 + Math.sqrt(5)) / 2
+    pi: Math.PI,
+    π: Math.PI,
+    tau: Math.PI * 2,
+    τ: Math.PI * 2,
+    e: Math.E,
+    G: 6.67408 * Math.pow(10, -11),
+    c: 299792458,
+    weed: 420,
+    gr: (1 + Math.sqrt(5)) / 2,
+    φ: (1 + Math.sqrt(5)) / 2
 };

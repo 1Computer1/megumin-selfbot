@@ -1,8 +1,8 @@
 const { Command } = require('discord-akairo');
 const moment = require('moment');
 
-function exec(message, args){
-    if (!args.guild){
+function exec(message, args) {
+    if (!args.guild) {
         this.client.logger.log(3, 'Must be in a guild to check its information.');
         return message.delete();
     }
@@ -11,7 +11,7 @@ function exec(message, args){
     const embed = this.client.util.embed()
     .setColor(color)
     .setTitle('Guild Information');
-    
+
     if (args.guild.iconURL) embed.setThumbnail(args.guild.iconURL);
 
     const fields = [

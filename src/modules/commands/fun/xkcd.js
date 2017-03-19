@@ -1,10 +1,10 @@
 const { Command } = require('discord-akairo');
 const xkcd = require('relevant-xkcd');
 
-function exec(message, args){
+function exec(message, args) {
     const sendComic = comic => {
         const color = this.client.color(message);
-        
+
         const embed = this.client.util.embed()
         .setColor(color)
         .setTitle(comic.title)
@@ -12,19 +12,19 @@ function exec(message, args){
         .setDescription(comic.altText)
         .setImage(comic.imageURL)
         .setFooter(comic.xkcdURL);
-        
+
         return message.edit('', { embed });
     };
 
-    if (!args.content){
+    if (!args.content) {
         return xkcd.fetchRandom().then(sendComic);
     }
 
-    if (!isNaN(args.content) && parseInt(args.content) === 0){
+    if (!isNaN(args.content) && parseInt(args.content) === 0) {
         return xkcd.fetchCurrent().then(sendComic);
     }
 
-    if (!isNaN(args.content)){
+    if (!isNaN(args.content)) {
         return xkcd.fetchComic(parseInt(args.content)).then(sendComic);
     }
 

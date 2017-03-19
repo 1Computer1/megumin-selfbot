@@ -1,19 +1,14 @@
 const { Command } = require('discord-akairo');
 const fs = require('fs');
 
-function exec(message, args){
-    if (args.option === 'list'){
-        const keys = Object.keys(this.client.images);
-        return message.editCode('json', keys.length ? keys.sort().map(image => `{${image}}`).join(', ') : 'No images added.');
-    }
-
-    if (['add', 'new', 'set'].includes(args.option)){
-        if (!args.name || !args.content){
+function exec(message, args) {
+    if (['add', 'new', 'set'].includes(args.option)) {
+        if (!args.name || !args.content) {
             this.client.logger.log(3, 'No image name or link provided.');
             return message.delete();
         }
 
-        if (this.client.images.hasOwnProperty(args.name.toLowerCase())){
+        if (this.client.images.hasOwnProperty(args.name.toLowerCase())) {
             this.client.logger.log(3, `Image {${args.name.toLowerCase()}} already exists. Remove it first.`);
             return message.delete();
         }
@@ -28,13 +23,13 @@ function exec(message, args){
         return message.delete();
     }
 
-    if (['remove', 'delete', 'del'].includes(args.option)){
-        if (!args.name){
+    if (['remove', 'delete', 'del'].includes(args.option)) {
+        if (!args.name) {
             this.client.logger.log(3, 'No image name provided.');
             return message.delete();
         }
 
-        if (!this.client.images.hasOwnProperty(args.name.toLowerCase())){
+        if (!this.client.images.hasOwnProperty(args.name.toLowerCase())) {
             this.client.logger.log(3, `Image {${args.name.toLowerCase()}} does not exist.`);
             return message.delete();
         }
@@ -49,13 +44,16 @@ function exec(message, args){
         return message.delete();
     }
 
-    if (args.option === 'reload'){
+    if (args.option === 'reload') {
         delete require.cache[require.resolve('../../../data/images.json')];
         this.client.images = require('../../../data/images.json');
 
         this.client.logger.log(2, 'Reloaded images.json.');
         return message.delete();
     }
+
+    const keys = Object.keys(this.client.images);
+    return message.editCode('json', keys.length ? keys.sort().map(image => `{${image}}`).join(', ') : 'No images added.');
 }
 
 module.exports = new Command('image', exec, {

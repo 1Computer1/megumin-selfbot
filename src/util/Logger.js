@@ -7,7 +7,7 @@ class Logger {
      * Logging for bot.
      * @param {boolean} [disabled=false] - Disables most logging.
      */
-    constructor(disabled = false){
+    constructor(disabled = false) {
         /**
          * Logging disabled.
          * @type {boolean}
@@ -20,7 +20,7 @@ class Logger {
      * @param {number} level - Severity level.
      * @param {*} args - Things to log.
      */
-    log(level, ...args){
+    log(level, ...args) {
         if (this.disabled) return;
 
         const joined = args.join(' ');
@@ -37,7 +37,7 @@ class Logger {
      * @param {number} level - Severity level.
      * @param {*} args - Things to log.
      */
-    logFrom(channel, level, ...args){
+    logFrom(channel, level, ...args) {
         if (this.disabled) return;
 
         const joined = args.join(' ');

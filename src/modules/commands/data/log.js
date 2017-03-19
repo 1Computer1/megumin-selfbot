@@ -2,7 +2,7 @@ const { Command } = require('discord-akairo');
 const moment = require('moment');
 const fs = require('fs');
 
-function exec(message, args){
+function exec(message, args) {
     try {
         fs.mkdirSync('./src/data/logs/');
     } catch (err) {
@@ -38,9 +38,9 @@ function exec(message, args){
                                     value: field.value
                                 };
                             }) : undefined,
-                            thumbnail: embed.thumbnail && embed.thumbnail.url || undefined,
-                            image: embed.image && embed.image.url || undefined,
-                            footer: embed.footer && embed.footer.text || undefined,
+                            thumbnail: (embed.thumbnail && embed.thumbnail.url) || undefined,
+                            image: (embed.image && embed.image.url) || undefined,
+                            footer: (embed.footer && embed.footer.text) || undefined
                         };
                     }) : undefined
                 };
