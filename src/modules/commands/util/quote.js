@@ -10,8 +10,13 @@ function exec(message, args) {
 
     const color = this.client.color(message);
 
-    return message.channel.fetchMessages({ around: args.id, limit: 3 }).then(messages => {
+    return message.channel.fetchMessages({ around: args.id, limit: 1 }).then(messages => {
         const quotee = messages.get(args.id);
+
+        if (!quotee) {
+            this.client.logger.log(3, 'Your message ID was invalid.');
+            return message.delete();
+        }
 
         const embed = this.client.util.embed()
         .setDescription(quotee.content || '\u200B')
