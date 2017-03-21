@@ -35,6 +35,11 @@ function exec(message, args) {
         message.edit(`📥\u2000**Input**${cb}js\n${args.actualInput || args.code}\n${cb}\n${title}${cb}js\n${evaled.output}\n${cb}`);
     };
 
+    const msg = message;
+    const mesg = message;
+    const client = this.client;
+    const bot = this.client;
+
     const result = new Promise(resolve => resolve(eval(args.code)));
     const cb = '```';
 
