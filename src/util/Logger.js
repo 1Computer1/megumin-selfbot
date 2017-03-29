@@ -7,7 +7,7 @@ class Logger {
      * Logging for bot.
      * @param {boolean} [disabled=false] - Disables most logging.
      */
-    constructor(disabled = false){
+    constructor(disabled = false) {
         /**
          * Logging disabled.
          * @type {boolean}
@@ -20,7 +20,7 @@ class Logger {
      * @param {number} level - Severity level.
      * @param {*} args - Things to log.
      */
-    log(level, ...args){
+    log(level, ...args) {
         if (this.disabled) return;
 
         const joined = args.join(' ');
@@ -28,7 +28,7 @@ class Logger {
         const internal = chalk.bold(`[Internal/${LogLevels[level]}]:`);
         const colored = chalk[LogColors[level]](joined);
 
-        console.log(`${time} ${internal} ${colored}`);
+        console.log(`${time} ${internal} ${colored}`); // eslint-disable-line no-console
     }
 
     /**
@@ -37,7 +37,7 @@ class Logger {
      * @param {number} level - Severity level.
      * @param {*} args - Things to log.
      */
-    logFrom(channel, level, ...args){
+    logFrom(channel, level, ...args) {
         if (this.disabled) return;
 
         const joined = args.join(' ');
@@ -45,7 +45,7 @@ class Logger {
         const location = chalk.bold(`[${channel.guild ? channel.guild.name : 'PM'}/${channel.guild ? channel.name : channel.recipient.username}]:`);
         const colored = chalk[LogColors[level]](joined);
 
-        console.log(`${time} ${location} ${colored}`);
+        console.log(`${time} ${location} ${colored}`); // eslint-disable-line no-console
     }
 }
 

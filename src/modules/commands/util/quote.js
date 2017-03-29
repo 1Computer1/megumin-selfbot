@@ -2,16 +2,21 @@ const { Command } = require('discord-akairo');
 const { URL } = require('url');
 const path = require('path');
 
-function exec(message, args){
-    if (!args.id){
+function exec(message, args) {
+    if (!args.id) {
         this.client.logger.log(3, 'No message ID provided to quote.');
         return message.delete();
     }
 
     const color = this.client.color(message);
 
-    return message.channel.fetchMessages({ around: args.id, limit: 3 }).then(messages => {
+    return message.channel.fetchMessages({ around: args.id, limit: 1 }).then(messages => {
         const quotee = messages.get(args.id);
+
+        if (!quotee) {
+            this.client.logger.log(3, 'Your message ID was invalid.');
+            return message.delete();
+        }
 
         const embed = this.client.util.embed()
         .setDescription(quotee.content || '\u200B')
@@ -20,7 +25,7 @@ function exec(message, args){
         .setTimestamp(quotee.createdAt)
         .setColor(color);
 
-        if (quotee.attachments.size){
+        if (quotee.attachments.size) {
             try {
                 const url = new URL(quotee.attachments.first().url);
                 const ext = path.extname(url.pathname);
@@ -32,11 +37,11 @@ function exec(message, args){
 
         return message.edit(message.content.slice(message.content.search(args.id) + args.id.length + 1), { embed });
     }).catch(err => {
-        if (err.response && err.response.badRequest){
+        if (err.response && err.response.badRequest) {
             this.client.logger.log(3, 'Your message ID was invalid.');
             return message.delete();
         }
-        
+
         throw err;
     });
 }

@@ -1,12 +1,12 @@
 const { Command } = require('discord-akairo');
 
-function exec(message, args){
-    if (!args.guild){
+function exec(message, args) {
+    if (!args.guild) {
         this.client.logger.log(3, 'Must be in a guild to check its emotes.');
         return message.delete();
     }
 
-    if (!args.guild.emojis.size){
+    if (!args.guild.emojis.size) {
         this.client.logger.log(2, 'This guild does not have any emotes.');
         return message.delete();
     }
@@ -20,8 +20,8 @@ function exec(message, args){
     const sections = [];
     let temp = [];
 
-    for (const emote of emotes.values()){
-        if (temp.join(' ').length + emote.toString().length + 1 > 1020){
+    for (const emote of emotes.values()) {
+        if (temp.join(' ').length + emote.toString().length + 1 > 1020) {
             sections.push(temp);
             temp = [];
         }
@@ -31,7 +31,7 @@ function exec(message, args){
 
     sections.push(temp);
 
-    for (const section of sections){
+    for (const section of sections) {
         embed.addField('\u200B', section.join(' '), true);
     }
 

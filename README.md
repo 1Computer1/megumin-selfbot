@@ -162,6 +162,9 @@ Use any text to get a relevant XKCD.
 Use a number for a specific XKCD.  
 Use 0 for the current XKCD.  
 
+#### time
+Gets the currrent time, somewhere.  
+
 #### rpn
 Does math in [Reverse Polish notation](https://en.wikipedia.org/wiki/Reverse_Polish_notation).  
 See the source code for available operators and constants.  

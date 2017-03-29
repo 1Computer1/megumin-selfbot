@@ -1,7 +1,7 @@
 const { Command } = require('discord-akairo');
 
-function exec(message, args){
-    if (!args.game){
+function exec(message, args) {
+    if (!args.game) {
         return this.client.user.setGame(null).then(() => {
             this.client.logger.log(1, 'Game set to not playing.');
             return message.delete();

@@ -1,20 +1,20 @@
 const { Command } = require('discord-akairo');
 const { EmojiMap, EmojiRegex } = require('../../../util/Constants');
 
-function exec(message, args){
-    if (!args.content){
+function exec(message, args) {
+    if (!args.content) {
         this.client.logger.log(3, 'No text provided to shout.');
         return message.delete();
     }
 
     const chars = [];
 
-    for (const c of args.content.match(/<.+?>|./g)){
+    for (const c of args.content.match(/<.+?>|./g)) {
         const out = c === ' ' ? '\u2000' : EmojiMap.get(c.toLowerCase()) || c;
 
         const custom = this.client.util.resolveEmoji(out, message.guild.emojis, false, true);
 
-        if (custom){
+        if (custom) {
             chars.push(custom);
             continue;
         }
@@ -25,7 +25,7 @@ function exec(message, args){
 
     const output = chars.join('\u180E');
 
-    if (output.length > 2000){
+    if (output.length > 2000) {
         this.client.logger.log(3, 'Text provided goes over character limit.');
         return message.delete();
     }
