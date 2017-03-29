@@ -87,7 +87,9 @@ module.exports.operators = {
     abs: a => Math.abs(a),
     floor: a => Math.floor(a),
     round: a => Math.round(a),
-    ceil: a => Math.ceil(a)
+    ceil: a => Math.ceil(a),
+    quadp: (a, b, c) => (-b + Math.sqrt(Math.pow(b, 2) - (4 * a * c))) / (2 * a),
+    quadn: (a, b, c) => (-b - Math.sqrt(Math.pow(b, 2) - (4 * a * c))) / (2 * a)
 };
 
 module.exports.numbers = {
