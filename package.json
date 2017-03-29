@@ -13,6 +13,10 @@
     "relevant-xkcd": "^1.1.1",
     "superagent": "^3.5.0"
   },
+  "scripts": {
+    "test": "npm run lint",
+    "lint": "eslint ./src"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/1Computer1/megumin-selfbot.git"
