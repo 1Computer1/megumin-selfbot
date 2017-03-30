@@ -4,15 +4,15 @@ function exec(message, args) {
     args.amount = Math.min(args.amount, 100);
 
     return message.channel.fetchMessages({ limit: 100 }).then(messages => {
-        const ownMessages = [];
+        const promises = [];
 
         for (const m of messages.values()) {
-            if (ownMessages.length > args.amount) break;
+            if (promises.length > args.amount) break;
             if (m.author.id !== this.client.user.id) continue;
-            ownMessages.push(m);
+            promises.push(m.delete());
         }
 
-        return Promise.all(ownMessages.map(msg => msg.delete()));
+        return Promise.all(promises);
     });
 }
 
