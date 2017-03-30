@@ -11,55 +11,38 @@ function exec(message, args) {
 
     const embed = this.client.util.embed()
     .setColor(color)
-    .setTitle('User Information')
     .setThumbnail(args.member.user.displayAvatarURL.replace('.jpg?size=1024', '.png?size=1024'));
 
     const fields = [
         [
-            'Username',
-            `${args.member.user.username}#${args.member.user.discriminator}`,
+            'User Information',
+            [
+                `**Username**: ${args.member.user.username}#${args.member.user.discriminator}`,
+                `**Nickname**: ${args.member.displayName}`,
+                `**User ID**: ${args.member.id}`
+            ],
             true
         ],
         [
-            'Nickname',
-            args.member.displayName,
+            'User Status',
+            [
+                `**Status**: ${args.member.presence.status[0].toUpperCase() + args.member.presence.status.slice(1)}`,
+                `**Game**: ${(args.member.presence.game && args.member.presence.game && args.member.presence.game.name) || 'Not playing a game.'}`,
+                `**Color**: ${this.client.util.displayHexColor(args.member).toUpperCase()}`
+            ],
             true
         ],
         [
-            'Identifier',
-            args.member.id,
-            true
-        ],
-        [
-            'Status',
-            args.member.presence.status[0].toUpperCase() + args.member.presence.status.slice(1),
-            true
-        ],
-        [
-            'Game',
-            (args.member.presence.game && args.member.presence.game && args.member.presence.game.name) || 'Not playing a game.',
-            true
-        ],
-        [
-            'Color',
-            this.client.util.displayHexColor(args.member).toUpperCase(),
-            true
-        ],
-        [
-            'Roles',
-            (() => {
-                const roles = args.member.roles.map(r => r.toString()).join(', ');
-                if (roles.length > 1024) return 'A lot of roles!';
-                return roles;
-            })()
-        ],
-        [
-            'Joined At',
-            moment(args.member.joinedAt).utc().format('dddd, MMMM Do YYYY, h:mm:ss a')
-        ],
-        [
-            'Created At',
-            moment(args.member.user.createdAt).utc().format('dddd, MMMM Do YYYY, h:mm:ss a')
+            'Guild Membership',
+            [
+                `**Joined At**: ${moment(args.member.joinedAt).utc().format('dddd, MMMM Do YYYY, h:mm:ss a')}`,
+                `**Created At**: ${moment(args.member.user.createdAt).utc().format('dddd, MMMM Do YYYY, h:mm:ss a')}`,
+                `**Roles**: ${(() => {
+                    const roles = args.member.roles.map(r => r.toString()).join(', ');
+                    if (roles.length > 1024) return 'A lot of roles!';
+                    return roles;
+                })()}`
+            ]
         ]
     ];
 
