@@ -8,10 +8,9 @@ function exec(message, args) {
     }
 
     const color = this.client.color(message);
-    const embed = this.client.util.embed()
-    .setColor(color);
+    const embed = this.client.util.embed().setColor(color);
 
-    if (args.guild.iconURL) embed.setThumbnail(args.guild.iconURL);
+    if (args.guild.iconURL) embed.setThumbnail(args.guild.iconURL.replace('.jpg', '.png?size=1024'));
 
     const fields = [
         [
@@ -38,6 +37,7 @@ function exec(message, args) {
                 `**Joined At**: ${moment(args.guild.joinedAt).utc().format('dddd, MMMM Do YYYY, h:mm:ss a')}`,
                 `**Created At**: ${moment(args.guild.createdAt).utc().format('dddd, MMMM Do YYYY, h:mm:ss a')}`,
                 `**Roles**: ${(() => {
+                    if ((message.guild && message.guild.id) !== args.guild.id) return 'Outside of guild, cannot view roles.';
                     const roles = args.guild.roles.map(r => r.toString()).join(', ');
                     if (roles.length > 1024) return 'A lot of roles!';
                     return roles;

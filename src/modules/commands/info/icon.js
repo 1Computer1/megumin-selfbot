@@ -15,9 +15,9 @@ function exec(message, args) {
 
     const embed = this.client.util.embed()
     .setColor(color)
-    .setImage(args.guild.iconURL)
     .setTitle('Guild Icon')
-    .setURL(args.guild.iconURL);
+    .setImage(args.guild.iconURL.replace('.jpg', '.png?size=1024'))
+    .setURL(args.guild.iconURL.replace('.jpg', '.png?size=1024'));
 
     return message.edit('', { embed });
 }
