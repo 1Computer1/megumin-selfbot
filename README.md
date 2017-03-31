@@ -148,6 +148,7 @@ By default it is 10.
 Quotes a message.  
 Supply this command with a message ID.  
 All text after the ID will be your reply.  
+Include `channel:id` to change channel of message.  
 
 #### edits
 Sees the edit history of a cached message.  
