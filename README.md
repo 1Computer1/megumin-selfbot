@@ -92,6 +92,10 @@ A better version of eval.
 Requires harmony or Node 7.6.0 or higher.  
 Allows usage of `await` in addtion to things from eval.  
 
+#### python / py
+Evaluates Python code.  
+Requires Python in your PATH.  
+
 #### stats / info / about
 Displays the memory usage, uptime, and a link to here.  
 
