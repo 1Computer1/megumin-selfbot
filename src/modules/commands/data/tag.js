@@ -1,5 +1,5 @@
 const { Command } = require('discord-akairo');
-const fs = require('fs');
+const FileSystem = require('../../../util/FileSystem');
 
 function exec(message, args) {
     if (['add', 'new', 'set'].includes(args.option)) {
@@ -15,12 +15,13 @@ function exec(message, args) {
 
         this.client.tags[args.name.toLowerCase()] = args.content;
 
-        fs.writeFileSync('./src/data/tags.json', JSON.stringify(this.client.tags, null, '\t'));
-        delete require.cache[require.resolve('../../../data/tags.json')];
-        this.client.tags = require('../../../data/tags.json');
+        return FileSystem.writeFile('./src/data/tags.json', JSON.stringify(this.client.tags, null, '\t')).then(() => {
+            delete require.cache[require.resolve('../../../data/tags.json')];
+            this.client.tags = require('../../../data/tags.json');
 
-        this.client.logger.log(2, `Tag [${args.name.toLowerCase()}] added: "${args.content}"`);
-        return message.delete();
+            this.client.logger.log(2, `Tag [${args.name.toLowerCase()}] added: "${args.content}"`);
+            return message.delete();
+        });
     }
 
     if (['remove', 'delete', 'del'].includes(args.option)) {
@@ -36,12 +37,13 @@ function exec(message, args) {
 
         delete this.client.tags[args.name.toLowerCase()];
 
-        fs.writeFileSync('./src/data/tags.json', JSON.stringify(this.client.tags, null, '\t'));
-        delete require.cache[require.resolve('../../../data/tags.json')];
-        this.client.tags = require('../../../data/tags.json');
+        return FileSystem.writeFile('./src/data/tags.json', JSON.stringify(this.client.tags, null, '\t')).then(() => {
+            delete require.cache[require.resolve('../../../data/tags.json')];
+            this.client.tags = require('../../../data/tags.json');
 
-        this.client.logger.log(2, `Tag [${args.name.toLowerCase()}] removed.`);
-        return message.delete();
+            this.client.logger.log(2, `Tag [${args.name.toLowerCase()}] removed.`);
+            return message.delete();
+        });
     }
 
     if (args.option === 'reload') {

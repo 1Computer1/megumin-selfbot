@@ -5,5 +5,6 @@
     "noLogs": false,
     "grammar": false,
     "cache": 50,
-    "exitOnDisconnect": false
+    "exitOnDisconnect": false,
+    "stickerImages": false
 }

@@ -1,15 +1,11 @@
 const { Command } = require('discord-akairo');
 const moment = require('moment');
-const fs = require('fs');
+const FileSystem = require('../../../util/FileSystem');
 
 function exec(message, args) {
-    try {
-        fs.mkdirSync('./src/data/logs/');
-    } catch (err) {
-        if (err.code !== 'EEXIST') throw err;
-    }
-
-    return message.channel.fetchMessages({ limit: 100, before: args.before || undefined }).then(messages => {
+    return FileSystem.mkdir('./src/data/logs/').then(() => {
+        return message.channel.fetchMessages({ limit: 100, before: args.before || undefined });
+    }).then(messages => {
         const object = {
             location: {
                 channel: message.channel.name || 'DM',
@@ -48,10 +44,10 @@ function exec(message, args) {
         };
 
         const filename = `./src/data/logs/log_${moment(message.createdTimestamp).format('YYYY-MM-DD_HH-mm-ss')}.json`;
-        fs.writeFileSync(filename, JSON.stringify(object, null, '\t'));
-
-        this.client.logger.log(2, `Saved messages to ${filename}.`);
-        return message.delete();
+        return FileSystem.writeFile(filename, JSON.stringify(object, null, '\t')).then(() => {
+            this.client.logger.log(2, `Saved messages to ${filename}.`);
+            return message.delete();
+        });
     });
 }
 

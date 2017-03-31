@@ -67,6 +67,11 @@ Errors are still logged.
 Exits the process on disconnect.  
 Recommended to use with uws and a process manager (eg PM2).  
 
+#### Sticker Images: "stickerImages"
+With this on, images will now be downloaded to `src/data/images`.  
+When sending images, they will no longer be embedded.  
+Images saved as links will still work with this on (but not the other way around when this is off).  
+
 ## Commands
 By default, the prefix is `/`.  
 You can change this in the config.json.  
@@ -202,7 +207,7 @@ It will not work anywhere else in the message.
 Everything after the image tag will be the actual message.  
 
 #### log / logs
-Fetches 100 messages and saves it to the src/data/logs/ folder.  
+Fetches 100 messages and saves it to the `src/data/logs` folder.  
 Include an ID to fetch 100 messages before that message.  
 
 ## Customization
