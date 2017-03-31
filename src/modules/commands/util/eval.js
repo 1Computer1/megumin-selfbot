@@ -19,7 +19,7 @@ function exec(message, args) {
 
     const print = (...a) => {
         const cleaned = a.map(o => {
-            if (typeof o !== 'string') o = util.inspect(o, { depth: 0 });
+            o = util.inspect(o, { depth: 0 });
             return o.replace(tokenRegex, '[TOKEN]');
         });
 
@@ -44,7 +44,7 @@ function exec(message, args) {
     const cb = '```';
 
     return result.then(output => {
-        if (typeof output !== 'string') output = util.inspect(output, { depth: 0 });
+        output = util.inspect(output, { depth: 0 });
         output = `${logs.join('\n')}\n${logs.length && output === 'undefined' ? '' : output}`;
         output = output.replace(tokenRegex, '[TOKEN]');
 
