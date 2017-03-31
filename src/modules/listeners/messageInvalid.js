@@ -15,6 +15,16 @@ function exec(message) {
         const color = this.client.color(message);
         const embed = new RichEmbed().setImage(image).setColor(color);
 
+        if (this.client.config.stickerImages) {
+            message.delete().then(() => {
+                return message.channel.send(message.content.replace(name[0], ''), {
+                    file: image
+                });
+            });
+
+            return;
+        }
+
         message.edit(this.editText(message.content.replace(name[0], '')), { embed }).catch(err => {
             if (err.response && err.response.badRequest) {
                 this.client.logger.log(3, 'Your image was invalid. Double check your link!');
