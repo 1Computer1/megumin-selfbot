@@ -15,7 +15,7 @@ function exec(message, args) {
             return message.delete();
         }
 
-        const save = this.client.config.stickerImages
+        const save = this.client.config.downloadImages
         ? request.get(args.content).then(res => {
             return FileSystem.mkdir('./src/data/images/').then(() => {
                 const ext = path.extname(args.content);
@@ -33,7 +33,7 @@ function exec(message, args) {
                 delete require.cache[require.resolve('../../../data/images.json')];
                 this.client.images = require('../../../data/images.json');
 
-                this.client.logger.log(2, `Image {${args.name.toLowerCase()}} added: "${args.content}"`);
+                this.client.logger.log(2, `Image {${args.name.toLowerCase()}} added: "${this.client.images[args.name.toLowerCase()]}"`);
                 return message.delete();
             });
         });

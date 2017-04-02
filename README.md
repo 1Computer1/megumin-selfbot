@@ -68,9 +68,12 @@ Exits the process on disconnect.
 Recommended to use with uws and a process manager (eg PM2).  
 
 #### Sticker Images: "stickerImages"
-With this on, images will now be downloaded to `src/data/images`.  
-When sending images, they will no longer be embedded.  
-Images saved as links will still work with this on (but not the other way around when this is off).  
+When sending images, they will be sent as an attachment rather than in embed. 
+Images saved as file (see below) will not work with this off.    
+
+#### Download Images: "downloadImages"
+When adding new images, they will be saved to `src/data/images` rather than saved as a link.  
+Images saved as a file will not work with the above setting off.  
 
 ## Commands
 By default, the prefix is `/`.  

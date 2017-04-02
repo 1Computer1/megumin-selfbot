@@ -6,5 +6,6 @@
     "grammar": false,
     "cache": 50,
     "exitOnDisconnect": false,
-    "stickerImages": false
+    "stickerImages": false,
+    "downloadImages": false
 }
