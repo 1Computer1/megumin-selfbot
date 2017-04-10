@@ -5,7 +5,9 @@ function exec(message, command, reason) {
         clientPermissions: `Missing permissions: ${command.clientPermissions}`
     };
 
-    this.client.logger.logFrom(message.channel, 0, `(Command: ${command.id}, Blocked: ${reasons[reason]})`);
+    if (reasons[reason]) {
+        this.client.logger.logFrom(message.channel, 0, `(Command: ${command.id}, Blocked: ${reasons[reason]})`);
+    }
 }
 
 module.exports = new Listener('commandBlocked', exec, {
