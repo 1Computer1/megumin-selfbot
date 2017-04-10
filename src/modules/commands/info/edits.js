@@ -23,7 +23,7 @@ function exec(message, args) {
         embed.addField(i === 0 ? 'Latest' : i === quotee.edits.length - 1 ? 'Original' : `Edit ${quotee.edits.length - i - 1}`, edit.content);
     }
 
-    return message.edit(message.content.slice(message.content.search(args.id) + args.id.length + 1), { embed });
+    return message.edit(args.text, { embed });
 }
 
 module.exports = new Command('edits', exec, {
@@ -31,6 +31,10 @@ module.exports = new Command('edits', exec, {
     args: [
         {
             id: 'id'
+        },
+        {
+            id: 'text',
+            match: 'rest'
         },
         {
             id: 'channel',
