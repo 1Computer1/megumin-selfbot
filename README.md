@@ -201,7 +201,7 @@ You can specify a multiple words long tag name by enclosing it in double quotes.
 Use `tag reload` to reload the tags.json if you have modified it outside of this command.  
 
 Tags can be used by doing `[tagname]` in your message.  
-For example, "hey check this out [animestuffs] it's so cool! [laugh]".  
+For example, `hey check this out [animeStuffs] it's so cool! [woah]`.  
 To force a tag to not be used, simply add a backslash, `\[tagname]`.  
 
 #### image / images / img / i - `image [option] [args...]`
@@ -220,9 +220,10 @@ Images can be used by starting a message with `{imagename}`.
 It will not work anywhere else in the message.  
 Everything after the image tag will be the actual message.  
 
-#### log / logs - `log [id]`
+#### log / logs - `log [id] [channel:id]`
 Fetches 100 messages and saves it to the `src/data/logs` folder.  
 Include an ID to fetch 100 messages before that message.  
+Include `channel:id` to change channel to fetch in.  
 
 ## Customization
 You can customize the selfbot all you want!  
