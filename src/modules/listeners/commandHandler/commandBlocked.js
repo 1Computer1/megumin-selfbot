@@ -2,11 +2,13 @@ const { Listener } = require('discord-akairo');
 
 function exec(message, command, reason) {
     const reasons = {
-        clientPermissions: `Missing permissions: ${command.clientPermissions}`
+        clientPermissions: () => {
+            return command.clientPermissions.join(', ');
+        }
     };
 
     if (reasons[reason]) {
-        this.client.logger.logFrom(message.channel, 0, `(Command: ${command.id}, Blocked: ${reasons[reason]})`);
+        this.client.logger.logFrom(message.channel, 0, `=> ${command.id} ~ ${reasons[reason]()}`);
     }
 
     message.delete();
