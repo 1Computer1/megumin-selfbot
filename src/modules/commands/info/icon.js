@@ -1,11 +1,6 @@
 const { Command } = require('discord-akairo');
 
 function exec(message, args) {
-    if (!args.guild) {
-        this.client.logger.log(3, 'Must be in a guild to check its icon.');
-        return message.delete();
-    }
-
     if (!args.guild.iconURL) {
         this.client.logger.log(2, 'Guild does not have an icon.');
         return message.delete();
@@ -27,7 +22,7 @@ module.exports = new Command('icon', exec, {
         {
             id: 'guild',
             type: 'guild',
-            default: m => m.guild
+            default: m => m.guild || m.client.guilds.random()
         }
     ],
     clientPermissions: ['EMBED_LINKS'],

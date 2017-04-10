@@ -1,11 +1,6 @@
 const { Command } = require('discord-akairo');
 
 function exec(message, args) {
-    if (!message.guild) {
-        this.client.logger.log(3, 'Must be in a guild to use this.');
-        return message.delete();
-    }
-
     if (!args.content) {
         this.client.logger.log(3, 'Must specify something to resolve.');
         return message.delete();
@@ -35,5 +30,6 @@ module.exports = new Command('id', exec, {
             match: 'content'
         }
     ],
+    channelRestriction: 'guild',
     category: 'info'
 });

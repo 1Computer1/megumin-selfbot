@@ -2,9 +2,8 @@ const { Listener } = require('discord-akairo');
 
 function exec(message, command, reason) {
     const reasons = {
-        clientPermissions: () => {
-            return command.clientPermissions.join(', ');
-        }
+        clientPermissions: () => command.clientPermissions.join(', '),
+        guild: () => 'Guild Only'
     };
 
     if (reasons[reason]) {

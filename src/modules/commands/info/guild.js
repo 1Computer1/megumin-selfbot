@@ -2,11 +2,6 @@ const { Command } = require('discord-akairo');
 const moment = require('moment');
 
 function exec(message, args) {
-    if (!args.guild) {
-        this.client.logger.log(3, 'Must be in a guild to check its information.');
-        return message.delete();
-    }
-
     const color = this.client.color(message);
     const embed = this.client.util.embed().setColor(color);
 
@@ -56,7 +51,7 @@ module.exports = new Command('guild', exec, {
         {
             id: 'guild',
             type: 'guild',
-            default: m => m.guild
+            default: m => m.guild || m.client.guilds.random()
         }
     ],
     clientPermissions: ['EMBED_LINKS'],
