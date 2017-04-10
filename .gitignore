@@ -1,3 +1,5 @@
-templates
 node_modules
 .vscode
+src/data/config.json
+src/data/images.json
+src/data/tags.json
