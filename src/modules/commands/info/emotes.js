@@ -1,11 +1,6 @@
 const { Command } = require('discord-akairo');
 
 function exec(message, args) {
-    if (!args.guild) {
-        this.client.logger.log(3, 'Must be in a guild to check its emotes.');
-        return message.delete();
-    }
-
     if (!args.guild.emojis.size) {
         this.client.logger.log(2, 'This guild does not have any emotes.');
         return message.delete();
@@ -44,7 +39,7 @@ module.exports = new Command('emotes', exec, {
         {
             id: 'guild',
             type: 'guild',
-            default: m => m.guild
+            default: m => m.guild || m.client.guilds.random()
         }
     ],
     clientPermissions: ['EMBED_LINKS'],
