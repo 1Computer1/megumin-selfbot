@@ -10,8 +10,8 @@ function exec(message, args) {
             location: {
                 channel: args.channel.name || 'DM',
                 channelID: args.channel.id,
-                guild: args.guild ? args.guild.name : undefined,
-                guildID: args.guild ? args.guild.id : undefined
+                guild: args.channel.guild ? args.channel.guild.name : undefined,
+                guildID: args.channel.guild ? args.channel.guild.id : undefined
             },
             messages: messages.map(m => {
                 return {
