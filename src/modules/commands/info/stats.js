@@ -12,7 +12,7 @@ function exec(message) {
         ],
         [
             'Client Uptime',
-            this.formatMs(this.client.uptime),
+            this.formatMilliseconds(this.client.uptime),
             true
         ],
         [
@@ -23,7 +23,7 @@ function exec(message) {
     ];
 
     for (const field of fields) embed.addField(...field);
-    return message.edit('', { embed });
+    return message.edit({ embed });
 }
 
 module.exports = new Command('stats', exec, {
@@ -31,7 +31,7 @@ module.exports = new Command('stats', exec, {
     category: 'info'
 });
 
-module.exports.formatMs = ms => {
+module.exports.formatMilliseconds = ms => {
     let x = Math.floor(ms / 1000);
     let seconds = x % 60;
 

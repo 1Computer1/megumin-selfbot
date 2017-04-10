@@ -47,7 +47,7 @@ function exec(message, args) {
     ];
 
     for (const field of fields) embed.addField(...field);
-    return message.edit('', { embed });
+    return message.edit({ embed });
 }
 
 module.exports = new Command('guild', exec, {

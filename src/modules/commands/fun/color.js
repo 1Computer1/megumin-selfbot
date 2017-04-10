@@ -8,7 +8,7 @@ function exec(message, args) {
     hex = `#${'0'.repeat(6 - hex.length)}${hex}`;
     embed.setTitle(hex.toUpperCase());
 
-    return message.edit('', { embed });
+    return message.edit({ embed });
 }
 
 module.exports = new Command('color', exec, {

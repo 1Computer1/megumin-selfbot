@@ -2,7 +2,7 @@ const { Command } = require('discord-akairo');
 const FileSystem = require('../../../util/FileSystem');
 
 function exec(message, args) {
-    if (['add', 'new', 'set'].includes(args.option)) {
+    if (args.option === 'add') {
         if (!args.name || !args.content) {
             this.client.logger.log(3, 'No tag name or content provided.');
             return message.delete();
@@ -24,7 +24,7 @@ function exec(message, args) {
         });
     }
 
-    if (['remove', 'delete', 'del'].includes(args.option)) {
+    if (args.option === 'remove') {
         if (!args.name) {
             this.client.logger.log(3, 'No tag name provided.');
             return message.delete();
@@ -63,7 +63,7 @@ module.exports = new Command('tag', exec, {
     args: [
         {
             id: 'option',
-            type: ['list', 'add', 'new', 'set', 'remove', 'delete', 'del', 'reload'],
+            type: [['list', 'ls'], ['add', 'new', 'set'], ['remove', 'delete', 'del'], 'reload'],
             default: 'list'
         },
         {
@@ -74,6 +74,6 @@ module.exports = new Command('tag', exec, {
             match: 'rest'
         }
     ],
-    split: 'quoted',
+    split: 'sticky',
     category: 'data'
 });

@@ -4,7 +4,7 @@ const path = require('path');
 const FileSystem = require('../../../util/FileSystem');
 
 function exec(message, args) {
-    if (['add', 'new', 'set'].includes(args.option)) {
+    if (args.option === 'add') {
         if (!args.name || !args.content) {
             this.client.logger.log(3, 'No image name or link provided.');
             return message.delete();
@@ -39,7 +39,7 @@ function exec(message, args) {
         });
     }
 
-    if (['remove', 'delete', 'del'].includes(args.option)) {
+    if (args.option === 'remove') {
         if (!args.name) {
             this.client.logger.log(3, 'No image name provided.');
             return message.delete();
@@ -78,16 +78,17 @@ module.exports = new Command('image', exec, {
     args: [
         {
             id: 'option',
-            type: ['list', 'add', 'new', 'set', 'remove', 'delete', 'del', 'reload'],
+            type: [['list', 'ls'], ['add', 'new', 'set'], ['remove', 'delete', 'del'], 'reload'],
             default: 'list'
         },
         {
             id: 'name'
         },
         {
-            id: 'content'
+            id: 'content',
+            match: 'rest'
         }
     ],
-    split: 'quoted',
+    split: 'sticky',
     category: 'data'
 });

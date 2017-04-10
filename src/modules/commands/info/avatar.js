@@ -9,7 +9,7 @@ function exec(message, args) {
     .setImage(args.user.displayAvatarURL.replace('.jpg?size=1024', '.png?size=1024'))
     .setURL(args.user.displayAvatarURL.replace('.jpg?size=1024', '.png?size=1024'));
 
-    return message.edit('', { embed });
+    return message.edit({ embed });
 }
 
 module.exports = new Command('avatar', exec, {

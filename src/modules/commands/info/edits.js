@@ -6,7 +6,6 @@ function exec(message, args) {
         return message.delete();
     }
 
-    const color = this.client.color(message);
     const quotee = message.channel.messages.get(args.id);
 
     if (!quotee) {
@@ -14,6 +13,7 @@ function exec(message, args) {
         return message.delete();
     }
 
+    const color = this.client.color(message);
     const embed = this.client.util.embed()
     .setAuthor(`${quotee.author.username}#${quotee.author.discriminator}`, quotee.author.displayAvatarURL)
     .setFooter(`${quotee.id} | Edit History`)

@@ -8,7 +8,6 @@ function exec(message, args) {
     }
 
     const color = this.client.color(message);
-
     const embed = this.client.util.embed()
     .setColor(color)
     .setThumbnail(args.member.user.displayAvatarURL.replace('.jpg?size=1024', '.png?size=1024'));
@@ -47,7 +46,7 @@ function exec(message, args) {
     ];
 
     for (const field of fields) embed.addField(...field);
-    return message.edit('', { embed });
+    return message.edit({ embed });
 }
 
 module.exports = new Command('user', exec, {

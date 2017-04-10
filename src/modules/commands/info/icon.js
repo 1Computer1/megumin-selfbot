@@ -12,14 +12,13 @@ function exec(message, args) {
     }
 
     const color = this.client.color(message);
-
     const embed = this.client.util.embed()
     .setColor(color)
     .setTitle('Guild Icon')
     .setImage(args.guild.iconURL.replace('.jpg', '.png?size=1024'))
     .setURL(args.guild.iconURL.replace('.jpg', '.png?size=1024'));
 
-    return message.edit('', { embed });
+    return message.edit({ embed });
 }
 
 module.exports = new Command('icon', exec, {

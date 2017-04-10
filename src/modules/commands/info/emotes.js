@@ -35,7 +35,7 @@ function exec(message, args) {
         embed.addField('\u200B', section.join(' '), true);
     }
 
-    return message.edit('', { embed });
+    return message.edit({ embed });
 }
 
 module.exports = new Command('emotes', exec, {

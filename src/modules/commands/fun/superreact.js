@@ -9,7 +9,7 @@ function exec(message, args) {
         emojiSet = message.guild.emojis;
     }
 
-    if (emojiSet.size === 0) {
+    if (!emojiSet.size) {
         this.client.logger.log(3, 'No custom emojis to react with.');
         return message.delete();
     }
@@ -20,7 +20,7 @@ function exec(message, args) {
     let temp;
     let rand;
 
-    while (curr !== 0) {
+    while (curr) {
         rand = Math.floor(Math.random() * curr);
         curr--;
 
