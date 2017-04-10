@@ -8,6 +8,8 @@ function exec(message, command, reason) {
     if (reasons[reason]) {
         this.client.logger.logFrom(message.channel, 0, `(Command: ${command.id}, Blocked: ${reasons[reason]})`);
     }
+
+    message.delete();
 }
 
 module.exports = new Listener('commandBlocked', exec, {
