@@ -6,7 +6,7 @@ function exec(message, args) {
         return message.delete();
     }
 
-    const quotee = message.channel.messages.get(args.id);
+    const quotee = args.channel.messages.get(args.id);
 
     if (!quotee) {
         this.client.logger.log(3, 'Your message ID was invalid or the message is not cached.');

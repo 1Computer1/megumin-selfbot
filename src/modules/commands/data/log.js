@@ -4,14 +4,14 @@ const FileSystem = require('../../../util/FileSystem');
 
 function exec(message, args) {
     return FileSystem.mkdir('./src/data/logs/').then(() => {
-        return message.channel.fetchMessages({ limit: 100, before: args.before || undefined });
+        return args.channel.fetchMessages({ limit: 100, before: args.before || undefined });
     }).then(messages => {
         const object = {
             location: {
-                channel: message.channel.name || 'DM',
-                channelID: message.channel.id,
-                guild: message.guild ? message.guild.name : undefined,
-                guildID: message.guild ? message.guild.id : undefined
+                channel: args.channel.name || 'DM',
+                channelID: args.channel.id,
+                guild: args.guild ? args.guild.name : undefined,
+                guildID: args.guild ? args.guild.id : undefined
             },
             messages: messages.map(m => {
                 return {
@@ -56,6 +56,18 @@ module.exports = new Command('log', exec, {
     args: [
         {
             id: 'before'
+        },
+        {
+            id: 'channel',
+            type: function type(word) {
+                if (!word) return null;
+                const channel = this.client.channels.get(word);
+                if (!channel || channel.type === 'voice') return null;
+                return channel;
+            },
+            match: 'prefix',
+            prefix: 'channel:',
+            default: m => m.channel
         }
     ],
     category: 'data'
