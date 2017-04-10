@@ -20,5 +20,6 @@ module.exports = new Command('color', exec, {
             default: () => (1 << 24) * Math.random() | 0
         }
     ],
+    clientPermissions: ['EMBED_LINKS'],
     category: 'fun'
 });

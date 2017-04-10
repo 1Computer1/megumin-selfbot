@@ -47,5 +47,6 @@ module.exports = new Command('emotes', exec, {
             default: m => m.guild
         }
     ],
+    clientPermissions: ['EMBED_LINKS'],
     category: 'info'
 });

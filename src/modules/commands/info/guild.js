@@ -59,5 +59,6 @@ module.exports = new Command('guild', exec, {
             default: m => m.guild
         }
     ],
+    clientPermissions: ['EMBED_LINKS'],
     category: 'info'
 });

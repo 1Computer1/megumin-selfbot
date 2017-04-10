@@ -33,5 +33,6 @@ module.exports = new Command('edits', exec, {
             id: 'id'
         }
     ],
+    clientPermissions: ['EMBED_LINKS'],
     category: 'info'
 });

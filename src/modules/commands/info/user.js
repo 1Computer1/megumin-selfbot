@@ -59,5 +59,6 @@ module.exports = new Command('user', exec, {
             default: message => message.member
         }
     ],
+    clientPermissions: ['EMBED_LINKS'],
     category: 'info'
 });

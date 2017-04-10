@@ -2,7 +2,6 @@ const { Command } = require('discord-akairo');
 
 function exec(message, args) {
     const color = this.client.color(message);
-
     const embed = this.client.util.embed()
     .setColor(color)
     .setTitle('User Avatar')
@@ -21,5 +20,6 @@ module.exports = new Command('avatar', exec, {
             default: m => m.author
         }
     ],
+    clientPermissions: ['EMBED_LINKS'],
     category: 'info'
 });

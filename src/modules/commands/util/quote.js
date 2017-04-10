@@ -88,5 +88,6 @@ module.exports = new Command('quote', exec, {
             default: m => m.channel
         }
     ],
+    clientPermissions: ['EMBED_LINKS'],
     category: 'util'
 });

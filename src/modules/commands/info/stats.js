@@ -28,6 +28,7 @@ function exec(message) {
 
 module.exports = new Command('stats', exec, {
     aliases: ['stats', 'info', 'about'],
+    clientPermissions: ['EMBED_LINKS'],
     category: 'info'
 });
 
