@@ -31,6 +31,18 @@ module.exports = new Command('edits', exec, {
     args: [
         {
             id: 'id'
+        },
+        {
+            id: 'channel',
+            type: function type(word) {
+                if (!word) return null;
+                const channel = this.client.channels.get(word);
+                if (!channel || channel.type === 'voice') return null;
+                return channel;
+            },
+            match: 'prefix',
+            prefix: 'channel:',
+            default: m => m.channel
         }
     ],
     clientPermissions: ['EMBED_LINKS'],
