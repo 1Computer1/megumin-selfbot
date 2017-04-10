@@ -5,8 +5,8 @@ function exec(message, args) {
     const embed = this.client.util.embed()
     .setColor(color)
     .setTitle('User Avatar')
-    .setImage(args.user.displayAvatarURL.replace('.jpg?size=1024', '.png?size=1024'))
-    .setURL(args.user.displayAvatarURL.replace('.jpg?size=1024', '.png?size=1024'));
+    .setURL(args.user.displayAvatarURL.replace('.jpg?size=1024', '.png?size=1024'))
+    .setImage(args.user.displayAvatarURL.replace('.jpg?size=1024', '.png?size=1024'));
 
     return message.edit({ embed });
 }

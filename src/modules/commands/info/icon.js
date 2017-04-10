@@ -10,8 +10,8 @@ function exec(message, args) {
     const embed = this.client.util.embed()
     .setColor(color)
     .setTitle('Guild Icon')
-    .setImage(args.guild.iconURL.replace('.jpg', '.png?size=1024'))
-    .setURL(args.guild.iconURL.replace('.jpg', '.png?size=1024'));
+    .setURL(args.guild.iconURL.replace('.jpg', '.png?size=1024'))
+    .setImage(args.guild.iconURL.replace('.jpg', '.png?size=1024'));
 
     return message.edit({ embed });
 }

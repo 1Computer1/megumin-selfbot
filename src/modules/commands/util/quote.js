@@ -18,10 +18,10 @@ function exec(message, args) {
 
         const color = this.client.color(message);
         const embed = this.client.util.embed()
-        .setDescription(quotee.content || '\u200B')
+        .setColor(color)
         .setAuthor(`${quotee.author.username}#${quotee.author.discriminator}`, quotee.author.displayAvatarURL)
-        .setTimestamp(quotee.createdAt)
-        .setColor(color);
+        .setDescription(quotee.content || '\u200B')
+        .setTimestamp(quotee.createdAt);
 
         if (args.channel.id !== message.channel.id) embed.setFooter(`#${args.channel.name} in ${args.channel.guild ? args.channel.guild.name : 'DM'}`);
 

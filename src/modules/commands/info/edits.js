@@ -15,9 +15,9 @@ function exec(message, args) {
 
     const color = this.client.color(message);
     const embed = this.client.util.embed()
+    .setColor(color)
     .setAuthor(`${quotee.author.username}#${quotee.author.discriminator}`, quotee.author.displayAvatarURL)
-    .setFooter(`${quotee.id} | Edit History`)
-    .setColor(color);
+    .setFooter(`${quotee.id} | Edit History`);
 
     for (const [i, edit] of quotee.edits.entries()) {
         embed.addField(i === 0 ? 'Latest' : i === quotee.edits.length - 1 ? 'Original' : `Edit ${quotee.edits.length - i - 1}`, edit.content);
