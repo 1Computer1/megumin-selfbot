@@ -198,6 +198,10 @@ Reacts to the previous message with the specified text.
 Don't use this one.  
 Especially not with the parameter set to 20.  
 
+#### reverse - `reverse [text...]`
+
+Reverses your message.  
+
 #### xkcd - `xkcd [comic...]`
 
 Gets XKCD comics.  
