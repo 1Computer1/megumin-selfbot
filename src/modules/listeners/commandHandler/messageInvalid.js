@@ -44,7 +44,8 @@ function exec(message) {
 module.exports = new Listener('messageInvalid', exec, {
     emitter: 'commandHandler',
     eventName: 'messageInvalid',
-    type: 'on'
+    type: 'on',
+    category: 'commandHandler'
 });
 
 module.exports.editText = function editText(text) {

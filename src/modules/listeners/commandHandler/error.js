@@ -8,5 +8,6 @@ function exec(err) {
 module.exports = new Listener('error', exec, {
     emitter: 'commandHandler',
     eventName: 'error',
-    type: 'on'
+    type: 'on',
+    category: 'commandHandler'
 });

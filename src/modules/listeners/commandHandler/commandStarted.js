@@ -7,5 +7,6 @@ function exec(message, command) {
 module.exports = new Listener('commandStarted', exec, {
     emitter: 'commandHandler',
     eventName: 'commandStarted',
-    type: 'on'
+    type: 'on',
+    category: 'commandHandler'
 });

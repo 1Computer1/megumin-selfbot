@@ -8,5 +8,6 @@ function exec(close) {
 module.exports = new Listener('disconnect', exec, {
     emitter: 'client',
     eventName: 'disconnect',
-    type: 'on'
+    type: 'on',
+    category: 'client'
 });

@@ -7,5 +7,6 @@ function exec() {
 module.exports = new Listener('reconnecting', exec, {
     emitter: 'client',
     eventName: 'reconnecting',
-    type: 'on'
+    type: 'on',
+    category: 'client'
 });
