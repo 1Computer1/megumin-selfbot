@@ -12,11 +12,13 @@ function exec(message, args) {
     for (const c of args.content.match(/<.+?>|./g)) {
         let out = EmojiMap.get(c.toLowerCase()) || c;
 
-        const custom = this.client.util.resolveEmoji(out, message.guild.emojis, false, true);
+        if (message.guild) {
+            const custom = this.client.util.resolveEmoji(out, message.guild.emojis, false, true);
 
-        if (custom) {
-            chars.push(custom);
-            continue;
+            if (custom) {
+                chars.push(custom);
+                continue;
+            }
         }
 
         if (!EmojiMap.has(c.toLowerCase()) && !EmojiRegex.test(out)) continue;
