@@ -8,7 +8,7 @@ function exec(message, command, reason) {
     };
 
     if (reasons[reason]) {
-        Logger.logAt(message.channel, `=> ${command.id} ~ ${reasons[reason]()}`);
+        Logger.log(`=> ${command.id} ~ ${reasons[reason]()}`);
     }
 
     message.delete();

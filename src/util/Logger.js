@@ -34,21 +34,6 @@ class Logger {
         process.stdout.write(`${time} ${internal} ${colored}\n`);
     }
 
-    static _logAt(channel, level, ...args) {
-        const texts = this._cleanArgs(args);
-
-        const time = chalk.cyan(`[${moment().format('YYYY-MM-DD HH:mm:ss')}]:`);
-        const location = chalk.bold(`[${channel.guild ? channel.guild.name : 'PM'}/${channel.guild ? channel.name : channel.recipient.username}]:`);
-        const colored = chalk[Constants.LogColors[level]](texts);
-
-        if (level === 4) {
-            process.stderr.write(`${time} ${location} ${colored}\n`);
-            return;
-        }
-
-        process.stdout.write(`${time} ${location} ${colored}\n`);
-    }
-
     /**
      * Sends level 0 log ([Log]).
      * @param {...any} args - Things to log.
@@ -92,56 +77,6 @@ class Logger {
      */
     static error(...args) {
         this._log(4, ...args);
-    }
-
-    /**
-     * Sends level 0 log from channel ([Log]).
-     * @param {Channel} channel - Channel to log from.
-     * @param {...any} args - Things to log.
-     * @returns {void}
-     */
-    static logAt(channel, ...args) {
-        this._logAt(channel, 0, ...args);
-    }
-
-    /**
-     * Sends level 1 log from channel ([Info]).
-     * @param {Channel} channel - Channel to log from.
-     * @param {...any} args - Things to log.
-     * @returns {void}
-     */
-    static infoAt(channel, ...args) {
-        this._logAt(channel, 1, ...args);
-    }
-
-    /**
-     * Sends level 2 log from channel ([Debug]).
-     * @param {Channel} channel - Channel to log from.
-     * @param {...any} args - Things to log.
-     * @returns {void}
-     */
-    static debugAt(channel, ...args) {
-        this._logAt(channel, 2, ...args);
-    }
-
-    /**
-     * Sends level 3 log from channel ([Warn]).
-     * @param {Channel} channel - Channel to log from.
-     * @param {...any} args - Things to log.
-     * @returns {void}
-     */
-    static warnAt(channel, ...args) {
-        this._logAt(channel, 3, ...args);
-    }
-
-    /**
-     * Sends level 4 log from channel ([Error]).
-     * @param {Channel} channel - Channel to log from.
-     * @param {...any} args - Things to log.
-     * @returns {void}
-     */
-    static errorAt(channel, ...args) {
-        this._logAt(channel, 4, ...args);
     }
 }
 
