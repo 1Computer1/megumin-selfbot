@@ -1,4 +1,5 @@
 const { AkairoClient } = require('discord-akairo');
+const Logger = require('./src/util/Logger');
 
 const config = require('./src/data/config.json');
 
@@ -22,11 +23,8 @@ const client = new AkairoClient({
     ]
 });
 
-const Logger = require('./src/util/Logger');
-
 Object.assign(client, {
     config,
-    logger: new Logger(config.noLogs),
     tags: require('./src/data/tags.json'),
     images: require('./src/data/images.json'),
     color: message => {
@@ -41,10 +39,10 @@ Object.assign(client, {
 });
 
 client.login(config.token).then(() => {
-    client.logger.log(1, 'Megumin ready! Explooooooosion!');
+    Logger.info('Megumin ready! Explooooooosion!');
 });
 
 process.on('unhandledRejection', err => {
-    client.logger.log(3, 'An error occured. Contact someone who might know what it means.');
-    console.error(err); // eslint-disable-line no-console
+    Logger.warn('An error occured. Contact someone who might know what it means.');
+    Logger.error(err);
 });

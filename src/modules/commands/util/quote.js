@@ -1,10 +1,11 @@
 const { Command } = require('discord-akairo');
 const { URL } = require('url');
+const Logger = require('../../../util/Logger');
 const path = require('path');
 
 function exec(message, args) {
     if (!args.id) {
-        this.client.logger.log(3, 'No message ID provided to quote.');
+        Logger.warn('No message ID provided to quote.');
         return message.delete();
     }
 
@@ -12,7 +13,7 @@ function exec(message, args) {
         const quotee = messages.get(args.id);
 
         if (!quotee) {
-            this.client.logger.log(3, 'Your message ID was invalid.');
+            Logger.warn('Your message ID was invalid.');
             return message.delete();
         }
 
@@ -57,7 +58,7 @@ function exec(message, args) {
         return message.edit(args.text, { embed });
     }).catch(err => {
         if (err.response && err.response.badRequest) {
-            this.client.logger.log(3, 'Your message ID was invalid.');
+            Logger.warn('Your message ID was invalid.');
             return message.delete();
         }
 

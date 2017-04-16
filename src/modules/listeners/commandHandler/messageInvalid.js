@@ -1,5 +1,6 @@
 const { Listener } = require('discord-akairo');
 const { RichEmbed } = require('discord.js');
+const Logger = require('../../../util/Logger');
 
 function exec(message) {
     if (/^\{.+?\}/.test(message.content)) {
@@ -27,7 +28,7 @@ function exec(message) {
 
         message.edit(this.editText(message.content.replace(name[0], '')), { embed }).catch(err => {
             if (err.response && err.response.badRequest) {
-                this.client.logger.log(3, 'Your image was invalid. Double check your link!');
+                Logger.warn('Your image was invalid. Double check your link!');
                 return message.delete();
             }
 

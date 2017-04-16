@@ -1,12 +1,13 @@
 /* eslint-disable no-unused-vars */
 
 const { Command } = require('discord-akairo');
+const Logger = require('../../../util/Logger');
 const util = require('util');
 const data = {};
 
 function exec(message, args) {
     if (!args.code) {
-        this.client.logger.log(3, 'No code provided to evaluate.');
+        Logger.warn('No code provided to evaluate.');
         return message.delete();
     }
 
@@ -55,8 +56,8 @@ function exec(message, args) {
             evaled.output = output;
         });
     }).catch(err => {
-        this.client.logger.log(2, 'Evaluation errored.');
-        console.error(err); // eslint-disable-line no-console
+        Logger.debug('Evaluation errored.');
+        Logger.error(err);
 
         err = err.toString();
         err = `${logs.join('\n')}\n${logs.length && err === 'undefined' ? '' : err}`;

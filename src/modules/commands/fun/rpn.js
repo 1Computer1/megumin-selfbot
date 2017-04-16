@@ -1,8 +1,9 @@
 const { Command } = require('discord-akairo');
+const Logger = require('../../../util/Logger');
 
 function exec(message, args) {
     if (!args.content) {
-        this.client.logger.log(3, 'No text provided to evaluate.');
+        Logger.warn('No text provided to evaluate.');
         return message.delete();
     }
 

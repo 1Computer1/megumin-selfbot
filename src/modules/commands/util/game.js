@@ -1,15 +1,16 @@
 const { Command } = require('discord-akairo');
+const Logger = require('../../../util/Logger');
 
 function exec(message, args) {
     if (!args.game) {
         return this.client.user.setGame(null).then(() => {
-            this.client.logger.log(1, 'Game set to not playing.');
+            Logger.info('Game set to not playing.');
             return message.delete();
         });
     }
 
     return this.client.user.setGame(args.game).then(() => {
-        this.client.logger.log(1, `Game set to "${this.client.user.presence.game.name}"`);
+        Logger.info(`Game set to "${this.client.user.presence.game.name}"`);
         return message.delete();
     });
 }

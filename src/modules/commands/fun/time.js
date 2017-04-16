@@ -1,12 +1,13 @@
 const { Command } = require('discord-akairo');
 const request = require('superagent');
+const Logger = require('../../../util/Logger');
 
 const timeIsURL = 'https://time.is/';
 const clocks = ['🕛', '🕐', '🕑', '🕒', '🕓', '🕔', '🕕', '🕖', '🕗', '🕘', '🕙', '🕚'];
 
 function exec(message, args) {
     if (!args.content) {
-        this.client.logger.log(3, 'No location provided.');
+        Logger.warn('No location provided.');
         return message.delete();
     }
 
@@ -18,9 +19,9 @@ function exec(message, args) {
         return message.edit(`${clock}\u2000The time in ${place} is ${time}.`);
     }).catch(err => {
         if (err.status === 404) {
-            this.client.logger.log(3, `Location ${args.content} not found.`);
+            Logger.warn(`Location ${args.content} not found.`);
         } else {
-            this.client.logger.log(3, `Time.is errored: ${err}`);
+            Logger.warn(`Time.is errored: ${err}`);
         }
 
         return message.delete();

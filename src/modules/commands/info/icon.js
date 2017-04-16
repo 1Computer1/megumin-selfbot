@@ -1,8 +1,9 @@
 const { Command } = require('discord-akairo');
+const Logger = require('../../../util/Logger');
 
 function exec(message, args) {
     if (!args.guild.iconURL) {
-        this.client.logger.log(2, 'Guild does not have an icon.');
+        Logger.debug('Guild does not have an icon.');
         return message.delete();
     }
 

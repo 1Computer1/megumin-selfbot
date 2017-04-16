@@ -1,6 +1,7 @@
 const { Command } = require('discord-akairo');
 const moment = require('moment');
 const FileSystem = require('../../../util/FileSystem');
+const Logger = require('../../../util/Logger');
 
 function exec(message, args) {
     return FileSystem.mkdir('./src/data/logs/').then(() => {
@@ -45,7 +46,7 @@ function exec(message, args) {
 
         const filename = `./src/data/logs/log_${moment(message.createdTimestamp).format('YYYY-MM-DD_HH-mm-ss')}.json`;
         return FileSystem.writeFile(filename, JSON.stringify(object, null, '\t')).then(() => {
-            this.client.logger.log(2, `Saved messages to ${filename}.`);
+            Logger.debug(`Saved messages to ${filename}.`);
             return message.delete();
         });
     });

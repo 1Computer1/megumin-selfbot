@@ -1,4 +1,5 @@
 const { Command } = require('discord-akairo');
+const Logger = require('../../../util/Logger');
 
 function exec(message, args) {
     let emojiSet;
@@ -10,7 +11,7 @@ function exec(message, args) {
     }
 
     if (!emojiSet.size) {
-        this.client.logger.log(3, 'No custom emojis to react with.');
+        Logger.warn('No custom emojis to react with.');
         return message.delete();
     }
 

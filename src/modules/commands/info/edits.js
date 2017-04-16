@@ -1,15 +1,16 @@
 const { Command } = require('discord-akairo');
+const Logger = require('../../../util/Logger');
 
 function exec(message, args) {
     if (!args.id) {
-        this.client.logger.log(3, 'No message ID provided to see edits.');
+        Logger.warn('No message ID provided to see edits.');
         return message.delete();
     }
 
     const quotee = args.channel.messages.get(args.id);
 
     if (!quotee) {
-        this.client.logger.log(3, 'Your message ID was invalid or the message is not cached.');
+        Logger.warn('Your message ID was invalid or the message is not cached.');
         return message.delete();
     }
 

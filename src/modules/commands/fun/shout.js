@@ -1,9 +1,10 @@
 const { Command } = require('discord-akairo');
 const { EmojiMap, EmojiRegex } = require('../../../util/Constants');
+const Logger = require('../../../util/Logger');
 
 function exec(message, args) {
     if (!args.content) {
-        this.client.logger.log(3, 'No text provided to shout.');
+        Logger.warn('No text provided to shout.');
         return message.delete();
     }
 
@@ -28,7 +29,7 @@ function exec(message, args) {
     const output = chars.join('\u180E');
 
     if (output.length > 2000) {
-        this.client.logger.log(3, 'Text provided goes over character limit.');
+        Logger.warn('Text provided goes over character limit.');
         return message.delete();
     }
 

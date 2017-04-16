@@ -1,7 +1,8 @@
 const { Listener } = require('discord-akairo');
+const Logger = require('../../../util/Logger');
 
 function exec() {
-    this.client.logger.log(1, 'Client reconnecting.');
+    Logger.info('Client reconnecting.');
 }
 
 module.exports = new Listener('reconnecting', exec, {

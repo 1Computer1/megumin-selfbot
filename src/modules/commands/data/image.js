@@ -1,17 +1,18 @@
 const { Command } = require('discord-akairo');
 const request = require('superagent');
 const path = require('path');
+const Logger = require('../../../util/Logger');
 const FileSystem = require('../../../util/FileSystem');
 
 function exec(message, args) {
     if (args.option === 'add') {
         if (!args.name || !args.content) {
-            this.client.logger.log(3, 'No image name or link provided.');
+            Logger.warn('No image name or link provided.');
             return message.delete();
         }
 
         if (this.client.images.hasOwnProperty(args.name.toLowerCase())) {
-            this.client.logger.log(3, `Image {${args.name.toLowerCase()}} already exists. Remove it first.`);
+            Logger.warn(`Image {${args.name.toLowerCase()}} already exists. Remove it first.`);
             return message.delete();
         }
 
@@ -33,7 +34,7 @@ function exec(message, args) {
                 delete require.cache[require.resolve('../../../data/images.json')];
                 this.client.images = require('../../../data/images.json');
 
-                this.client.logger.log(2, `Image {${args.name.toLowerCase()}} added: "${this.client.images[args.name.toLowerCase()]}"`);
+                Logger.debug(`Image {${args.name.toLowerCase()}} added: "${this.client.images[args.name.toLowerCase()]}"`);
                 return message.delete();
             });
         });
@@ -41,12 +42,12 @@ function exec(message, args) {
 
     if (args.option === 'remove') {
         if (!args.name) {
-            this.client.logger.log(3, 'No image name provided.');
+            Logger.warn('No image name provided.');
             return message.delete();
         }
 
         if (!this.client.images.hasOwnProperty(args.name.toLowerCase())) {
-            this.client.logger.log(3, `Image {${args.name.toLowerCase()}} does not exist.`);
+            Logger.warn(`Image {${args.name.toLowerCase()}} does not exist.`);
             return message.delete();
         }
 
@@ -56,7 +57,7 @@ function exec(message, args) {
             delete require.cache[require.resolve('../../../data/images.json')];
             this.client.images = require('../../../data/images.json');
 
-            this.client.logger.log(2, `Image {${args.name.toLowerCase()}} removed.`);
+            Logger.debug(`Image {${args.name.toLowerCase()}} removed.`);
             return message.delete();
         });
     }
@@ -65,7 +66,7 @@ function exec(message, args) {
         delete require.cache[require.resolve('../../../data/images.json')];
         this.client.images = require('../../../data/images.json');
 
-        this.client.logger.log(2, 'Reloaded images.json.');
+        Logger.debug('Reloaded images.json.');
         return message.delete();
     }
 

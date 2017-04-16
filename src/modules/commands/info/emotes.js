@@ -1,8 +1,9 @@
 const { Command } = require('discord-akairo');
+const Logger = require('../../../util/Logger');
 
 function exec(message, args) {
     if (!args.guild.emojis.size) {
-        this.client.logger.log(2, 'This guild does not have any emotes.');
+        Logger.debug('This guild does not have any emotes.');
         return message.delete();
     }
 

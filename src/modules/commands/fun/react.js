@@ -1,9 +1,10 @@
 const { Command } = require('discord-akairo');
 const { EmojiMap, EmojiRegex, EmojiAlts } = require('../../../util/Constants');
+const Logger = require('../../../util/Logger');
 
 function exec(message, args) {
     if (!args.content) {
-        this.client.logger.log(3, 'No text provided to react.');
+        Logger.warn('No text provided to react.');
         return message.delete();
     }
 
