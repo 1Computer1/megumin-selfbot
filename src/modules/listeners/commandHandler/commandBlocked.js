@@ -1,4 +1,5 @@
 const { Listener } = require('discord-akairo');
+const Logger = require('../../../util/Logger');
 
 function exec(message, command, reason) {
     const reasons = {
@@ -7,7 +8,7 @@ function exec(message, command, reason) {
     };
 
     if (reasons[reason]) {
-        this.client.logger.logFrom(message.channel, 0, `=> ${command.id} ~ ${reasons[reason]()}`);
+        Logger.logAt(message.channel, `=> ${command.id} ~ ${reasons[reason]()}`);
     }
 
     message.delete();
