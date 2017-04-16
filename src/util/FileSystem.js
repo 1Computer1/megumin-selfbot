@@ -1,6 +1,11 @@
 const fs = require('fs');
 
 class FileSystem {
+    /**
+     * Makes a directory.
+     * @param {string} path - Path to directory.
+     * @returns {Promise<void>}
+    */
     static mkdir(path) {
         return new Promise((resolve, reject) => {
             fs.mkdir(path, err => {
@@ -10,6 +15,12 @@ class FileSystem {
         });
     }
 
+    /**
+     * Writes to file.
+     * @param {string} path - Path to file.
+     * @param {any} data - Data to write.
+     * @returns {Promise<void>}
+    */
     static writeFile(path, data) {
         return new Promise((resolve, reject) => {
             fs.writeFile(path, data, err => {
