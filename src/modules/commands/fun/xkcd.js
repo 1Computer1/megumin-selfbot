@@ -38,5 +38,6 @@ module.exports = new Command('xkcd', exec, {
             match: 'content'
         }
     ],
+    clientPermissions: ['EMBED_LINKS'],
     category: 'fun'
 });
