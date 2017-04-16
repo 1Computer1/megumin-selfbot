@@ -4,13 +4,13 @@ const Logger = require('../../../util/Logger');
 function exec(message, args) {
     if (!args.game) {
         return this.client.user.setGame(null).then(() => {
-            Logger.info('Game set to not playing.');
+            Logger.debug('Game set to not playing.');
             return message.delete();
         });
     }
 
     return this.client.user.setGame(args.game).then(() => {
-        Logger.info(`Game set to "${this.client.user.presence.game.name}"`);
+        Logger.debug(`Game set to "${this.client.user.presence.game.name}"`);
         return message.delete();
     });
 }

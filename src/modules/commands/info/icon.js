@@ -3,7 +3,7 @@ const Logger = require('../../../util/Logger');
 
 function exec(message, args) {
     if (!args.guild.iconURL) {
-        Logger.debug('Guild does not have an icon.');
+        Logger.warn('Guild does not have an icon.');
         return message.delete();
     }
 

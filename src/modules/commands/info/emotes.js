@@ -3,7 +3,7 @@ const Logger = require('../../../util/Logger');
 
 function exec(message, args) {
     if (!args.guild.emojis.size) {
-        Logger.debug('This guild does not have any emotes.');
+        Logger.warn('This guild does not have any emotes.');
         return message.delete();
     }
 

@@ -20,7 +20,7 @@ function exec(message, args) {
         if (stdout.length + args.code.length > 1900) stdout = 'Output too long.';
         return message.edit(`🐍\u2000**Input**${cb}py\n${args.code}\n${cb}\n📤\u2000**Output**${cb}py\n${stdout}\n${cb}`);
     }).catch(err => {
-        Logger.debug('Evaluation errored.');
+        Logger.warn('Evaluation errored.');
         Logger.error(err);
 
         err = err.toString();

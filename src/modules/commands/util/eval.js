@@ -56,7 +56,7 @@ function exec(message, args) {
             evaled.output = output;
         });
     }).catch(err => {
-        Logger.debug('Evaluation errored.');
+        Logger.warn('Evaluation errored.');
         Logger.error(err);
 
         err = err.toString();
