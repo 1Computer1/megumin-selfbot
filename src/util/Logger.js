@@ -23,15 +23,15 @@ class Logger {
         const texts = this._cleanArgs(args);
 
         const time = chalk.cyan(`[${moment().format('YYYY-MM-DD HH:mm:ss')}]:`);
-        const internal = chalk.bold(`[Internal/${Constants.LogLevels[level]}]:`);
+        const tag = chalk.bold(`[${Constants.LogLevels[level]}]:`);
         const colored = chalk[Constants.LogColors[level]](texts);
 
         if (level === 4) {
-            process.stderr.write(`${time} ${internal} ${colored}\n`);
+            process.stderr.write(`${time} ${tag} ${colored}\n`);
             return;
         }
 
-        process.stdout.write(`${time} ${internal} ${colored}\n`);
+        process.stdout.write(`${time} ${tag} ${colored}\n`);
     }
 
     /**
