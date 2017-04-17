@@ -15,7 +15,11 @@ module.exports = new Command('locate', exec, {
     args: [
         {
             id: 'emoji',
-            type: 'emoji'
+            type: function type(word) {
+                if (!word) return null;
+                const emoji = this.client.util.resolveEmoji(word, this.client.emojis);
+                return emoji || null;
+            }
         }
     ]
 });
