@@ -140,6 +140,10 @@ Defaults to yourself.
 Gets the ID of something (member/channel/role/emote).  
 Usable only in a guild.  
 
+#### locate - `locate <emoji>`
+
+Gets the name of the guild that the emoji comes from.  
+
 #### game - `game [text...]`
 
 Sets your current playing game.  
