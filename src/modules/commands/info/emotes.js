@@ -35,7 +35,7 @@ function exec(message, args) {
 }
 
 module.exports = new Command('emotes', exec, {
-    aliases: ['emotes'],
+    aliases: ['emotes', 'emojis'],
     args: [
         {
             id: 'guild',
