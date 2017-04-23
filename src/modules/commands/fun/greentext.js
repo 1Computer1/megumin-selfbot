@@ -1,7 +1,7 @@
 const { Command } = require('discord-akairo');
 
 function exec(message, args) {
-    return message.editCode('css', `>${args.content.replace(/\n/g, '\n>')}`);
+    return message.edit(`>${args.content.replace(/\n/g, '\n>')}`, { code: 'css' });
 }
 
 module.exports = new Command('greentext', exec, {

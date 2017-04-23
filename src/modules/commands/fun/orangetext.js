@@ -1,7 +1,7 @@
 const { Command } = require('discord-akairo');
 
 function exec(message, args) {
-    return message.editCode('fix', `${args.content.replace(/\n/g, '<\n')}<`);
+    return message.edit(`${args.content.replace(/\n/g, '<\n')}<`, { code: 'fix' });
 }
 
 module.exports = new Command('orangetext', exec, {

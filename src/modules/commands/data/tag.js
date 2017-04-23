@@ -56,7 +56,7 @@ function exec(message, args) {
     }
 
     const keys = Object.keys(this.client.tags);
-    return message.editCode('json', keys.length ? keys.sort().map(tag => `[${tag}]`).join(', ') : 'No tags added.');
+    return message.edit(keys.length ? keys.sort().map(tag => `[${tag}]`).join(', ') : 'No tags added.', { code: 'json' });
 }
 
 module.exports = new Command('tag', exec, {

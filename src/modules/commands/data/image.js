@@ -71,7 +71,7 @@ function exec(message, args) {
     }
 
     const keys = Object.keys(this.client.images);
-    return message.editCode('json', keys.length ? keys.sort().map(image => `{${image}}`).join(', ') : 'No images added.');
+    return message.edit(keys.length ? keys.sort().map(image => `{${image}}`).join(', ') : 'No images added.', { code: 'json' });
 }
 
 module.exports = new Command('image', exec, {
