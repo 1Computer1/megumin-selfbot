@@ -17,6 +17,5 @@ function exec(message, command, reason) {
 module.exports = new Listener('commandBlocked', exec, {
     emitter: 'commandHandler',
     eventName: 'commandBlocked',
-    type: 'on',
     category: 'commandHandler'
 });

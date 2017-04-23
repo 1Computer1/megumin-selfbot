@@ -8,6 +8,5 @@ function exec() {
 module.exports = new Listener('ready', exec, {
     emitter: 'client',
     eventName: 'ready',
-    type: 'on',
     category: 'client'
 });

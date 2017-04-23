@@ -6,8 +6,8 @@ function exec(err) {
     Logger.error(err);
 }
 
-module.exports = new Listener('error', exec, {
-    emitter: 'commandHandler',
-    eventName: 'error',
-    category: 'commandHandler'
+module.exports = new Listener('unhandledRejection', exec, {
+    emitter: 'process',
+    eventName: 'unhandledRejection',
+    category: 'process'
 });
