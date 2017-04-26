@@ -11,7 +11,7 @@ function exec(message, args) {
     const chars = [];
 
     for (const c of args.content.match(/<.+?>|./g)) {
-        const out = c === ' ' ? '\u2000' : EmojiMap.get(c.toLowerCase()) || c;
+        const out = c === ' ' ? '\u2000' : EmojiMap[c.toLowerCase()] || c;
 
         if (message.guild) {
             const custom = this.client.util.resolveEmoji(out, message.guild.emojis, false, true);
@@ -22,7 +22,7 @@ function exec(message, args) {
             }
         }
 
-        if (!EmojiMap.has(c.toLowerCase()) && !EmojiRegex.test(out) && out !== '\u2000') continue;
+        if (!EmojiMap[c.toLowerCase()] && !EmojiRegex.test(out) && out !== '\u2000') continue;
         chars.push(out);
     }
 

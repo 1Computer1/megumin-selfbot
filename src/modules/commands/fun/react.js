@@ -11,7 +11,7 @@ function exec(message, args) {
     let chars = [];
 
     for (const c of args.content.match(/<.+?>|./g)) {
-        let out = EmojiMap.get(c.toLowerCase()) || c;
+        let out = EmojiMap[c.toLowerCase()] || c;
 
         if (message.guild) {
             const custom = this.client.util.resolveEmoji(out, message.guild.emojis, false, true);
@@ -22,8 +22,8 @@ function exec(message, args) {
             }
         }
 
-        if (!EmojiMap.has(c.toLowerCase()) && !EmojiRegex.test(out)) continue;
-        if (chars.includes(out)) out = EmojiAlts.get(out) || out;
+        if (!EmojiMap[c.toLowerCase()] && !EmojiRegex.test(out)) continue;
+        if (chars.includes(out)) out = EmojiAlts[out] || out;
         chars.push(out);
     }
 
