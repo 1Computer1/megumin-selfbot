@@ -206,6 +206,10 @@ Especially not with the parameter set to 20.
 
 Reverses your message.  
 
+#### flip - `flip [text...]`
+
+Flips and reverses your message.  
+
 #### xkcd - `xkcd [comic...]`
 
 Gets XKCD comics.  
