@@ -9,17 +9,20 @@ function exec(message, args) {
     }
 
     let chars = [];
+    let customEmojis = this.client.premium ? this.client.emojis : this.client.emojis.filter(e => e.managed);
 
-    for (const c of args.content.match(/<.+?>|./g)) {
+    if (message.guild) {
+        customEmojis = customEmojis.concat(message.guild.emojis);
+    }
+
+    for (const c of args.content.match(/<:[a-zA-Z0-9_]+:(\d+)>|./g)) {
         let out = EmojiMap[c.toLowerCase()] || c;
 
-        if (message.guild) {
-            const custom = this.client.util.resolveEmoji(out, message.guild.emojis, false, true);
+        const custom = c.match(/<:[a-zA-Z0-9_]+:(\d+)>/);
 
-            if (custom) {
-                chars.push(custom);
-                continue;
-            }
+        if (custom) {
+            chars.push(customEmojis.get(custom[1]));
+            continue;
         }
 
         if (!EmojiMap[c.toLowerCase()] && !EmojiRegex.test(out)) continue;

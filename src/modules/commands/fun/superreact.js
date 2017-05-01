@@ -2,20 +2,18 @@ const { Command } = require('discord-akairo');
 const Logger = require('../../../util/Logger');
 
 function exec(message, args) {
-    let emojiSet;
+    let customEmojis = this.client.premium ? this.client.emojis : this.client.emojis.filter(e => e.managed);
 
-    if (!message.guild || !message.guild.emojis.size) {
-        emojiSet = this.client.user.premium ? this.client.emojis : this.client.emojis.filter(e => e.managed);
-    } else {
-        emojiSet = message.guild.emojis;
+    if (message.guild) {
+        customEmojis = customEmojis.concat(message.guild.emojis);
     }
 
-    if (!emojiSet.size) {
+    if (!customEmojis.size) {
         Logger.warn('No custom emojis to react with.');
         return message.delete();
     }
 
-    let emojis = emojiSet.array();
+    let emojis = customEmojis.array();
 
     let curr = emojis.length;
     let temp;
