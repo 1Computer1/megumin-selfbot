@@ -19,7 +19,7 @@ function exec(message) {
         if (this.client.config.stickerImages) {
             message.delete().then(() => {
                 return message.channel.send(message.content.replace(name[0], ''), {
-                    file: image
+                    files: [image]
                 });
             });
 
