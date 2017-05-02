@@ -5,7 +5,14 @@ function exec(message, args) {
     const color = this.client.color(message);
     const embed = this.client.util.embed().setColor(color);
 
-    if (args.guild.iconURL) embed.setThumbnail(args.guild.iconURL.replace('.jpg', '.png?size=1024'));
+    if (args.guild.iconURL) {
+        // Support for Discord.js master.
+        const url = typeof args.guild.iconURL === 'function'
+        ? args.guild.iconURL('png', 1024)
+        : args.guild.iconURL.replace('.jpg', '.png?size=1024');
+
+        embed.setThumbnail(url);
+    }
 
     const fields = [
         [
