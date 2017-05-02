@@ -11,7 +11,7 @@ function exec(message, args) {
         [
             'User Information',
             [
-                `**Username**: ${args.member.user.username}#${args.member.user.discriminator}`,
+                `**Username**: ${args.member.user.tag}`,
                 `**Nickname**: ${args.member.displayName}`,
                 `**User ID**: ${args.member.id}`
             ],
@@ -22,7 +22,7 @@ function exec(message, args) {
             [
                 `**Status**: ${args.member.presence.status[0].toUpperCase() + args.member.presence.status.slice(1)}`,
                 `**Game**: ${(args.member.presence.game && args.member.presence.game && args.member.presence.game.name) || 'Not playing a game.'}`,
-                `**Color**: ${this.client.util.displayHexColor(args.member).toUpperCase()}`
+                `**Color**: ${args.member.displayHexColor.toUpperCase()}`
             ],
             true
         ],

@@ -34,7 +34,7 @@ class MeguminClient extends AkairoClient {
         }
 
         if (this.config.color === 'auto') {
-            return message.guild ? this.util.displayColor(message.member) : 0;
+            return message.guild ? message.member.displayColor : 0;
         }
 
         return this.config.color || 0;

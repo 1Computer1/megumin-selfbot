@@ -17,7 +17,7 @@ function exec(message, args) {
     const color = this.client.color(message);
     const embed = this.client.util.embed()
     .setColor(color)
-    .setAuthor(`${quotee.author.username}#${quotee.author.discriminator}`, quotee.author.displayAvatarURL)
+    .setAuthor(quotee.author.tag, quotee.author.displayAvatarURL)
     .setFooter(`${quotee.id} | Edit History`);
 
     for (const [i, edit] of quotee.edits.entries()) {

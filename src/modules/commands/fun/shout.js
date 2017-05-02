@@ -8,18 +8,22 @@ function exec(message, args) {
         return message.delete();
     }
 
+    let customEmojis = this.client.premium ? this.client.emojis : this.client.emojis.filter(e => e.managed);
+
+    if (message.guild) {
+        customEmojis = customEmojis.concat(message.guild.emojis);
+    }
+
     const chars = [];
 
-    for (const c of args.content.match(/<.+?>|./g)) {
+    for (const c of args.content.match(/<:[a-zA-Z0-9_]+:(\d+)>|./g)) {
         const out = c === ' ' ? '\u2000' : EmojiMap[c.toLowerCase()] || c;
 
-        if (message.guild) {
-            const custom = this.client.util.resolveEmoji(out, message.guild.emojis, false, true);
+        const custom = c.match(/<:[a-zA-Z0-9_]+:(\d+)>/);
 
-            if (custom) {
-                chars.push(custom);
-                continue;
-            }
+        if (custom) {
+            chars.push(customEmojis.get(custom[1]));
+            continue;
         }
 
         if (!EmojiMap[c.toLowerCase()] && !EmojiRegex.test(out) && out !== '\u2000') continue;

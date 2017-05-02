@@ -7,7 +7,7 @@ function exec(message, args) {
         return message.delete();
     }
 
-    args.actualInput = args.code;
+    args.input = args.code;
     args.code = `(async()=>{${args.code}})()`;
     return this.handler.modules.get('eval').exec(message, args);
 }

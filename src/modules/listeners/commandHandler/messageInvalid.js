@@ -29,13 +29,12 @@ function exec(message) {
         message.edit(this.editText(message.content.replace(name[0], '')), { embed }).catch(err => {
             if (err.response && err.response.badRequest) {
                 Logger.warn('Your image was invalid. Double check your link!');
-                return message.delete();
+                message.delete();
+                return;
             }
 
             throw err;
         });
-
-        return;
     }
 
     const rep = this.editText(message.content);
