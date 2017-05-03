@@ -2,7 +2,7 @@ const { Listener } = require('discord-akairo');
 const Logger = require('../../../util/Logger');
 
 function exec() {
-    Logger.info('Client reconnecting.');
+    Logger.info('Megumin reconnecting.');
     if (this.client.config.exitOnDisconnect) process.exit();
 }
 

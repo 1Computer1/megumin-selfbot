@@ -2,7 +2,7 @@ const { Listener } = require('discord-akairo');
 const Logger = require('../../../util/Logger');
 
 function exec() {
-    Logger.info('Client connected.');
+    Logger.info('Megumin connected.');
 }
 
 module.exports = new Listener('ready', exec, {
