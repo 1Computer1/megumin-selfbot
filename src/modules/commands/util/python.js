@@ -9,7 +9,7 @@ function exec(message, args) {
     }
 
     const cb = '```';
-    const input = args.code.replace(/"/g, '\\"').replace(/'/g, '\\\'').replace(/^/gm, '\t');
+    const input = args.code.replace(/^/gm, '\t').replace(/\\n/, '\\\\n').replace(/\n/g, '\\n').replace(/"/g, '\\"').replace(/'/g, '\\\'');
     const code = `def __python_eval():\\n${input}\\nprint(__python_eval())`;
 
     return new Promise((resolve, reject) => {
