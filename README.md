@@ -210,6 +210,11 @@ Reverses your message.
 
 Flips and reverses your message.  
 
+#### embed - `embed [text...]`
+
+Embeds your image.  
+Also works with tags!  
+
 #### xkcd - `xkcd [comic...]`
 
 Gets XKCD comics.  
