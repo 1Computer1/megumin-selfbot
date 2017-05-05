@@ -212,7 +212,7 @@ Flips and reverses your message.
 
 #### embed - `embed [text...]`
 
-Embeds your image.  
+Embeds your message.  
 Also works with tags!  
 
 #### xkcd - `xkcd [comic...]`
