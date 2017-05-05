@@ -9,10 +9,11 @@ function exec(message, args) {
     }
 
     const cb = '```';
-    const input = args.code.replace(/\n/g, '\\n').replace(/"/g, '\\"').replace(/'/g, '\\\'');
+    const input = args.code.replace(/"/g, '\\"').replace(/'/g, '\\\'').replace(/^/gm, '\t');
+    const code = `def __python_eval():\\n${input}\\nprint(__python_eval())`;
 
     return new Promise((resolve, reject) => {
-        childProcess.exec(`python -c "exec('${input}')"`, (err, stdout, stderr) => {
+        childProcess.exec(`python -c "exec('${code}')"`, (err, stdout, stderr) => {
             if (err || stderr) return reject(err || stderr);
             return resolve(stdout);
         });
