@@ -28,7 +28,7 @@ class MeguminClient extends AkairoClient {
         this.images = require('../data/images.json');
     }
 
-    color(message) {
+    getColor(message) {
         if (this.config.color === 'random') {
             return (1 << 24) * Math.random() | 0;
         }

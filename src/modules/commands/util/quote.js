@@ -17,7 +17,7 @@ function exec(message, args) {
             return message.delete();
         }
 
-        const color = this.client.color(message);
+        const color = this.client.getColor(message);
         const embed = this.client.util.embed()
         .setColor(color)
         .setAuthor(`${quotee.author.username}#${quotee.author.discriminator}`, quotee.author.displayAvatarURL)

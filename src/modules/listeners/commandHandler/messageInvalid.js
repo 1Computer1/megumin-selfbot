@@ -7,12 +7,12 @@ function exec(message) {
         const image = this.client.images[name[1].toLowerCase()];
 
         if (!image) {
-            const rep = this.editText(message.content);
-            if (message.content !== rep) message.edit(rep);
+            const text = this.editText(message.content);
+            if (message.content !== text) message.edit(text);
             return;
         }
 
-        const color = this.client.color(message);
+        const color = this.client.getColor(message);
         const embed = new RichEmbed().setImage(image).setColor(color);
         const text = this.editText(message.content.replace(name[0], ''));
 
@@ -30,8 +30,8 @@ function exec(message) {
         return;
     }
 
-    const rep = this.editText(message.content);
-    if (message.content !== rep) message.edit(rep);
+    const text = this.editText(message.content);
+    if (message.content !== text) message.edit(text);
 }
 
 module.exports = new Listener('messageInvalid', exec, {

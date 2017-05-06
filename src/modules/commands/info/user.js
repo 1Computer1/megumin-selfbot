@@ -2,7 +2,7 @@ const { Command } = require('discord-akairo');
 const moment = require('moment');
 
 function exec(message, args) {
-    const color = this.client.color(message);
+    const color = this.client.getColor(message);
     const embed = this.client.util.embed()
     .setColor(color)
     .setThumbnail(args.member.user.displayAvatarURL.replace('.jpg?size=1024', '.png?size=1024'));

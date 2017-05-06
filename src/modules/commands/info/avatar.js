@@ -1,7 +1,7 @@
 const { Command } = require('discord-akairo');
 
 function exec(message, args) {
-    const color = this.client.color(message);
+    const color = this.client.getColor(message);
     const embed = this.client.util.embed()
     .setColor(color)
     .setTitle('User Avatar')

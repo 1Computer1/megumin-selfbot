@@ -3,7 +3,7 @@ const xkcd = require('relevant-xkcd');
 
 function exec(message, args) {
     const sendComic = comic => {
-        const color = this.client.color(message);
+        const color = this.client.getColor(message);
         const embed = this.client.util.embed()
         .setColor(color)
         .setTitle(comic.title)
