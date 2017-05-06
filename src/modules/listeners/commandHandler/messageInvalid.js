@@ -1,6 +1,5 @@
 const { Listener } = require('discord-akairo');
 const { RichEmbed } = require('discord.js');
-const Logger = require('../../../util/Logger');
 
 function exec(message) {
     if (/^\{.+?\}/.test(message.content)) {
@@ -15,10 +14,11 @@ function exec(message) {
 
         const color = this.client.color(message);
         const embed = new RichEmbed().setImage(image).setColor(color);
+        const text = this.editText(message.content.replace(name[0], ''));
 
         if (this.client.config.stickerImages) {
             message.delete().then(() => {
-                return message.channel.send(message.content.replace(name[0], ''), {
+                return message.channel.send(text, {
                     files: [image]
                 });
             });
@@ -26,15 +26,8 @@ function exec(message) {
             return;
         }
 
-        message.edit(this.editText(message.content.replace(name[0], '')), { embed }).catch(err => {
-            if (err.response && err.response.badRequest) {
-                Logger.warn('Your image was invalid. Double check your link!');
-                message.delete();
-                return;
-            }
-
-            throw err;
-        });
+        message.edit(text, { embed });
+        return;
     }
 
     const rep = this.editText(message.content);
