@@ -109,6 +109,10 @@ Requires Python in your PATH.
 
 Displays the memory usage, uptime, and a link to here.  
 
+### reload - `reload <command>`
+
+Reloads a command.  
+
 #### guild / server - `guild [name...]`
 
 Gets information about a guild.  
