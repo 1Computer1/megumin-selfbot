@@ -105,6 +105,11 @@ Allows usage of `await` in addtion to things from eval.
 Evaluates Python code.  
 Requires Python in your PATH.  
 
+#### ruby / rb - `ruby <code...>`
+
+Evaluates Ruby code.  
+Requires Ruby in your PATH.  
+
 #### stats / info / about - `stats`
 
 Displays the memory usage, uptime, and a link to here.  
