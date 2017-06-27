@@ -1,0 +1,11 @@
+{
+    "token": "abcDEFghiJKLmnoPQRstuVWXyz-",
+    "prefix": "/",
+    "color": "auto",
+    "location": "London",
+    "grammar": false,
+    "cache": 50,
+    "exitOnDisconnect": false,
+    "stickerImages": false,
+    "downloadImages": false
+}

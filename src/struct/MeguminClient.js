@@ -1,4 +1,5 @@
 const { AkairoClient } = require('discord-akairo');
+const Logger = require('../util/Logger');
 
 class MeguminClient extends AkairoClient {
     constructor(config) {
@@ -8,9 +9,8 @@ class MeguminClient extends AkairoClient {
             handleEdits: true,
             commandUtil: false,
             selfbot: true,
-            emitters: { process },
-            commandDirectory: './src/modules/commands',
-            listenerDirectory: './src/modules/listeners'
+            commandDirectory: './src/commands',
+            listenerDirectory: './src/listeners'
         }, {
             maxMessageCache: config.cache === undefined ? 50 : config.cache,
             disableEveryone: true,
@@ -40,8 +40,9 @@ class MeguminClient extends AkairoClient {
         return this.config.color || 0;
     }
 
-    start() {
-        return this.login(this.config.token);
+    async start() {
+        await this.login(this.config.token);
+        Logger.info('Megumin ready! Explooooooosion!');
     }
 }
 

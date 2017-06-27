@@ -1,82 +1,40 @@
-const Constants = require('./Constants');
 const chalk = require('chalk');
 const moment = require('moment');
 const util = require('util');
 
 class Logger {
-    static _cleanArgs(args) {
-        const texts = [];
-
-        for (const arg of args) {
-            if (typeof arg === 'string') {
-                texts.push(arg);
-                continue;
-            }
-
-            texts.push(util.inspect(arg));
-        }
-
-        return texts.join(' ');
+    static log(content, { color = 'grey', tag = 'Log' } = {}) {
+        this.write(content, { color, tag });
     }
 
-    static _log(level, ...args) {
-        const texts = this._cleanArgs(args);
-
-        const time = chalk.cyan(`[${moment().format('YYYY-MM-DD HH:mm:ss')}]:`);
-        const tag = chalk.bold(`[${Constants.LogLevels[level]}]:`);
-        const colored = chalk[Constants.LogColors[level]](texts);
-
-        if (level === 4) {
-            process.stderr.write(`${time} ${tag} ${colored}\n`);
-            return;
-        }
-
-        process.stdout.write(`${time} ${tag} ${colored}\n`);
+    static info(content, { color = 'green', tag = 'Info' } = {}) {
+        this.write(content, { color, tag });
     }
 
-    /**
-     * Sends level 0 log ([Log]).
-     * @param {...any} args - Things to log.
-     * @returns {void}
-     */
-    static log(...args) {
-        this._log(0, ...args);
+    static warn(content, { color = 'yellow', tag = 'Warn' } = {}) {
+        this.write(content, { color, tag });
     }
 
-    /**
-     * Sends level 1 log ([Info]).
-     * @param {...any} args - Things to log.
-     * @returns {void}
-     */
-    static info(...args) {
-        this._log(1, ...args);
+    static error(content, { color = 'red', tag = 'Error' } = {}) {
+        this.write(content, { color, tag, error: true });
     }
 
-    /**
-     * Sends level 2 log ([Debug]).
-     * @param {...any} args - Things to log.
-     * @returns {void}
-     */
-    static debug(...args) {
-        this._log(2, ...args);
+    static stacktrace(content, { color = 'white', tag = 'Error' } = {}) {
+        this.write(content, { color, tag, error: true });
     }
 
-    /**
-     * Sends level 3 log ([Warn]).
-     * @param {...any} args - Things to log.
-     * @returns {void}
-     */
-    static warn(...args) {
-        this._log(3, ...args);
+    static write(content, { color = 'grey', tag = 'Log', error = false } = {}) {
+        const timestamp = chalk.cyan(`[${moment().format('YYYY-MM-DD HH:mm:ss')}]:`);
+        const levelTag = chalk.bold(`[${tag}]:`);
+        const text = chalk[color](this.clean(content));
+        const stream = error ? process.stderr : process.stdout;
+        stream.write(`${timestamp} ${levelTag} ${text}\n`);
     }
 
-    /**
-     * Sends level 4 log ([Error]).
-     * @param {...any} args - Things to log.
-     * @returns {void}
-     */
-    static error(...args) {
-        this._log(4, ...args);
+    static clean(item) {
+        if (typeof item === 'string') return item;
+        const cleaned = util.inspect(item, { depth: Infinity });
+        return cleaned;
     }
 }
 

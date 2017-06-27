@@ -115,19 +115,5 @@ module.exports = {
         _: '‾',
         '∴': '∵',
         '⁅': '⁆'
-    },
-    LogLevels: [
-        'Log',
-        'Info',
-        'Debug',
-        'Warn',
-        'Error'
-    ],
-    LogColors: [
-        'grey',
-        'green',
-        'yellow',
-        'red',
-        'white'
-    ]
+    }
 };
