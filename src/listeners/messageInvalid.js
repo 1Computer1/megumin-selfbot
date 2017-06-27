@@ -54,7 +54,7 @@ class MessageInvalidListener extends Listener {
             }
 
             const color = this.client.getColor(message);
-            const embed = this.client.embed().setImage(image).setColor(color);
+            const embed = this.client.util.embed().setImage(image).setColor(color);
             const text = this.editText(message.content.replace(name[0], ''));
 
             if (this.client.config.stickerImages) {
