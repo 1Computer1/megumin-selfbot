@@ -11,12 +11,12 @@ client.on('ready', () => {
 
 client.on('disconnect', close => {
     Logger.info(`Megumin disconnected with code ${close.code}.`);
-    if (this.client.config.exitOnDisconnect) process.exit();
+    if (config.exitOnDisconnect) process.exit();
 });
 
 client.on('reconnecting', () => {
     Logger.info('Megumin reconnecting.');
-    if (this.client.config.exitOnDisconnect) process.exit();
+    if (config.exitOnDisconnect) process.exit();
 });
 
 client.commandHandler.on('commandStarted', (message, command) => {
