@@ -20,6 +20,12 @@ Also a `data` object that persists throughout evaluations.
 
 Allows usage of `await` in addtion to things from eval.  
 
+#### deferred / def - `deferred`
+
+Waits until you type `.` then evaluates all messages typed until that point.  
+Deleted messages will not affect the eval.  
+Type `..` instead to cancel the eval.  
+
 #### python / py - `python <code...>`
 
 Evaluates Python code.  
