@@ -40,7 +40,7 @@ Requires Ruby in your PATH.
 
 Displays the memory usage, uptime, and a link to here.  
 
-### reload - `reload <command>`
+#### reload - `reload <command>`
 
 Reloads a command.  
 
