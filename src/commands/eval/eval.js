@@ -50,7 +50,14 @@ class EvalCommand extends Command {
             const title = evaled.errored ? '☠\u2000**Error**' : '📤\u2000**Output**';
 
             if (evaled.output.length + code.length > 1900) evaled.output = 'Output too long.';
-            message.edit(`📥\u2000**Input**${cb}js\n${input || code}\n${cb}\n${title}${cb}js\n${evaled.output}\n${cb}`);
+            message.edit([
+                `📥\u2000**Input**${cb}js`,
+                input || code,
+                cb,
+                `${title}${cb}js`,
+                evaled.output,
+                cb
+            ]);
         };
 
         const msg = message;
