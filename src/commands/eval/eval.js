@@ -5,8 +5,6 @@ const util = require('util');
 const { Command } = require('discord-akairo');
 const Logger = require('../../util/Logger');
 
-const data = {};
-
 class EvalCommand extends Command {
     constructor() {
         super('eval', {
@@ -20,6 +18,7 @@ class EvalCommand extends Command {
             ]
         });
 
+        this.data = {};
         this.lastResult = null;
     }
 
@@ -67,6 +66,7 @@ class EvalCommand extends Command {
         const client = this.client;
         const bot = this.client;
         const lastResult = this.lastResult;
+        const data = this.data;
         const cb = '```';
 
         try {
