@@ -4,11 +4,18 @@ class DeferredCommand extends Command {
     constructor() {
         super('deferred', {
             aliases: ['deferred', 'def'],
-            category: 'eval'
+            category: 'eval',
+            args: [
+                {
+                    id: 'lang',
+                    type: [['eval', 'e', 'js'], ['async', 'a'], ['python', 'py'], ['ruby', 'rb']],
+                    default: 'eval'
+                }
+            ]
         });
     }
 
-    exec(message) {
+    exec(message, { lang }) {
         const collector = message.channel.createMessageCollector(m => m.id !== message.id && m.author.id === message.author.id);
         this.handler.addPrompt(message);
 
@@ -30,7 +37,7 @@ class DeferredCommand extends Command {
 
             await Promise.all(msgs.deleteAll());
             const code = msgs.map(m => m.content).slice(1).reverse().join('\n');
-            return this.handler.modules.get('eval').exec(message, { code });
+            return this.handler.modules.get(lang).exec(message, { code });
         });
     }
 }

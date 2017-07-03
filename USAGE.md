@@ -15,12 +15,13 @@ Evaluates Javascript code.
 Not recommended for the average user.  
 Has a `print()` method that prepends/appends to the output, including async things.  
 Also a `data` object that persists throughout evaluations.  
+Also a `lastResult` for the previous eval result.  
 
 #### async / a - `async <code...>`
 
 Allows usage of `await` in addtion to things from eval.  
 
-#### deferred / def - `deferred`
+#### deferred / def - `deferred [lang]`
 
 Waits until you type `.` then evaluates all messages typed until that point.  
 Deleted messages will not affect the eval.  
