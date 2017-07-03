@@ -19,6 +19,8 @@ class EvalCommand extends Command {
                 }
             ]
         });
+
+        this.lastResult = null;
     }
 
     async exec(message, { code, input }) {
@@ -64,11 +66,13 @@ class EvalCommand extends Command {
         const mesg = message;
         const client = this.client;
         const bot = this.client;
+        const lastResult = this.lastResult;
         const cb = '```';
 
         try {
             let output = eval(code);
             if (output instanceof Promise) output = await output;
+            this.lastResult = output;
 
             output = util.inspect(output, { depth: 0 });
             output = `${logs.join('\n')}\n${logs.length && output === 'undefined' ? '' : output}`;
