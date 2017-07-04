@@ -1,3 +1,7 @@
+// Temporary
+const Discord = require('discord.js');
+Discord.RichEmbed = Discord.MessageEmbed;
+
 const MeguminClient = require('./src/struct/MeguminClient');
 const Logger = require('./src/util/Logger');
 
