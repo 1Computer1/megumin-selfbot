@@ -81,12 +81,10 @@ class DocsCommand extends Command {
 
     formatMethod(item, mainItem, version) {
         const embed = this.client.util.embed();
-
         let description = `[${mainItem.name}${item.scope === 'static' ? '.' : '#'}${item.name}](https://discord.js.org/#/docs/main/${version}/class/${mainItem.name}${item.scope === 'static' ? '.' : '?scrollTo='}${item.name})`;
 
         if (item.description) description += `\r\n${this.clean(item.description)}`;
         embed.setDescription(description);
-
         if (item.params) {
             const params = item.params.map(param => {
                 const name = param.optional ? `[${param.name}]` : param.name;
@@ -112,10 +110,10 @@ class DocsCommand extends Command {
     formatEvent(item, mainItem, version) {
         const embed = this.client.util.embed();
 
-        const title = `${mainItem.name}#${item.name}`;
-        embed.setTitle(title);
+        let description = `[${mainItem.name}#${item.name}](https://discord.js.org/#/docs/main/${version}/class/${mainItem.name}?scrollTo=${item.name})`;
 
-        if (item.description) embed.setDescription(this.clean(item.description));
+        if (item.description) description += `\r\n${this.clean(item.description)}`;
+        embed.setDescription(description);
 
         if (item.params) {
             const params = item.params.map(param => {
