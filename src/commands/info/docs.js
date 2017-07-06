@@ -42,14 +42,14 @@ class DocsCommand extends Command {
         return type.map(t => t.map(a => a.join('')).join('')).join(' | ');
     }
 
-    formatMain(item, version) {
+    formatMain(item) {
         const embed = this.client.util.embed();
 
-        let description = `[${item.name}](https://discord.js.org/#/docs/main/${version}/class/${item.name})`;
-        if (item.extends) description += ` (extends ${item.extends[0]})`;
+        let title = item.name;
+        if (item.extends) title += ` (extends ${item.extends[0]})`;
+        embed.setTitle(title);
 
-        if (item.description) description += `\r\n${this.clean(item.description)}`;
-        embed.setDescription(description);
+        if (item.description) embed.setDescription(this.clean(item.description));
 
         const join = it => `\`${it.map(i => i.name).join('` `')}\``;
 
@@ -65,13 +65,13 @@ class DocsCommand extends Command {
         return embed;
     }
 
-    formatProp(item, mainItem, version) {
+    formatProp(item, mainItem) {
         const embed = this.client.util.embed();
 
-        let description = `[${mainItem.name}${item.scope === 'static' ? '.' : '#'}${item.name}](https://discord.js.org/#/docs/main/${version}/class/${mainItem.name}${item.scope === 'static' ? '.' : '?scrollTo='}${item.name})`;
+        const title = `${mainItem.name}${item.scope === 'static' ? '.' : '#'}${item.name}`;
+        embed.setTitle(title);
 
-        if (item.description) description += `\r\n${this.clean(item.description)}`;
-        embed.setDescription(description);
+        if (item.description) embed.setDescription(this.clean(item.description));
 
         const type = this.joinType(item.type);
         embed.addField('Type', `\`${type}\``);
@@ -79,12 +79,14 @@ class DocsCommand extends Command {
         return embed;
     }
 
-    formatMethod(item, mainItem, version) {
+    formatMethod(item, mainItem) {
         const embed = this.client.util.embed();
-        let description = `[${mainItem.name}${item.scope === 'static' ? '.' : '#'}${item.name}](https://discord.js.org/#/docs/main/${version}/class/${mainItem.name}${item.scope === 'static' ? '.' : '?scrollTo='}${item.name})`;
 
-        if (item.description) description += `\r\n${this.clean(item.description)}`;
-        embed.setDescription(description);
+        const title = `${mainItem.name}${item.scope === 'static' ? '.' : '#'}${item.name}()`;
+        embed.setTitle(title);
+
+        if (item.description) embed.setDescription(this.clean(item.description));
+
         if (item.params) {
             const params = item.params.map(param => {
                 const name = param.optional ? `[${param.name}]` : param.name;
@@ -99,7 +101,6 @@ class DocsCommand extends Command {
             const description = item.returns.description ? `${this.clean(item.returns.description)}\n` : '';
             const type = this.joinType(item.returns.types || item.returns);
             const returns = `${description}\`=> ${type}\``;
-
             embed.addField('Returns', returns);
         } else {
             embed.addField('Returns', '`=> void`');
@@ -108,13 +109,13 @@ class DocsCommand extends Command {
         return embed;
     }
 
-    formatEvent(item, mainItem, version) {
+    formatEvent(item, mainItem) {
         const embed = this.client.util.embed();
 
-        let description = `[${mainItem.name}#${item.name}](https://discord.js.org/#/docs/main/${version}/class/${mainItem.name}?scrollTo=${item.name})`;
+        const title = `${mainItem.name}#${item.name}`;
+        embed.setTitle(title);
 
-        if (item.description) description += `\r\n${this.clean(item.description)}`;
-        embed.setDescription(description);
+        if (item.description) embed.setDescription(this.clean(item.description));
 
         if (item.params) {
             const params = item.params.map(param => {
@@ -145,20 +146,19 @@ class DocsCommand extends Command {
         let embed;
 
         if (!member) {
-            embed = this.formatMain(main.item, version);
+            embed = this.formatMain(main.item);
         } else {
             embed = {
                 props: this.formatProp,
                 methods: this.formatMethod,
                 events: this.formatEvent
-            }[member.type].call(this, member.item, main.item, version);
+            }[member.type].call(this, member.item, main.item);
         }
 
         const color = this.client.getColor(message);
 
         embed
         .setColor(color)
-        .setURL(`https://discord.js.org/#/docs/main/${version}`)
         .setAuthor(`Discord.js Docs (${version})`, 'https://cdn.discordapp.com/icons/222078108977594368/bc226f09db83b9176c64d923ff37010b.webp');
 
         return message.edit({ embed });
