@@ -48,7 +48,7 @@ class DocsCommand extends Command {
         let description = `[${item.name}](https://discord.js.org/#/docs/main/${version}/class/${item.name})`;
         if (item.extends) description += ` (extends ${item.extends[0]})`;
 
-        if (item.description) description += `\r\n${this.clean(item.description)}`;
+        if (item.description) description += `\n${this.clean(item.description)}`;
         embed.setDescription(description);
 
         const join = it => `\`${it.map(i => i.name).join('` `')}\``;
@@ -70,7 +70,7 @@ class DocsCommand extends Command {
 
         let description = `[${mainItem.name}${item.scope === 'static' ? '.' : '#'}${item.name}](https://discord.js.org/#/docs/main/${version}/class/${mainItem.name}${item.scope === 'static' ? '?scrollTo=s-' : '?scrollTo='}${item.name})`;
 
-        if (item.description) description += `\r\n${this.clean(item.description)}`;
+        if (item.description) description += `\n${this.clean(item.description)}`;
         embed.setDescription(description);
 
         const type = this.joinType(item.type);
@@ -83,7 +83,7 @@ class DocsCommand extends Command {
         const embed = this.client.util.embed();
         let description = `[${mainItem.name}${item.scope === 'static' ? '.' : '#'}${item.name}](https://discord.js.org/#/docs/main/${version}/class/${mainItem.name}${item.scope === 'static' ? '?scrollTo=s-' : '?scrollTo='}${item.name})`;
 
-        if (item.description) description += `\r\n${this.clean(item.description)}`;
+        if (item.description) description += `\n${this.clean(item.description)}`;
         embed.setDescription(description);
         if (item.params) {
             const params = item.params.map(param => {
@@ -96,9 +96,7 @@ class DocsCommand extends Command {
         }
 
         if (item.returns) {
-            const descript = item.returns.description ? `${this.clean(item.returns.description)}\n` : '';
             const type = this.joinType(item.returns.types);
-            const returns = `${descript}\`=> ${type}\``;
             embed.addField('Returns', returns);
         } else {
             embed.addField('Returns', '`=> void`');
