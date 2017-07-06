@@ -10,13 +10,13 @@ class MeguminClient extends AkairoClient {
             commandUtil: false,
             selfbot: true,
             commandDirectory: './src/commands',
-            listenerDirectory: './src/listeners'
+            listenerDirectory: './src/listeners',
+            inhibitorDirectory: './src/inhibitors'
         }, {
             maxMessageCache: config.cache === undefined ? 50 : config.cache,
             disableEveryone: true,
             disabledEvents: [
                 'TYPING_START',
-                'MESSAGE_DELETE',
                 'GUILD_MEMBER_UPDATE',
                 'PRESENCE_UPDATE',
                 config.cache === 0 ? 'MESSAGE_UPDATE' : ''
@@ -24,6 +24,7 @@ class MeguminClient extends AkairoClient {
         });
 
         this.config = config;
+        this.deleteCache = {};
         this.tags = require('../data/tags.json');
         this.images = require('../data/images.json');
     }
