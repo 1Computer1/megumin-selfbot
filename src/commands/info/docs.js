@@ -68,7 +68,7 @@ class DocsCommand extends Command {
     formatProp(item, mainItem, version) {
         const embed = this.client.util.embed();
 
-        let description = `[${mainItem.name}${item.scope === 'static' ? '.' : '#'}${item.name}](https://discord.js.org/#/docs/main/${version}/class/${mainItem.name}${item.scope === 'static' ? '.' : '?scrollTo='}${item.name})`;
+        let description = `[${mainItem.name}${item.scope === 'static' ? '.' : '#'}${item.name}](https://discord.js.org/#/docs/main/${version}/class/${mainItem.name}${item.scope === 'static' ? '?scrollTo=s-' : '?scrollTo='}${item.name})`;
 
         if (item.description) description += `\r\n${this.clean(item.description)}`;
         embed.setDescription(description);
@@ -81,7 +81,7 @@ class DocsCommand extends Command {
 
     formatMethod(item, mainItem, version) {
         const embed = this.client.util.embed();
-        let description = `[${mainItem.name}${item.scope === 'static' ? '.' : '#'}${item.name}](https://discord.js.org/#/docs/main/${version}/class/${mainItem.name}${item.scope === 'static' ? '.' : '?scrollTo='}${item.name})`;
+        let description = `[${mainItem.name}${item.scope === 'static' ? '.' : '#'}${item.name}](https://discord.js.org/#/docs/main/${version}/class/${mainItem.name}${item.scope === 'static' ? '?scrollTo=s-' : '?scrollTo='}${item.name})`;
 
         if (item.description) description += `\r\n${this.clean(item.description)}`;
         embed.setDescription(description);
