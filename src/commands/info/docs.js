@@ -42,6 +42,10 @@ class DocsCommand extends Command {
         return type.map(t => t.map(a => a.join('')).join('')).join(' | ');
     }
 
+    makeLink(mainItem, item, version) {
+        return `https://discord.js.org/#/docs/main/${version}/class/${mainItem.name}?scrollTo=${item.scope === 'static' ? 's-' : ''}${item.name}`;
+    }
+
     formatMain(item, version) {
         const embed = this.client.util.embed();
 
@@ -68,7 +72,7 @@ class DocsCommand extends Command {
     formatProp(item, mainItem, version) {
         const embed = this.client.util.embed();
 
-        let description = `[${mainItem.name}${item.scope === 'static' ? '.' : '#'}${item.name}](https://discord.js.org/#/docs/main/${version}/class/${mainItem.name}${item.scope === 'static' ? '?scrollTo=s-' : '?scrollTo='}${item.name})`;
+        let description = `[${mainItem.name}${item.scope === 'static' ? '.' : '#'}${item.name}](${this.makeLink(mainItem, item, version)})`;
 
         if (item.description) description += `\n${this.clean(item.description)}`;
         embed.setDescription(description);
@@ -81,10 +85,11 @@ class DocsCommand extends Command {
 
     formatMethod(item, mainItem, version) {
         const embed = this.client.util.embed();
-        let description = `[${mainItem.name}${item.scope === 'static' ? '.' : '#'}${item.name}](https://discord.js.org/#/docs/main/${version}/class/${mainItem.name}${item.scope === 'static' ? '?scrollTo=s-' : '?scrollTo='}${item.name})`;
+        let description = `[${mainItem.name}${item.scope === 'static' ? '.' : '#'}${item.name}](${this.makeLink(mainItem, item, version)})`;
 
         if (item.description) description += `\n${this.clean(item.description)}`;
         embed.setDescription(description);
+
         if (item.params) {
             const params = item.params.map(param => {
                 const name = param.optional ? `[${param.name}]` : param.name;
@@ -110,9 +115,9 @@ class DocsCommand extends Command {
     formatEvent(item, mainItem, version) {
         const embed = this.client.util.embed();
 
-        let description = `[${mainItem.name}#${item.name}](https://discord.js.org/#/docs/main/${version}/class/${mainItem.name}?scrollTo=${item.name})`;
+        let description = `[${mainItem.name}#${item.name}](${this.makeLink(mainItem, item, version)})`;
 
-        if (item.description) description += `\r\n${this.clean(item.description)}`;
+        if (item.description) description += `\n${this.clean(item.description)}`;
         embed.setDescription(description);
 
         if (item.params) {
