@@ -102,7 +102,7 @@ class DocsCommand extends Command {
 
         if (item.returns) {
             const desc = item.returns.description ? `${this.clean(item.returns.description)}\n` : '';
-            const type = this.joinType(item.returns.types);
+            const type = this.joinType(item.returns.types || item.returns);
             const returns = `${desc}\`=> ${type}\``;
             embed.addField('Returns', returns);
         } else {
