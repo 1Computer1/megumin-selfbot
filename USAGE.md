@@ -159,6 +159,11 @@ Use any text to get a relevant XKCD.
 Use a number for a specific XKCD.  
 Use 0 for the current XKCD.  
 
+#### docs - `docs <query> [version]`
+
+Searches the Discord.js docs.  
+Choose between `stable` or `master` for version.  
+
 #### time - `time [place...]`
 
 Gets the currrent time, somewhere.  

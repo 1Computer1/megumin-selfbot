@@ -23,4 +23,4 @@ This selfbot requires git and Node 8 or higher.
 ## Commands
 
 See the [usage guide](USAGE.md).  
-Contains info on all 34 commands, and more!  
+Contains info on all of the commands, and more!  
