@@ -35,11 +35,11 @@ class DocsCommand extends Command {
     }
 
     clean(text) {
-        return text.replace(/<\/?(info|warn)>/g, '').replace(/\{@link (.+?)\}/g, '`$1`');
+        return text.replace(/\n/g, ' ').replace(/<\/?(?:info|warn)>/g, '').replace(/\{@link (.+?)\}/g, '`$1`');
     }
 
     joinType(type) {
-        return type.map(t => t.map(a => a.join('')).join('')).join(' | ');
+        return type.map(t => t.map(a => Array.isArray(a) ? a.join('') : a).join('')).join(' | ');
     }
 
     makeLink(mainItem, item, version) {
@@ -49,8 +49,9 @@ class DocsCommand extends Command {
     formatMain(item, version) {
         const embed = this.client.util.embed();
 
-        let description = `[${item.name}](https://discord.js.org/#/docs/main/${version}/class/${item.name})`;
+        let description = `__**[${item.name}`;
         if (item.extends) description += ` (extends ${item.extends[0]})`;
+        description += `](https://discord.js.org/#/docs/main/${version}/class/${item.name})**__\n`;
 
         if (item.description) description += `\n${this.clean(item.description)}`;
         embed.setDescription(description);
@@ -72,7 +73,7 @@ class DocsCommand extends Command {
     formatProp(item, mainItem, version) {
         const embed = this.client.util.embed();
 
-        let description = `[${mainItem.name}${item.scope === 'static' ? '.' : '#'}${item.name}](${this.makeLink(mainItem, item, version)})`;
+        let description = `__**[${mainItem.name}${item.scope === 'static' ? '.' : '#'}${item.name}](${this.makeLink(mainItem, item, version)})**__\n`;
 
         if (item.description) description += `\n${this.clean(item.description)}`;
         embed.setDescription(description);
@@ -86,7 +87,7 @@ class DocsCommand extends Command {
     formatMethod(item, mainItem, version) {
         const embed = this.client.util.embed();
 
-        let description = `[${mainItem.name}${item.scope === 'static' ? '.' : '#'}${item.name}()](${this.makeLink(mainItem, item, version)})`;
+        let description = `__**[${mainItem.name}${item.scope === 'static' ? '.' : '#'}${item.name}()](${this.makeLink(mainItem, item, version)})**__\n`;
 
         if (item.description) description += `\n${this.clean(item.description)}`;
         embed.setDescription(description);
@@ -116,7 +117,7 @@ class DocsCommand extends Command {
     formatEvent(item, mainItem, version) {
         const embed = this.client.util.embed();
 
-        let description = `[${mainItem.name}#${item.name}](${this.makeLink(mainItem, item, version)})`;
+        let description = `__**[${mainItem.name}#${item.name}](${this.makeLink(mainItem, item, version)})**__\n`;
 
         if (item.description) description += `\n${this.clean(item.description)}`;
         embed.setDescription(description);
@@ -213,4 +214,5 @@ class DocsSearch {
     }
 }
 
+DocsCommand.DocsSearch = DocsSearch;
 module.exports = DocsCommand;
