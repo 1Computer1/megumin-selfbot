@@ -35,7 +35,7 @@ class DocsCommand extends Command {
     }
 
     clean(text) {
-        return text.replace(/<\/?(info|warn)>/g, '').replace(/\{@link (.+?)\}/g);
+        return text.replace(/<\/?(info|warn)>/g, '').replace(/\{@link (.+?)\}/g, '`$1`');
     }
 
     joinType(type) {
@@ -85,7 +85,8 @@ class DocsCommand extends Command {
 
     formatMethod(item, mainItem, version) {
         const embed = this.client.util.embed();
-        let description = `[${mainItem.name}${item.scope === 'static' ? '.' : '#'}${item.name}](${this.makeLink(mainItem, item, version)})`;
+
+        let description = `[${mainItem.name}${item.scope === 'static' ? '.' : '#'}${item.name}()](${this.makeLink(mainItem, item, version)})`;
 
         if (item.description) description += `\n${this.clean(item.description)}`;
         embed.setDescription(description);
