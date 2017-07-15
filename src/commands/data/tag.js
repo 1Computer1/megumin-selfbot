@@ -31,8 +31,8 @@ class TagCommand extends Command {
     }
 
     async addTag(name, text) {
-        const cwdPath = './src/data/images.json';
-        const relPath = '../../data/images.json';
+        const cwdPath = './src/data/tags.json';
+        const relPath = '../../data/tags.json';
 
         if (!name || !text) {
             Logger.error('No tag name or content provided.');
