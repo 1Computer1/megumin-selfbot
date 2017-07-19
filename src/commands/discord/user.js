@@ -51,7 +51,7 @@ class UserCommand extends Command {
                     `**Created At**: ${moment(args.member.user.createdAt).utc().format('dddd, MMMM Do YYYY, h:mm:ss a')}`,
                     `**Roles**: ${(() => {
                         const roles = args.member.roles.map(r => r.toString()).join(', ');
-                        if (roles.length > 1024) return 'A lot of roles!';
+                        if (roles.length > 880) return 'A lot of roles!';
                         return roles;
                     })()}`
                 ]

@@ -59,7 +59,7 @@ class GuildCommand extends Command {
                     `**Roles**: ${(() => {
                         if ((message.guild && message.guild.id) !== guild.id) return 'Outside of guild, cannot view roles.';
                         const roles = guild.roles.map(r => r.toString()).join(', ');
-                        if (roles.length > 1024) return 'A lot of roles!';
+                        if (roles.length > 880) return 'A lot of roles!';
                         return roles;
                     })()}`
                 ]
