@@ -92,25 +92,25 @@ class DocsCommand extends Command {
         return `https://discord.js.org/#/docs/main/${version}/${main.category === 'classes' ? 'class' : 'typedef'}/${main.item.name}?scrollTo=${member.item.scope === 'static' ? 's-' : ''}${member.item.name}`;
     }
 
-    formatMain({ item }, version) {
+    formatMain(main, version) {
         const embed = this.client.util.embed();
 
-        let description = `__**[${item.name}`;
-        if (item.extends) description += ` (extends ${item.extends[0]})`;
-        description += `](https://discord.js.org/#/docs/main/${version}/class/${item.name})**__\n`;
+        let description = `__**[${main.item.name}`;
+        if (main.item.extends) description += ` (extends ${main.item.extends[0]})`;
+        description += `](https://discord.js.org/#/docs/main/${version}/${main.category === 'classes' ? 'class' : 'typedef'}/${main.item.name})**__\n`;
 
-        if (item.description) description += `\n${this.clean(item.description)}`;
+        if (main.item.description) description += `\n${this.clean(main.item.description)}`;
         embed.setDescription(description);
 
         const join = it => `\`${it.map(i => i.name).join('` `')}\``;
 
-        const props = item.props ? join(item.props) : null;
+        const props = main.item.props ? join(main.item.props) : null;
         if (props) embed.addField('Properties', props);
 
-        const methods = item.methods ? join(item.methods) : null;
+        const methods = main.item.methods ? join(main.item.methods) : null;
         if (methods) embed.addField('Methods', methods);
 
-        const events = item.events ? join(item.events) : null;
+        const events = main.item.events ? join(main.item.events) : null;
         if (events) embed.addField('Events', events);
 
         return embed;
