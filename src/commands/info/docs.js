@@ -41,11 +41,11 @@ class DocsCommand extends Command {
 
         const findWithin = (parentItem, props, name) => {
             let found = null;
-            for (const type of props) {
-                if (!parentItem[type]) continue;
-                const item = parentItem[type].find(i => i.name.toLowerCase() === name);
+            for (const category of props) {
+                if (!parentItem[category]) continue;
+                const item = parentItem[category].find(i => i.name.toLowerCase() === name);
                 if (item) {
-                    found = { item, type };
+                    found = { item, category };
                     break;
                 }
             }
@@ -63,9 +63,16 @@ class DocsCommand extends Command {
             classes: ['props', 'methods', 'events'],
             interfaces: ['props', 'methods', 'events'],
             typedefs: ['props']
-        }[main.type], memberQuery);
+        }[main.category], memberQuery);
 
         if (!member) return [];
+        const rest = query.slice(2);
+
+        if (rest.length) {
+            const base = this.joinType(member.item.type).replace(/<.+?>/g, '');
+            return this.search(docs, `${base}.${rest.join('.')}`);
+        }
+
         res.push(member);
         return res;
     }
@@ -81,11 +88,11 @@ class DocsCommand extends Command {
         return type.map(t => t.map(a => Array.isArray(a) ? a.join('') : a).join('')).join(' | ');
     }
 
-    makeLink(mainItem, item, version) {
-        return `https://discord.js.org/#/docs/main/${version}/class/${mainItem.name}?scrollTo=${item.scope === 'static' ? 's-' : ''}${item.name}`;
+    makeLink(main, member, version) {
+        return `https://discord.js.org/#/docs/main/${version}/${main.category === 'classes' ? 'class' : 'typedef'}/${main.item.name}?scrollTo=${member.item.scope === 'static' ? 's-' : ''}${member.item.name}`;
     }
 
-    formatMain(item, version) {
+    formatMain({ item }, version) {
         const embed = this.client.util.embed();
 
         let description = `__**[${item.name}`;
@@ -109,30 +116,30 @@ class DocsCommand extends Command {
         return embed;
     }
 
-    formatProp(item, mainItem, version) {
+    formatProp(main, member, version) {
         const embed = this.client.util.embed();
 
-        let description = `__**[${mainItem.name}${item.scope === 'static' ? '.' : '#'}${item.name}](${this.makeLink(mainItem, item, version)})**__\n`;
+        let description = `__**[${main.item.name}${member.item.scope === 'static' ? '.' : '#'}${member.item.name}](${this.makeLink(main, member, version)})**__\n`;
 
-        if (item.description) description += `\n${this.clean(item.description)}`;
+        if (member.item.description) description += `\n${this.clean(member.item.description)}`;
         embed.setDescription(description);
 
-        const type = this.joinType(item.type);
+        const type = this.joinType(member.item.type);
         embed.addField('Type', `\`${type}\``);
 
         return embed;
     }
 
-    formatMethod(item, mainItem, version) {
+    formatMethod(main, member, version) {
         const embed = this.client.util.embed();
 
-        let description = `__**[${mainItem.name}${item.scope === 'static' ? '.' : '#'}${item.name}()](${this.makeLink(mainItem, item, version)})**__\n`;
+        let description = `__**[${main.item.name}${member.item.scope === 'static' ? '.' : '#'}${member.item.name}()](${this.makeLink(main, member, version)})**__\n`;
 
-        if (item.description) description += `\n${this.clean(item.description)}`;
+        if (member.item.description) description += `\n${this.clean(member.item.description)}`;
         embed.setDescription(description);
 
-        if (item.params) {
-            const params = item.params.map(param => {
+        if (member.item.params) {
+            const params = member.item.params.map(param => {
                 const name = param.optional ? `[${param.name}]` : param.name;
                 const type = this.joinType(param.type);
                 return `\`${name}: ${type}\`\n${this.clean(param.description)}`;
@@ -141,9 +148,9 @@ class DocsCommand extends Command {
             embed.addField('Parameters', params.join('\n\n'));
         }
 
-        if (item.returns) {
-            const desc = item.returns.description ? `${this.clean(item.returns.description)}\n` : '';
-            const type = this.joinType(item.returns.types || item.returns);
+        if (member.item.returns) {
+            const desc = member.item.returns.description ? `${this.clean(member.item.returns.description)}\n` : '';
+            const type = this.joinType(member.item.returns.types || member.item.returns);
             const returns = `${desc}\`=> ${type}\``;
             embed.addField('Returns', returns);
         } else {
@@ -153,16 +160,16 @@ class DocsCommand extends Command {
         return embed;
     }
 
-    formatEvent(item, mainItem, version) {
+    formatEvent(main, member, version) {
         const embed = this.client.util.embed();
 
-        let description = `__**[${mainItem.name}#${item.name}](${this.makeLink(mainItem, item, version)})**__\n`;
+        let description = `__**[${main.item.name}#${member.item.name}](${this.makeLink(main, member, version)})**__\n`;
 
-        if (item.description) description += `\n${this.clean(item.description)}`;
+        if (member.item.description) description += `\n${this.clean(member.item.description)}`;
         embed.setDescription(description);
 
-        if (item.params) {
-            const params = item.params.map(param => {
+        if (member.item.params) {
+            const params = member.item.params.map(param => {
                 const type = this.joinType(param.type);
                 return `\`${param.name}: ${type}\`\n${this.clean(param.description)}`;
             });
@@ -187,17 +194,11 @@ class DocsCommand extends Command {
             return message.delete();
         }
 
-        let embed;
-
-        if (!member) {
-            embed = this.formatMain(main.item, version);
-        } else {
-            embed = {
-                props: this.formatProp,
-                methods: this.formatMethod,
-                events: this.formatEvent
-            }[member.type].call(this, member.item, main.item, version);
-        }
+        const embed = member ? {
+            props: this.formatProp,
+            methods: this.formatMethod,
+            events: this.formatEvent
+        }[member.category].call(this, main, member, version) : this.formatMain(main, version);
 
         const color = this.client.getColor(message);
 
