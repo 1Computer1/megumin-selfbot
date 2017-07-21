@@ -34,8 +34,47 @@ class DocsCommand extends Command {
         return json;
     }
 
+    search(docs, query) {
+        query = query.split(/[#.]/);
+        const mainQuery = query[0].toLowerCase();
+        const memberQuery = query[1] ? query[1].toLowerCase() : null;
+
+        const findWithin = (parentItem, props, name) => {
+            let found = null;
+            for (const type of props) {
+                if (!parentItem[type]) continue;
+                const item = parentItem[type].find(i => i.name.toLowerCase() === name);
+                if (item) {
+                    found = { item, type };
+                    break;
+                }
+            }
+
+            return found;
+        };
+
+        const main = findWithin(docs, ['classes', 'interfaces', 'typedefs'], mainQuery);
+        if (!main) return [];
+
+        const res = [main];
+        if (!memberQuery) return res;
+
+        const member = findWithin(main.item, {
+            classes: ['props', 'methods', 'events'],
+            interfaces: ['props', 'methods', 'events'],
+            typedefs: ['props']
+        }[main.type], memberQuery);
+
+        if (!member) return [];
+        res.push(member);
+        return res;
+    }
+
     clean(text) {
-        return text.replace(/\n/g, ' ').replace(/<\/?(?:info|warn)>/g, '').replace(/\{@link (.+?)\}/g, '`$1`');
+        return text
+        .replace(/\n/g, ' ')
+        .replace(/<\/?(?:info|warn)>/g, '')
+        .replace(/\{@link (.+?)\}/g, '`$1`');
     }
 
     joinType(type) {
@@ -141,7 +180,7 @@ class DocsCommand extends Command {
         }
 
         const docs = await this.fetchDocs(version);
-        const [main, member] = new DocsSearch(docs, query).find();
+        const [main, member] = this.search(docs, query);
 
         if (!main) {
             Logger.error('Could not find entry in docs.');
@@ -171,48 +210,4 @@ class DocsCommand extends Command {
     }
 }
 
-class DocsSearch {
-    constructor(docs, query) {
-        this.docs = docs;
-
-        query = query.split(/[#.]/);
-        this.mainQuery = query[0].toLowerCase();
-        this.memberQuery = query[1] ? query[1].toLowerCase() : null;
-    }
-
-    find() {
-        const main = this.findWithin(this.docs, ['classes', 'interfaces', 'typedefs'], this.mainQuery);
-        if (!main) return [];
-
-        const res = [main];
-        if (!this.memberQuery) return res;
-
-        const member = this.findWithin(main.item, {
-            classes: ['props', 'methods', 'events'],
-            interfaces: ['props', 'methods', 'events'],
-            typedefs: ['props']
-        }[main.type], this.memberQuery);
-
-        if (!member) return [];
-        res.push(member);
-        return res;
-    }
-
-    findWithin(parentItem, props, query) {
-        let found = null;
-
-        for (const type of props) {
-            if (!parentItem[type]) continue;
-            const item = parentItem[type].find(i => i.name.toLowerCase() === query);
-            if (item) {
-                found = { item, type };
-                break;
-            }
-        }
-
-        return found;
-    }
-}
-
-DocsCommand.DocsSearch = DocsSearch;
 module.exports = DocsCommand;
