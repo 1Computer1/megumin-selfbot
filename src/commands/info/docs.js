@@ -73,7 +73,11 @@ class DocsCommand extends Command {
         const rest = query.slice(2);
         if (rest.length) {
             if (!member.item.type) return [];
-            const base = this.joinType(member.item.type).replace(/<.+>/g, '');
+            const base = this.joinType(member.item.type || member.item.returns.types || member.item.returns)
+            .replace(/<.+>/g, '')
+            .replace(/\|.+/, '')
+            .trim();
+
             return this.search(docs, `${base}.${rest.join('.')}`);
         }
 
@@ -131,6 +135,10 @@ class DocsCommand extends Command {
         const type = this.joinType(member.item.type);
         embed.addField('Type', `\`${type}\``);
 
+        if (member.item.examples) {
+            embed.addField('Example', `\`\`\`js\n${member.item.examples.join('```\n```js\n')}\`\`\``);
+        }
+
         return embed;
     }
 
@@ -161,6 +169,10 @@ class DocsCommand extends Command {
             embed.addField('Returns', '`=> void`');
         }
 
+        if (member.item.examples) {
+            embed.addField('Example', `\`\`\`js\n${member.item.examples.join('```\n```js\n')}\`\`\``);
+        }
+
         return embed;
     }
 
@@ -179,6 +191,10 @@ class DocsCommand extends Command {
             });
 
             embed.addField('Parameters', params.join('\n\n'));
+        }
+
+        if (member.item.examples) {
+            embed.addField('Example', `\`\`\`js\n${member.item.examples.join('```\n```js\n')}\`\`\``);
         }
 
         return embed;
