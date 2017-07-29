@@ -43,6 +43,8 @@ class MessageInvalidListener extends Listener {
     }
 
     async exec(message) {
+        if (message.editedTimestamp) return;
+
         if (/^\{.+?\}/.test(message.content)) {
             const name = message.content.match(/^\{(.+?)\}/);
             const image = this.client.images[name[1].toLowerCase()];
