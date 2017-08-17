@@ -4,6 +4,12 @@
     </a>
 </p>  
 
+## Use at your own risk
+
+Selfbots as well as some features within this bot are not allowed by Discord TOS.  
+Any problems arising from using this selfbot will be at your own liability.  
+Future updates to this selfbot will only be for maintenance.  
+
 ## Features
 - A powerful eval command.
 - Changing game and status.
