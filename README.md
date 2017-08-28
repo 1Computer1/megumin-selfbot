@@ -1,6 +1,6 @@
 <p align="center">
     <a href=https://github.com/1Computer1/megumin-selfbot>
-        <img src=https://u.nya.is/uckdrf.png/>
+        <img src=https://lolisafe.moe/5XawcqjB.png/>
     </a>
 </p>  
 
