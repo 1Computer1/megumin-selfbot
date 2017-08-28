@@ -23,12 +23,12 @@ class IconCommand extends Command {
             return message.delete();
         }
 
-        if (!guild.iconURL()) {
+        if (!guild.iconURL) {
             Logger.error('Guild does not have an icon.');
             return message.delete();
         }
 
-        const icon = guild.iconURL({ format: 'png', size: 2048 });
+        const icon = guild.iconURL;
         const color = this.client.getColor(message);
         const embed = this.client.util.embed()
         .setColor(color)

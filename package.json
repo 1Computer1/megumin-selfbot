@@ -8,7 +8,7 @@
   "dependencies": {
     "chalk": "^1.1.3",
     "discord-akairo": "github:1computer1/discord-akairo",
-    "discord.js": "github:hydrabolt/discord.js",
+    "discord.js": "github:hydrabolt/discord.js#11.1-dev",
     "moment": "^2.18.1",
     "relevant-xkcd": "^1.1.1",
     "snekfetch": "^3.1.11"

@@ -17,7 +17,7 @@ class AvatarCommand extends Command {
     }
 
     exec(message, { user }) {
-        const avatar = user.displayAvatarURL({ format: 'png', size: 2048 });
+        const avatar = user.displayAvatarURL;
         const color = this.client.getColor(message);
         const embed = this.client.util.embed()
         .setColor(color)

@@ -42,7 +42,7 @@ class EditsCommand extends Command {
         const color = this.client.getColor(message);
         const embed = this.client.util.embed()
         .setColor(color)
-        .setAuthor(msg.author.tag, msg.author.displayAvatarURL());
+        .setAuthor(msg.author.tag, msg.author.displayAvatarURL);
 
         if (msg.channel.id !== message.channel.id) {
             embed.setFooter(`#${msg.channel.name} in ${msg.channel.guild ? msg.channel.guild.name : 'DM'} | Edit History`);

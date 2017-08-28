@@ -23,7 +23,7 @@ class UserCommand extends Command {
         const color = this.client.getColor(message);
         const embed = this.client.util.embed()
         .setColor(color)
-        .setThumbnail(args.member.user.displayAvatarURL());
+        .setThumbnail(args.member.user.displayAvatarURL);
 
         const fields = [
             [

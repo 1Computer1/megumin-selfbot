@@ -82,7 +82,7 @@ class QuoteCommand extends Command {
         const color = this.client.getColor(message);
         const embed = this.client.util.embed()
         .setColor(color)
-        .setAuthor(`${msg.author.tag}`, msg.author.displayAvatarURL())
+        .setAuthor(`${msg.author.tag}`, msg.author.displayAvatarURL)
         .setDescription(msg.content || '\u200B')
         .setTimestamp(msg.createdAt);
 
