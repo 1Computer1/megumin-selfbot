@@ -10,15 +10,8 @@ class MissingPermissionsListener extends Listener {
         });
     }
 
-    exec(message, command, reason) {
-        const reasons = {
-            clientPermissions: () => command.clientPermissions.join(', ')
-        };
-
-        if (reasons[reason]) {
-            Logger.log(`=> ${command.id} ~ ${reasons[reason]()}`);
-        }
-
+    exec(message, command, type, missing) {
+        Logger.log(`=> ${command.id} ~ ${missing.join(', ')}`);
         message.delete();
     }
 }
