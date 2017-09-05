@@ -17,12 +17,12 @@ class GameCommand extends Command {
 
     async exec(message, { game }) {
         if (!game) {
-            await this.client.user.setGame(null);
+            await this.client.user.setActivity(null);
             Logger.info('Game set to not playing.');
             return message.delete();
         }
 
-        await this.client.user.setGame(game);
+        await this.client.user.setActivity(game);
         Logger.info(`Game set to "${this.client.user.presence.game.name}"`);
         return message.delete();
     }
