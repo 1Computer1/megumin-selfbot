@@ -6,7 +6,7 @@ class IDCommand extends Command {
         super('id', {
             aliases: ['id'],
             category: 'discord',
-            channelRestriction: 'guild',
+            channel: 'guild',
             args: [
                 {
                     id: 'text',

@@ -18,7 +18,7 @@ class PruneCommand extends Command {
     async exec(message, { amount }) {
         amount = Math.min(amount, 100);
 
-        const messages = await message.channel.fetchMessages({ limit: 100 });
+        const messages = await message.channel.messages.fetch({ limit: 100 });
         const promises = [];
 
         for (const m of messages.values()) {

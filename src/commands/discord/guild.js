@@ -28,8 +28,8 @@ class GuildCommand extends Command {
         const color = this.client.getColor(message);
         const embed = this.client.util.embed().setColor(color);
 
-        if (guild.iconURL) {
-            embed.setThumbnail(guild.iconURL);
+        if (guild.iconURL()) {
+            embed.setThumbnail(guild.iconURL({ size: 2048 }));
         }
 
         const fields = [

@@ -27,7 +27,7 @@ class DeferredCommand extends Command {
 
         collector.on('end', async (coll, reason) => {
             this.handler.removePrompt(message);
-            let msgs = await message.channel.fetchMessages({ after: message.id, limit: 100 });
+            let msgs = await message.channel.messages.fetch({ after: message.id, limit: 100 });
             msgs = msgs.filter(m => coll.has(m.id));
 
             if (reason === 'cancel' || msgs.size === 1) {

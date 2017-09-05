@@ -14,7 +14,7 @@ class QuoteCommand extends Command {
                 {
                     id: 'channel',
                     type: word => {
-                        const channel = this.client.channels.get(word);
+                        const channel = this.client.util.resolveChannel(word, this.client.channels);
                         if (!channel || channel.type === 'voice') return null;
                         return channel;
                     },
@@ -25,7 +25,7 @@ class QuoteCommand extends Command {
                 {
                     id: 'message',
                     type: (word, message, { channel }) => {
-                        return channel.fetchMessage(word).catch(() => Promise.reject());
+                        return channel.messages.fetch(word).catch(() => null);
                     }
                 },
                 {

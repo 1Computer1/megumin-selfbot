@@ -6,7 +6,7 @@ class UserCommand extends Command {
         super('user', {
             aliases: ['user', 'member', 'whois'],
             category: 'discord',
-            channelRestriction: 'guild',
+            channel: 'guild',
             clientPermissions: ['EMBED_LINKS'],
             args: [
                 {
@@ -23,7 +23,7 @@ class UserCommand extends Command {
         const color = this.client.getColor(message);
         const embed = this.client.util.embed()
         .setColor(color)
-        .setThumbnail(args.member.user.displayAvatarURL);
+        .setThumbnail(args.member.user.displayAvatarURL({ size: 2048 }));
 
         const fields = [
             [

@@ -18,7 +18,7 @@ class LogCommand extends Command {
                 {
                     id: 'channel',
                     type: word => {
-                        const channel = this.client.channels.get(word);
+                        const channel = this.client.util.resolveChannel(word, this.client.channels);
                         if (!channel || channel.type === 'voice') return null;
                         return channel;
                     },
@@ -29,7 +29,7 @@ class LogCommand extends Command {
                 {
                     id: 'messages',
                     type: (word, message, { channel }) => {
-                        return channel.fetchMessages({ limit: 100, before: word || undefined }).catch(() => Promise.reject(null));
+                        return channel.messages.fetch({ limit: 100, before: word || undefined }).catch(() => null);
                     }
                 }
             ]

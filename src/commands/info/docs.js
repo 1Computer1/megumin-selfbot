@@ -14,7 +14,7 @@ class DocsCommand extends Command {
                 },
                 {
                     id: 'version',
-                    type: ['master', 'stable'],
+                    type: ['master', 'stable', 'commando'],
                     default: 'stable'
                 }
             ]
@@ -26,7 +26,10 @@ class DocsCommand extends Command {
     async fetchDocs(version) {
         if (this.docs[version]) return this.docs[version];
 
-        const link = `https://raw.githubusercontent.com/hydrabolt/discord.js/docs/${version}.json`;
+        const link = version === 'commando'
+            ? 'https://raw.githubusercontent.com/Gawdl3y/discord.js-commando/docs/master.json'
+            : `https://raw.githubusercontent.com/hydrabolt/discord.js/docs/${version}.json`;
+
         const { text } = await request.get(link);
         const json = JSON.parse(text);
 
@@ -87,17 +90,27 @@ class DocsCommand extends Command {
 
     clean(text) {
         return text
-        .replace(/\n/g, ' ')
-        .replace(/<\/?(?:info|warn)>/g, '')
-        .replace(/\{@link (.+?)\}/g, '`$1`');
+        .replace(/<(info|warn)>([^]+)<\/(?:info|warn)>/g, '\n**$2**\n')
+        .replace(/\{@link (.+?)\}/g, '`$1`')
+        .replace(/(```[^]+?```)|(^[*-].+$)?\n(?![*-])/gm, (match, codeblock, hasListBefore) => {
+            if (codeblock) return codeblock;
+            if (hasListBefore) return match;
+            return ' ';
+        });
     }
 
     joinType(type) {
         return type.map(t => t.map(a => Array.isArray(a) ? a.join('') : a).join('')).join(' | ');
     }
 
+    getLink(version) {
+        return version === 'commando'
+            ? 'https://discord.js.org/#/docs/commando/master/'
+            : `https://discord.js.org/#/docs/main/${version}/`;
+    }
+
     makeLink(main, member, version) {
-        return `https://discord.js.org/#/docs/main/${version}/${main.category === 'classes' ? 'class' : 'typedef'}/${main.item.name}?scrollTo=${member.item.scope === 'static' ? 's-' : ''}${member.item.name}`;
+        return `${this.getLink(version)}${main.category === 'classes' ? 'class' : 'typedef'}/${main.item.name}?scrollTo=${member.item.scope === 'static' ? 's-' : ''}${member.item.name}`;
     }
 
     formatMain(main, version) {
@@ -105,7 +118,7 @@ class DocsCommand extends Command {
 
         let description = `__**[${main.item.name}`;
         if (main.item.extends) description += ` (extends ${main.item.extends[0]})`;
-        description += `](https://discord.js.org/#/docs/main/${version}/${main.category === 'classes' ? 'class' : 'typedef'}/${main.item.name})**__\n`;
+        description += `](${this.getLink(version)}${main.category === 'classes' ? 'class' : 'typedef'}/${main.item.name})**__\n`;
 
         if (main.item.description) description += `\n${this.clean(main.item.description)}`;
         embed.setDescription(description);
@@ -221,11 +234,12 @@ class DocsCommand extends Command {
         }[member.category].call(this, main, member, version) : this.formatMain(main, version);
 
         const color = this.client.getColor(message);
+        const name = version === 'commando' ? 'Commando Docs' : `Discord.js Docs (${version})`;
 
         embed
         .setColor(color)
-        .setURL(`https://discord.js.org/#/docs/main/${version}`)
-        .setAuthor(`Discord.js Docs (${version})`, 'https://cdn.discordapp.com/icons/222078108977594368/bc226f09db83b9176c64d923ff37010b.webp');
+        .setURL(this.getLink(version))
+        .setAuthor(name, 'https://cdn.discordapp.com/icons/222078108977594368/bc226f09db83b9176c64d923ff37010b.webp');
 
         return message.edit({ embed });
     }

@@ -49,7 +49,7 @@ class ReactCommand extends Command {
         chars.length = Math.min(chars.length, 20);
 
         await message.delete();
-        const messages = await message.channel.fetchMessages({ limit: 2 });
+        const messages = await message.channel.messages.fetch({ limit: 2 });
 
         const msg = messages.first();
         if (!msg) return undefined;

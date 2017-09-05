@@ -1,18 +1,18 @@
 const { Listener } = require('discord-akairo');
 const Logger = require('../util/Logger');
 
-class CommandBlockedListener extends Listener {
+class MissingPermissionsListener extends Listener {
     constructor() {
-        super('commandBlocked', {
+        super('missingPermissions', {
             emitter: 'commandHandler',
-            event: 'commandBlocked',
+            event: 'missingPermissions',
             category: 'commandHandler'
         });
     }
 
     exec(message, command, reason) {
         const reasons = {
-            guild: () => 'Guild Only'
+            clientPermissions: () => command.clientPermissions.join(', ')
         };
 
         if (reasons[reason]) {
@@ -23,4 +23,4 @@ class CommandBlockedListener extends Listener {
     }
 }
 
-module.exports = CommandBlockedListener;
+module.exports = MissingPermissionsListener;
