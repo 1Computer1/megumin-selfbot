@@ -4,6 +4,11 @@
     </a>
 </p>  
 
+## Ded
+
+This repo is now abandoned.  
+The selfbot probably doesn't even start up!  
+
 ## Use at your own risk
 
 Selfbots as well as some features within this bot are not allowed by Discord TOS.  
